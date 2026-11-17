@@ -1,0 +1,2806 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coraloce // Fortifying the World’s Critical Assets</title>
+  
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#fafafa',
+              100: '#f4f4f5',
+              200: '#e4e4e7',
+              300: '#d4d4d8',
+              400: '#a1a1aa',
+              500: '#71717a',
+              600: '#52525b',
+              700: '#3f3f46',
+              800: '#27272a',
+              900: '#18181b',
+              950: '#09090b',
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            mono: ['JetBrains Mono', 'Menlo', 'Monaco', 'Courier New', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Inter, Plus Jakarta Sans, Playfair Display & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+    .font-display {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .font-serif-italic {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+    }
+    .font-mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .light-grid-bg {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(203, 213, 225, 0.45) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(203, 213, 225, 0.45) 1px, transparent 1px);
+    }
+
+    @keyframes floatOrb1 {
+      0%, 100% { transform: translate(0px, 0px) scale(1); }
+      50% { transform: translate(30px, -20px) scale(1.05); }
+    }
+    @keyframes floatOrb2 {
+      0%, 100% { transform: translate(0px, 0px) scale(1); }
+      50% { transform: translate(-30px, 30px) scale(0.95); }
+    }
+    .orb-1 { animation: floatOrb1 16s ease-in-out infinite; }
+    .orb-2 { animation: floatOrb2 20s ease-in-out infinite; }
+
+    .aesthetic-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+      border-radius: 1rem;
+      transition: all 0.25s ease;
+    }
+    .aesthetic-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 10px 25px -3px rgba(15, 23, 42, 0.08);
+    }
+
+    ::-webkit-scrollbar { width: 7px; height: 7px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col relative selection:bg-zinc-900 selection:text-white bg-zinc-50 text-zinc-900">
+
+  <!-- STANDARDIZED MONOCHROME AMBIENT BACKGROUND -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <div class="absolute inset-0 light-grid-bg opacity-40"></div>
+    <div class="absolute -top-32 -left-32 w-[600px] h-[600px] rounded-full bg-zinc-300/35 blur-[140px] orb-1"></div>
+    <div class="absolute -top-20 -right-20 w-[550px] h-[550px] rounded-full bg-slate-300/35 blur-[140px] orb-2"></div>
+    <div class="absolute top-[40%] left-[20%] w-[650px] h-[650px] rounded-full bg-zinc-200/40 blur-[160px] orb-1"></div>
+    <div class="absolute -bottom-32 -right-32 w-[550px] h-[550px] rounded-full bg-slate-200/40 blur-[140px] orb-2"></div>
+  </div>
+
+  <!-- TOP HEADER / STANDARDIZED WEBSITE NAV -->
+  <header class="border-b border-zinc-200/90 bg-white/95 backdrop-blur-md sticky top-0 z-40 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center space-x-3 cursor-pointer group" onclick="switchTab('welcome')">
+        <div class="w-10 h-10 rounded-xl bg-zinc-950 flex items-center justify-center shadow-md shadow-zinc-950/10 text-white group-hover:scale-105 transition border border-zinc-800">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="text-xl font-display font-black tracking-tight text-zinc-950">CORAL<span class="text-zinc-500">OCE</span></span>
+            <span class="text-[10px] font-display font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-800 border border-zinc-300">Sentinel Active</span>
+          </div>
+          <p class="text-[11px] font-sans text-zinc-500 font-medium">Fortifying the World’s Critical Assets</p>
+        </div>
+      </div>
+
+      <!-- Main Website Navigation Tabs -->
+      <nav class="flex items-center bg-zinc-100 p-1 rounded-xl border border-zinc-200">
+        <button id="navTabWelcome" onclick="switchTab('welcome')" class="px-3.5 py-1.5 rounded-lg text-xs font-display font-bold transition bg-zinc-950 text-white shadow-xs flex items-center space-x-1.5 cursor-pointer">
+          <span>✦ Welcome</span>
+        </button>
+
+        <button id="navTabDashboard" onclick="document.getElementById('workbench-slide-container').scrollIntoView({ behavior: 'smooth' })" class="px-3.5 py-1.5 rounded-lg text-xs font-display font-semibold transition text-zinc-600 hover:text-zinc-950 flex items-center space-x-1.5 cursor-pointer">
+          <svg class="w-3.5 h-3.5 text-zinc-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+          <span>Workbench & Sentinel</span>
+        </button>
+
+        <button id="navTabAdmin" onclick="switchTab('admin')" class="px-3.5 py-1.5 rounded-lg text-xs font-display font-semibold transition text-zinc-600 hover:text-zinc-950 flex items-center space-x-1.5 cursor-pointer">
+          <svg class="w-3.5 h-3.5 text-zinc-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg>
+          <span>Admin Authority</span>
+          <span id="adminAuthBadge" class="hidden w-2 h-2 rounded-full bg-zinc-900 ml-1"></span>
+        </button>
+      </nav>
+
+      <!-- Right Header Actions -->
+      <div class="flex items-center flex-wrap gap-2 text-xs">
+        
+        <!-- Live Sentinel Status -->
+        <div id="liveSentinelBadge" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-zinc-100 border border-zinc-300 text-zinc-900 font-display font-bold shadow-2xs">
+          <span class="w-2 h-2 rounded-full bg-zinc-800 animate-ping"></span>
+          <span>Sentinel: <strong class="text-zinc-950">GUARDING</strong></span>
+        </div>
+
+        <div class="group relative px-3 py-1.5 rounded-xl bg-white border border-zinc-300 text-zinc-800 shadow-xs cursor-help font-display">
+          Height: <strong id="totalBlocksCount" class="text-zinc-950 font-mono font-bold">1</strong>
+          <div class="hidden group-hover:block absolute top-full left-1/2 -translate-x-1/2 mt-2 w-64 p-2.5 bg-zinc-950 text-zinc-100 text-[11px] rounded-xl shadow-xl z-50 pointer-events-none font-sans">
+            <div class="font-bold text-white mb-0.5 font-display">What is "Height"?</div>
+            Height is the total sequential count of mined Proof-of-Work blocks stacked on the Genesis root.
+          </div>
+        </div>
+
+        <button id="btnAuditChain" onclick="auditLedger()" class="px-3 py-1.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white border border-zinc-800 transition flex items-center space-x-1.5 cursor-pointer shadow-xs font-display font-semibold">
+          <svg class="w-3.5 h-3.5 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+          <span>Audit Chain</span>
+        </button>
+
+        <!-- Real-Time Device Alerts Permission -->
+        <button id="btnNotificationPermission" onclick="requestBrowserNotifications()" title="Enable Real-Time Desktop & Mobile Breach Notifications" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-white text-zinc-800 hover:bg-zinc-100 flex items-center space-x-1.5 border border-zinc-300 shadow-xs cursor-pointer transition">
+          <span>🔔</span>
+          <span class="hidden sm:inline">Allow Device Alerts</span>
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- ======================================================== -->
+  <!-- 30-SECOND SECURITY QUARANTINE & TAMPER ALERT MODAL       -->
+  <!-- ======================================================== -->
+  <div id="quarantineModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+    <div id="quarantineModalCard" class="max-w-lg w-full bg-white rounded-3xl border-2 border-amber-500 shadow-2xl p-6 sm:p-8 space-y-6 text-center relative overflow-hidden animate-in fade-in zoom-in duration-300">
+      
+      <!-- Close button on modal -->
+      <button onclick="closeQuarantineModal()" title="Close Window" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-sm cursor-pointer transition">
+        ✕
+      </button>
+
+      <!-- Warning Header -->
+      <div class="flex flex-col items-center space-y-2">
+        <div id="quarantineIconContainer" class="w-16 h-16 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-3xl font-black border border-amber-200">
+          <span id="quarantineIcon" class="animate-bounce">⏳</span>
+        </div>
+        <h2 class="text-xl font-extrabold text-slate-900 tracking-tight" id="quarantineTitle">
+          PLEASE WAIT 30 SECONDS BEFORE EDITING
+        </h2>
+        <p class="text-xs text-amber-700 font-semibold" id="quarantineSubtext">
+          Pre-edit security protocol engaged. An alert was dispatched to your email before editing unlocks!
+        </p>
+      </div>
+
+      <!-- Email Notification Dispatch Banner -->
+      <div id="quarantineEmailBanner" class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-left space-y-2 text-xs">
+        <div class="flex items-center space-x-2 text-amber-900 font-bold">
+          <span id="quarantineEmailLabel">📧 Real-Time Alert Dispatched BEFORE Editing To:</span>
+        </div>
+        <div id="quarantineEmailDisplay" class="font-mono text-sm font-bold text-amber-900 bg-white p-2 rounded-lg border border-amber-200 truncate">
+          owner@example.com
+        </div>
+        <p class="text-[11px] text-slate-500" id="quarantineEmailNote">
+          The Sentinel dispatched an alert to the registered file owner before allowing editing.
+        </p>
+      </div>
+
+      <!-- Live 30-Second Countdown Clock -->
+      <div class="space-y-3 bg-slate-50 p-5 rounded-2xl border border-slate-200">
+        <div class="text-xs text-slate-500 uppercase tracking-widest font-mono font-bold" id="countdownProtocolLabel">
+          30-Second Pre-Edit Security Protocol Active
+        </div>
+        
+        <div class="flex items-center justify-center space-x-2">
+          <span id="countdownTimer" class="font-mono text-5xl font-black text-amber-600">30</span>
+          <span class="text-sm font-bold text-slate-400">seconds</span>
+        </div>
+
+        <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+          <div id="countdownProgressBar" class="bg-amber-600 h-full w-full transition-all duration-1000 ease-linear"></div>
+        </div>
+
+        <p class="text-[11px] text-slate-500 leading-relaxed" id="countdownExplanation">
+          Please wait <strong>30 seconds</strong> before editing. This delay gives the registered owner time to see the alert on their phone/email and intervene before editing unlocks.
+        </p>
+      </div>
+
+      <!-- View Email Content Button -->
+      <div>
+        <button onclick="toggleAlertPreview()" class="text-xs font-semibold text-amber-800 hover:text-amber-950 underline">
+          View Dispatched Alert Email Content
+        </button>
+
+        <div id="alertEmailPreviewBox" class="hidden mt-3 text-left font-mono text-[11px] bg-slate-900 text-slate-200 p-3 rounded-xl max-h-40 overflow-y-auto space-y-1">
+          <div class="text-amber-400 font-bold" id="previewEmailSubject">Subject: 🚨 PRE-EDIT ALERT: File Edit Mode Requested</div>
+          <div class="text-slate-400">To: <span id="previewEmailTo"></span></div>
+          <div class="text-slate-300 pt-2 border-t border-slate-800" id="previewEmailBody"></div>
+        </div>
+      </div>
+
+      <!-- Permission & Instant User App Dispatch (No Code Access Needed) -->
+      <div class="pt-3 border-t border-slate-200 text-left space-y-2">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-slate-800">Dispatch Alert via Your App:</span>
+          <span class="text-[10px] text-slate-500">Zero passwords or server access needed</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+          <button type="button" onclick="dispatchViaGmailWeb()" class="py-2 px-2.5 rounded-xl bg-white border border-slate-300 hover:border-slate-500 hover:bg-slate-50 text-slate-800 text-xs font-semibold flex items-center justify-center space-x-1 shadow-xs transition cursor-pointer">
+            <span>✉️</span>
+            <span>Open in Gmail</span>
+          </button>
+          <button type="button" onclick="dispatchViaMailto()" class="py-2 px-2.5 rounded-xl bg-white border border-slate-300 hover:border-slate-500 hover:bg-slate-50 text-slate-800 text-xs font-semibold flex items-center justify-center space-x-1 shadow-xs transition cursor-pointer">
+            <span>📧</span>
+            <span>System Mail App</span>
+          </button>
+          <button type="button" onclick="copyAlertReportToClipboard()" id="btnCopyAlertReport" class="py-2 px-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-semibold flex items-center justify-center space-x-1 shadow-xs transition cursor-pointer">
+            <span>📋</span>
+            <span>Copy Report</span>
+          </button>
+        </div>
+      </div>
+
+      <button id="btnDismissQuarantine" onclick="finishQuarantineModalAction()" disabled class="w-full py-3 rounded-xl bg-slate-200 text-slate-400 font-bold text-xs transition cursor-not-allowed">
+        Waiting for 30-Second Security Window (30s)
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- ======================================================== -->
+  <!-- VIEW 1: WELCOME PAGE (EXPANSIVE AESTHETIC HERO & INTRO)  -->
+  <!-- ======================================================== -->
+  <main id="tabContentWelcome" class="max-w-7xl mx-auto px-4 sm:px-8 lg:px-12 py-12 sm:py-20 flex-1 w-full space-y-12 sm:space-y-16 relative z-10 animate-in fade-in duration-300">
+    
+    <!-- Hero Banner with Luxury Typography & Generous Spacing -->
+    <section class="aesthetic-card p-10 sm:p-20 relative overflow-hidden bg-gradient-to-br from-white via-zinc-50 to-zinc-100/70 border border-zinc-200/90 shadow-2xl rounded-3xl space-y-8 sm:space-y-10">
+      <div class="absolute -top-32 -right-32 w-[450px] h-[450px] bg-zinc-200/40 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-32 -left-32 w-[400px] h-[400px] bg-slate-200/35 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 max-w-4xl space-y-8">
+        
+        <div class="inline-flex items-center space-x-2.5 px-4 py-2 rounded-full bg-zinc-100 border border-zinc-300 text-zinc-900 text-xs font-semibold shadow-xs">
+          <span class="w-2 h-2 rounded-full bg-zinc-900 animate-ping"></span>
+          <span class="font-display font-bold tracking-wider">CORALOCE 2.5 &bull; ACTIVE FILE INTEGRITY SENTINEL</span>
+        </div>
+
+        <div class="space-y-4">
+          <h1 class="font-display font-black text-4xl sm:text-7xl text-zinc-950 tracking-tight leading-[1.08]">
+            Welcome to <span class="bg-gradient-to-r from-zinc-950 via-zinc-800 to-zinc-600 bg-clip-text text-transparent">CORALOCE</span>
+          </h1>
+          <p class="font-serif-italic text-2xl sm:text-4xl text-zinc-700 font-normal leading-snug">
+            Fortifying the world’s <span class="text-zinc-950 underline decoration-zinc-400 font-medium">critical assets</span> with cryptographic truth.
+          </p>
+        </div>
+
+        <p class="text-sm sm:text-base text-zinc-600 leading-relaxed font-sans max-w-3xl">
+          Say goodbye to silent tampering and unmonitored alterations. Coraloce combines a custom <strong>Node.js Proof-of-Work blockchain</strong> with an active real-time background Sentinel. When anyone attempts to alter a registered record, the system immediately dispatches an emergency alert to the file owner and enforces a <em class="font-serif-italic text-amber-700 font-bold text-base">mandatory 30-second delay BEFORE editing unlocks</em>.
+        </p>
+
+        <!-- Generously Spaced Action Buttons -->
+        <div class="flex flex-wrap items-center gap-4 pt-4">
+          <button onclick="document.getElementById('workbench-slide-container').scrollIntoView({ behavior: 'smooth' })" class="px-7 py-4 rounded-2xl bg-zinc-950 hover:bg-zinc-800 text-white font-display font-bold text-sm transition flex items-center space-x-2.5 shadow-xl shadow-zinc-950/20 cursor-pointer">
+            <span>🚀 Enter Platform Workbench</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+          </button>
+          
+          <button onclick="switchTab('admin')" class="px-7 py-4 rounded-2xl bg-white hover:bg-zinc-100 text-zinc-900 font-display font-bold text-sm transition flex items-center space-x-2.5 border border-zinc-300 shadow-sm cursor-pointer">
+            <svg class="w-4 h-4 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg>
+            <span>Admin Authority: Register Email</span>
+          </button>
+
+          <button onclick="goToSlide(3)" class="px-6 py-4 rounded-2xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 font-display font-bold text-sm transition flex items-center space-x-2 cursor-pointer shadow-xs">
+            <span>⚡ 30s Pre-Edit Lab</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 3 Guided Architecture Pillars with Generous Spacing -->
+    <section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <div class="aesthetic-card p-8 sm:p-10 space-y-4 border-t-4 border-t-zinc-950 hover:shadow-xl transition">
+        <div class="w-12 h-12 rounded-2xl bg-zinc-950 text-white flex items-center justify-center font-display font-black text-lg shadow-md">
+          01
+        </div>
+        <h3 class="font-display font-bold text-zinc-950 text-lg">Mine & Cryptographically Anchor</h3>
+        <p class="text-xs sm:text-sm text-zinc-500 leading-relaxed font-sans">
+          Upload critical contracts, blueprints, or documents. The native Node.js engine computes a <strong>SHA-256 fingerprint</strong> and executes CPU Proof-of-Work to chain it permanently into the ledger.
+        </p>
+        <div class="text-[11px] font-mono text-zinc-800 bg-zinc-100 p-3 rounded-xl border border-zinc-200 font-medium">
+          Target: 3 Leading Zeroes &bull; Nonce Discovery
+        </div>
+      </div>
+
+      <div class="aesthetic-card p-8 sm:p-10 space-y-4 border-t-4 border-t-amber-500 hover:shadow-xl transition">
+        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center font-display font-black text-lg shadow-md border border-amber-200">
+          02
+        </div>
+        <h3 class="font-display font-bold text-zinc-950 text-lg">Active 30s Pre-Edit Sentinel</h3>
+        <p class="text-xs sm:text-sm text-zinc-500 leading-relaxed font-sans">
+          Before any user can alter or edit an anchored file, the Sentinel locks the editor, dispatches an emergency alert email to the registered owner, and enforces a <em class="font-serif-italic font-bold text-amber-800">mandatory 30-second delay</em>.
+        </p>
+        <div class="text-[11px] font-mono text-amber-900 bg-amber-50 p-3 rounded-xl border border-amber-200 font-medium">
+          Real-Time Pre-Edit Quarantine Protocol
+        </div>
+      </div>
+
+      <div class="aesthetic-card p-8 sm:p-10 space-y-4 border-t-4 border-t-zinc-700 hover:shadow-xl transition">
+        <div class="w-12 h-12 rounded-2xl bg-zinc-800 text-white flex items-center justify-center font-display font-black text-lg shadow-md">
+          03
+        </div>
+        <h3 class="font-display font-bold text-zinc-950 text-lg">Admin Authority & Multi-Device Vault</h3>
+        <p class="text-xs sm:text-sm text-zinc-500 leading-relaxed font-sans">
+          Specify authorized owner emails for file alerts, configure inactivity retention limits, and securely access your files from any phone or remote device via 6-digit email OTP.
+        </p>
+        <div class="text-[11px] font-mono text-zinc-800 bg-zinc-100 p-3 rounded-xl border border-zinc-200 font-medium">
+          6-Digit Email OTP &bull; State Pruning
+        </div>
+      </div>
+
+    </section>
+
+    <!-- High-Trust Architecture Highlights Grid -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="aesthetic-card p-6 space-y-2 border border-zinc-200">
+        <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-400">Consensus Engine</div>
+        <div class="text-xl font-display font-extrabold text-zinc-950">Self-Contained</div>
+        <p class="text-xs text-zinc-500 font-sans">100% native Node.js crypto. Zero external 3rd-party blockchain dependency.</p>
+      </div>
+
+      <div class="aesthetic-card p-6 space-y-2 border border-zinc-200">
+        <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-400">Response Window</div>
+        <div class="text-xl font-display font-extrabold text-amber-700">30 Seconds</div>
+        <p class="text-xs text-zinc-500 font-sans">Guaranteed delay allowing document owners to intercept unapproved changes.</p>
+      </div>
+
+      <div class="aesthetic-card p-6 space-y-2 border border-zinc-200">
+        <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-400">Data Hygiene</div>
+        <div class="text-xl font-display font-extrabold text-zinc-950">Auto-Pruning</div>
+        <p class="text-xs text-zinc-500 font-sans">Files unverified within retention limits purge automatically from storage.</p>
+      </div>
+
+      <div class="aesthetic-card p-6 space-y-2 border border-zinc-200">
+        <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-400">Vault Access</div>
+        <div class="text-xl font-display font-extrabold text-zinc-950">Multi-Device OTP</div>
+        <p class="text-xs text-zinc-500 font-sans">Access records anywhere with ephemeral single-use verification codes.</p>
+      </div>
+    </section>
+
+    <!-- Architectural Specifications & Consensus Slide -->
+    <section class="aesthetic-card p-10 sm:p-14 bg-zinc-950 text-white rounded-3xl space-y-6 border border-zinc-800 shadow-2xl">
+      <div class="flex items-center space-x-2 text-zinc-400 text-xs font-mono font-bold uppercase tracking-widest">
+        <span>✦</span><span>Architectural Specifications</span>
+      </div>
+      
+      <div class="space-y-3">
+        <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-white tracking-tight">
+          Zero-Trust Cryptographic Ledger & Active Sentinel Framework
+        </h3>
+        <p class="text-xs sm:text-sm text-zinc-400 font-sans leading-relaxed max-w-3xl">
+          Designed for uncompromising data integrity. VeriChain combines deterministic SHA-256 Proof-of-Work blockchain consensus with an active background disk watcher, ensuring every file modification is intercepted before alterations occur.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2 border-t border-zinc-800/80 text-xs">
+        <div class="bg-zinc-900/80 p-4 rounded-2xl border border-zinc-800 space-y-1">
+          <div class="font-display font-bold text-white text-sm">Self-Contained Engine</div>
+          <p class="text-zinc-400 text-[11px] leading-relaxed">Pure native Node.js crypto. Zero external 3rd-party blockchain or cloud dependencies.</p>
+        </div>
+        <div class="bg-zinc-900/80 p-4 rounded-2xl border border-zinc-800 space-y-1">
+          <div class="font-display font-bold text-amber-400 text-sm">30s Pre-Edit Protocol</div>
+          <p class="text-zinc-400 text-[11px] leading-relaxed">Locks editing and dispatches owner email alerts before file modifications unlock.</p>
+        </div>
+        <div class="bg-zinc-900/80 p-4 rounded-2xl border border-zinc-800 space-y-1">
+          <div class="font-display font-bold text-white text-sm">Autonomous Pruning</div>
+          <p class="text-zinc-400 text-[11px] leading-relaxed">Automated inactivity garbage collection sanitizes disk storage and purges stale records.</p>
+        </div>
+      </div>
+
+      <div class="text-xs text-zinc-500 font-sans flex items-center space-x-2 pt-2 border-t border-zinc-900">
+        <span>&mdash;</span>
+        <strong class="text-zinc-300 font-display">VeriChain Cryptographic Consensus Engine</strong>
+        <span>&bull;</span>
+        <span>Standardized Enterprise Cryptography</span>
+      </div>
+    </section>
+
+    <!-- ======================================================== -->
+    <!-- WORKBENCH PLATFORM INTERACTIVE SLIDE DECK                -->
+    <!-- ======================================================== -->
+    <div id="workbench-platform" class="w-full space-y-12"><section id="workbench-slide-container" class="aesthetic-card p-6 sm:p-10 border border-zinc-200/90 shadow-2xl rounded-3xl space-y-8 bg-white relative overflow-hidden scroll-mt-24">
+      
+      <!-- Slide Deck Header & Toolbar -->
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-zinc-200">
+        <div class="space-y-1.5">
+          <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-300 text-zinc-900 text-xs font-semibold">
+            <span class="w-2 h-2 rounded-full bg-zinc-950 animate-ping"></span>
+            <span class="font-display font-bold">WORKBENCH PLATFORM &bull; INTERACTIVE SLIDE DECK</span>
+          </div>
+          <h2 class="text-2xl sm:text-4xl font-display font-black text-zinc-950 tracking-tight">
+            Cryptographic Workbench <span class="font-serif-italic font-normal text-zinc-700">& Sentinel Slide Flow</span>
+          </h2>
+          <p class="text-xs sm:text-sm text-zinc-500 font-sans max-w-2xl">
+            Everything in the Workbench platform is built right into this interactive slide flow. Slide through each stage or toggle full flow view.
+          </p>
+        </div>
+
+        <!-- Slide Navigation Controls & Mode Switcher -->
+        <div class="flex flex-wrap items-center gap-3">
+          
+          <!-- Mode Toggle: Slide vs Flow -->
+          <div class="inline-flex items-center bg-zinc-100 p-1 rounded-xl border border-zinc-200 text-xs font-display">
+            <button id="btnModeSlide" onclick="setWorkbenchMode('slide')" class="px-3 py-1.5 rounded-lg font-bold bg-zinc-950 text-white shadow-xs transition cursor-pointer">
+              ◫ Slide Mode
+            </button>
+            <button id="btnModeFlow" onclick="setWorkbenchMode('flow')" class="px-3 py-1.5 rounded-lg font-semibold text-zinc-600 hover:text-zinc-950 transition cursor-pointer">
+              ≡ Full Flow
+            </button>
+          </div>
+
+          <!-- Slide Previous / Next Controls -->
+          <div id="slideControlsToolbar" class="inline-flex items-center space-x-1.5">
+            <button id="btnPrevSlide" onclick="prevSlide()" class="p-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 border border-zinc-300 transition cursor-pointer flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+            </button>
+            <span class="text-xs font-mono font-bold px-3 py-1.5 bg-zinc-50 rounded-xl border border-zinc-200 text-zinc-800" id="slideIndicatorBadge">
+              Slide <span id="currentSlideNumber">1</span> of 4
+            </span>
+            <button id="btnNextSlide" onclick="nextSlide()" class="p-2 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white transition cursor-pointer flex items-center justify-center">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Live Network Metric Badges within Slide -->
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-left">
+        <div class="bg-zinc-50 p-3.5 rounded-2xl border border-zinc-200 shadow-2xs">
+          <div class="text-[10px] text-zinc-400 font-mono uppercase tracking-wider font-bold">Ledger Height</div>
+          <div class="text-xl font-black text-zinc-950 font-mono mt-0.5"><span id="heroHeightCount">1</span> <span class="text-xs text-zinc-400 font-sans font-normal">Block</span></div>
+        </div>
+        <div class="bg-zinc-50 p-3.5 rounded-2xl border border-zinc-200 shadow-2xs">
+          <div class="text-[10px] text-zinc-400 font-mono uppercase tracking-wider font-bold">PoW Difficulty</div>
+          <div class="text-xl font-black text-zinc-950 font-mono mt-0.5">3 <span class="text-xs text-zinc-400 font-sans font-normal">Zeroes Target</span></div>
+        </div>
+        <div class="bg-zinc-50 p-3.5 rounded-2xl border border-zinc-200 shadow-2xs">
+          <div class="text-[10px] text-zinc-400 font-mono uppercase tracking-wider font-bold">Sentinel Protocol</div>
+          <div class="text-xl font-black text-amber-700 font-mono mt-0.5">30s <span class="text-xs text-zinc-400 font-sans font-normal">Pre-Edit Wait</span></div>
+        </div>
+        <div class="bg-zinc-50 p-3.5 rounded-2xl border border-zinc-200 shadow-2xs">
+          <div class="text-[10px] text-zinc-400 font-mono uppercase tracking-wider font-bold">State Engine</div>
+          <div class="text-xl font-black text-zinc-950 font-mono mt-0.5">Auto <span class="text-xs text-zinc-400 font-sans font-normal">Pruning</span></div>
+        </div>
+      </div>
+
+      <!-- Slide Progress Bar Track -->
+      <div class="w-full bg-zinc-100 h-1.5 rounded-full overflow-hidden">
+        <div id="slideProgressBar" class="bg-zinc-950 h-full w-1/4 transition-all duration-300 ease-out"></div>
+      </div>
+
+      <!-- Interactive Slide Tabs (Pills) -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs font-display">
+        <button id="tabSlide1" onclick="goToSlide(1)" class="slide-tab-btn p-3 rounded-2xl border-2 border-zinc-950 bg-zinc-950 text-white text-left transition flex items-center space-x-2.5 cursor-pointer">
+          <span class="w-6 h-6 rounded-lg bg-white/20 text-white flex items-center justify-center font-bold text-xs">1</span>
+          <div>
+            <div class="font-bold text-xs">Mine & Anchor</div>
+            <div class="text-[10px] opacity-75 font-normal">Stage 01 Slide</div>
+          </div>
+        </button>
+
+        <button id="tabSlide2" onclick="goToSlide(2)" class="slide-tab-btn p-3 rounded-2xl border border-zinc-200 bg-zinc-50 text-zinc-700 hover:border-zinc-400 text-left transition flex items-center space-x-2.5 cursor-pointer">
+          <span class="w-6 h-6 rounded-lg bg-zinc-200 text-zinc-900 flex items-center justify-center font-bold text-xs">2</span>
+          <div>
+            <div class="font-bold text-xs">Verify & Clock</div>
+            <div class="text-[10px] text-zinc-400 font-normal">Stage 02 Slide</div>
+          </div>
+        </button>
+
+        <button id="tabSlide3" onclick="goToSlide(3)" class="slide-tab-btn p-3 rounded-2xl border border-zinc-200 bg-zinc-50 text-zinc-700 hover:border-zinc-400 text-left transition flex items-center space-x-2.5 cursor-pointer">
+          <span class="w-6 h-6 rounded-lg bg-amber-100 text-amber-900 flex items-center justify-center font-bold text-xs">3</span>
+          <div>
+            <div class="font-bold text-xs">30s Tamper Lab</div>
+            <div class="text-[10px] text-zinc-400 font-normal">Stage 03 Slide</div>
+          </div>
+        </button>
+
+        <button id="tabSlide4" onclick="goToSlide(4)" class="slide-tab-btn p-3 rounded-2xl border border-zinc-200 bg-zinc-50 text-zinc-700 hover:border-zinc-400 text-left transition flex items-center space-x-2.5 cursor-pointer">
+          <span class="w-6 h-6 rounded-lg bg-zinc-200 text-zinc-900 flex items-center justify-center font-bold text-xs">4</span>
+          <div>
+            <div class="font-bold text-xs">Ledger Explorer</div>
+            <div class="text-[10px] text-zinc-400 font-normal">Stage 04 Slide</div>
+          </div>
+        </button>
+      </div>
+
+      <!-- ====================================================== -->
+      <!-- SLIDE 1: MINE & ANCHOR (CRYPTOGRAPHIC INGESTION)       -->
+      <!-- ====================================================== -->
+      <div id="slideContent1" class="workbench-slide block space-y-6 pt-2 animate-in fade-in duration-200">
+        
+        <div class="space-y-4 pb-4 border-b border-zinc-200">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center space-x-3">
+              <div class="w-9 h-9 rounded-xl bg-zinc-950 text-white flex items-center justify-center font-display font-black text-sm shadow-sm">
+                01
+              </div>
+              <div>
+                <span class="text-[10px] font-mono font-bold tracking-wider uppercase text-zinc-400">SLIDE 01 &bull; CRYPTOGRAPHIC INGESTION</span>
+                <h3 class="text-xl sm:text-2xl font-display font-extrabold text-zinc-950">
+                  Mine & Anchor Document into Immutable Blockchain
+                </h3>
+              </div>
+            </div>
+            <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-zinc-100 text-zinc-700 border border-zinc-200">
+              POST /api/upload
+            </span>
+          </div>
+
+          <!-- Integrated Safeguard & How-to-Use Guide -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs bg-zinc-50 p-4 rounded-2xl border border-zinc-200">
+            <div class="space-y-1">
+              <div class="flex items-center space-x-1.5 font-display font-bold text-zinc-900">
+                <span>🛡️</span><span>How this Safeguards:</span>
+              </div>
+              <p class="text-zinc-500 font-sans leading-relaxed">
+                Computes a raw 256-bit SHA-256 binary hash. The CPU mines a Proof-of-Work nonce targeting leading zeroes, binding the file hash, owner alert email, and Genesis link into an immutable block.
+              </p>
+            </div>
+            <div class="space-y-1">
+              <div class="flex items-center space-x-1.5 font-display font-bold text-zinc-900">
+                <span>📖</span><span>How to Use:</span>
+              </div>
+              <p class="text-zinc-500 font-sans leading-relaxed">
+                Enter the owner's alert email address below, pick an inactivity retention period (e.g. 6 Months), drop your file into the box, and click <strong>"Mine Block"</strong> to anchor it.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Tool for Stage 01 -->
+        <div class="space-y-4" id="workbench">
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Owner Alert Email Input -->
+            <div class="bg-zinc-50 p-4 rounded-2xl border border-zinc-200 space-y-1.5">
+              <label class="block text-xs font-bold text-zinc-900 flex items-center justify-between">
+                <span class="flex items-center space-x-1.5">
+                  <span>📧</span>
+                  <span>Owner Alert Email (Receives Tamper Alarms):</span>
+                </span>
+                <span class="text-[10px] font-semibold text-zinc-900 font-mono">Real-Time Dispatch</span>
+              </label>
+              <input type="email" id="ownerEmailInput" placeholder="your-email@example.com" class="w-full bg-white text-xs text-zinc-900 px-3 py-2 rounded-xl border border-zinc-300 focus:outline-none focus:border-zinc-900" />
+              <p class="text-[11px] text-zinc-400">
+                * The Sentinel will immediately dispatch an alert to this address if a modification is attempted!
+              </p>
+            </div>
+
+            <!-- Inactivity Retention Period -->
+            <div class="bg-zinc-50 p-4 rounded-2xl border border-zinc-200 space-y-2">
+              <div class="flex justify-between items-center text-xs">
+                <label class="font-bold text-zinc-900 flex items-center space-x-1.5">
+                  <svg class="w-4 h-4 text-zinc-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <span>Individual File Time Limit:</span>
+                </label>
+                <span id="individualTimeLimitHint" class="text-[11px] font-semibold text-zinc-900">6 Months Retention</span>
+              </div>
+
+              <div class="grid grid-cols-3 gap-1.5 text-xs">
+                <button type="button" onclick="setTimeLimit(1, '1 Month')" class="time-btn py-1.5 px-2 rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400 text-center font-medium">1 Month</button>
+                <button type="button" onclick="setTimeLimit(3, '3 Months')" class="time-btn py-1.5 px-2 rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400 text-center font-medium">3 Months</button>
+                <button type="button" onclick="setTimeLimit(6, '6 Months (Recommended)')" class="time-btn active-time py-1.5 px-2 rounded-lg border-2 border-zinc-950 bg-zinc-950 text-white text-center font-bold">6 Months</button>
+                <button type="button" onclick="setTimeLimit(12, '12 Months (1 Year)')" class="time-btn py-1.5 px-2 rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400 text-center font-medium">1 Year</button>
+                <button type="button" onclick="setTimeLimit(0.00023, '10 Minutes (Live Demo Test)')" class="time-btn py-1.5 px-2 rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400 text-center font-medium text-amber-700">10 Min (Demo)</button>
+                <button type="button" onclick="setTimeLimit('never', 'Permanent (Never Expire)')" class="time-btn py-1.5 px-2 rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400 text-center font-medium">Permanent</button>
+              </div>
+              <input type="hidden" id="selectedInactivityMonths" value="6" />
+            </div>
+          </div>
+
+          <!-- File Dropzone -->
+          <div id="registerDropzone" class="border-2 border-dashed border-zinc-300 hover:border-zinc-800 rounded-2xl p-6 text-center cursor-pointer transition bg-zinc-50/50 hover:bg-zinc-100/50 group">
+            <input type="file" id="registerFileInput" class="hidden" />
+            <div class="flex flex-col items-center justify-center space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-white text-zinc-400 group-hover:text-zinc-900 flex items-center justify-center transition shadow-xs border border-zinc-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+              </div>
+              <p class="text-sm font-medium text-zinc-700 group-hover:text-zinc-950 font-sans">
+                Drop document here to mine, or <span class="text-zinc-950 font-bold underline">browse file</span>
+              </p>
+              <p class="text-[11px] text-zinc-400 font-sans">Accepts PDF, TXT, DOCX, Code, or binary files up to 25MB</p>
+            </div>
+          </div>
+
+          <!-- Selected File Details -->
+          <div id="registerSelectedFileInfo" class="hidden bg-zinc-50 rounded-xl p-3.5 border border-zinc-200 space-y-1.5">
+            <div class="flex items-center justify-between text-xs">
+              <span id="regSelectedFileName" class="font-bold text-zinc-900 truncate max-w-sm">file</span>
+              <span id="regSelectedFileSize" class="text-zinc-500 font-mono text-[11px]">0 KB</span>
+            </div>
+            <div class="text-[11px] bg-white p-2.5 rounded-lg border border-zinc-200 text-zinc-600 break-all font-mono">
+              <span class="text-zinc-400 font-sans">Computed SHA-256 Digest:</span> <span id="regComputedHash" class="text-zinc-900 font-semibold">Computing...</span>
+            </div>
+          </div>
+
+          <!-- Action Button -->
+          <button id="btnMineBlock" disabled onclick="submitRegisterFile()" class="w-full py-3.5 px-4 rounded-xl font-display font-bold text-sm transition flex items-center justify-center space-x-2 cursor-not-allowed bg-zinc-200 text-zinc-400 shadow-xs">
+            <svg id="mineSpinner" class="hidden animate-spin w-4 h-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+            <span id="mineBtnText">Select a File to Mine into Blockchain</span>
+          </button>
+
+          <!-- Success Alert -->
+          <div id="registerSuccessAlert" class="hidden rounded-2xl p-4 bg-zinc-100 border border-zinc-300 text-zinc-900 text-xs space-y-2">
+            <div class="flex items-start justify-between">
+              <div class="flex items-center space-x-2">
+                <span class="w-5 h-5 rounded-full bg-zinc-950 text-white flex items-center justify-center font-bold text-xs">✓</span>
+                <span class="font-bold text-sm text-zinc-900" id="regAlertTitle">Block Successfully Mined!</span>
+              </div>
+              <span id="regAlertBlockIndex" class="px-2.5 py-0.5 rounded-full bg-zinc-200 text-zinc-900 font-mono text-[11px] font-bold">Block #</span>
+            </div>
+            <div class="font-mono text-[11px] bg-white p-3 rounded-xl border border-zinc-300 text-zinc-700 space-y-1">
+              <div>File Hash: <span id="regResultHash" class="text-zinc-900 font-semibold break-all"></span></div>
+              <div>Alert Email: <span id="regResultEmail" class="text-zinc-900 font-bold"></span></div>
+              <div>Retention: <span id="regResultExpiry" class="text-zinc-900 font-bold"></span></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Slide Footer Nav -->
+        <div class="flex items-center justify-between pt-4 border-t border-zinc-200 text-xs">
+          <span class="text-zinc-400 font-mono">Stage 01 of 04</span>
+          <button onclick="goToSlide(2)" class="px-5 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-display font-bold transition flex items-center space-x-2 cursor-pointer shadow-xs">
+            <span>Next: Slide 02 (Verify Authenticity) &rarr;</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ====================================================== -->
+      <!-- SLIDE 2: VERIFY & CLOCK (INTEGRITY AUDIT)              -->
+      <!-- ====================================================== -->
+      <div id="slideContent2" class="workbench-slide block space-y-6 pt-2 animate-in fade-in duration-200">
+        
+        <div class="space-y-4 pb-4 border-b border-zinc-200">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center space-x-3">
+              <div class="w-9 h-9 rounded-xl bg-zinc-950 text-white flex items-center justify-center font-display font-black text-sm shadow-sm">
+                02
+              </div>
+              <div>
+                <span class="text-[10px] font-mono font-bold tracking-wider uppercase text-zinc-400">SLIDE 02 &bull; PARITY AUDIT & CLOCK EXTENSION</span>
+                <h3 class="text-xl sm:text-2xl font-display font-extrabold text-zinc-950">
+                  Verify File Integrity & Reset Retention Lifespan
+                </h3>
+              </div>
+            </div>
+            <span class="text-[10px] font-mono px-2.5 py-1 rounded bg-zinc-100 text-zinc-700 border border-zinc-200">
+              POST /api/verify
+            </span>
+          </div>
+
+          <!-- Integrated Safeguard & How-to-Use Guide -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs bg-zinc-50 p-4 rounded-2xl border border-zinc-200">
+            <div class="space-y-1">
+              <div class="flex items-center space-x-1.5 font-display font-bold text-zinc-900">
+                <span>🛡️</span><span>How this Safeguards:</span>
+              </div>
+              <p class="text-zinc-500 font-sans leading-relaxed">
+                Verifies byte-for-byte authenticity against ledger records. Successful verification mathematically proves zero tampering and automatically extends the document's inactivity retention clock!
+              </p>
+            </div>
+            <div class="space-y-1">
+              <div class="flex items-center space-x-1.5 font-display font-bold text-zinc-900">
+                <span>📖</span><span>How to Use:</span>
+              </div>
+              <p class="text-zinc-500 font-sans leading-relaxed">
+                Drop any document below to audit its integrity. If valid, the inactivity clock resets. If modified, the Sentinel immediately sounds the alarm and dispatches an alert email!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Tool for Stage 02 -->
+        <div class="space-y-4">
+          
+          <div id="verifyDropzone" class="border-2 border-dashed border-zinc-300 hover:border-zinc-800 rounded-2xl p-6 text-center cursor-pointer transition bg-zinc-50/50 hover:bg-zinc-100/50 group">
+            <input type="file" id="verifyFileInput" class="hidden" />
+            <div class="flex flex-col items-center justify-center space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-white text-zinc-400 group-hover:text-zinc-900 flex items-center justify-center transition shadow-xs border border-zinc-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              </div>
+              <p class="text-sm font-medium text-zinc-700 group-hover:text-zinc-950 font-sans">
+                Drop file here to verify, or <span class="text-zinc-950 font-bold underline">browse</span>
+              </p>
+              <p class="text-[11px] text-zinc-400 font-sans">Recalculates cryptographic SHA-256 and matches against blockchain</p>
+            </div>
+          </div>
+
+          <div id="verifySelectedFileInfo" class="hidden bg-zinc-50 rounded-xl p-3.5 border border-zinc-200 space-y-1.5">
+            <div class="flex items-center justify-between text-xs">
+              <span id="verSelectedFileName" class="font-bold text-zinc-900 truncate max-w-sm">file</span>
+              <span id="verSelectedFileSize" class="text-zinc-500 font-mono text-[11px]">0 KB</span>
+            </div>
+            <div class="text-[11px] bg-white p-2.5 rounded-lg border border-zinc-200 text-zinc-600 break-all font-mono">
+              <span class="text-zinc-400 font-sans">Computed SHA-256 Digest:</span> <span id="verComputedHash" class="text-zinc-900 font-semibold">Computing...</span>
+            </div>
+          </div>
+
+          <button id="btnVerifyFile" disabled onclick="submitVerifyFile()" class="w-full py-3.5 px-4 rounded-xl font-display font-bold text-sm transition flex items-center justify-center space-x-2 cursor-not-allowed bg-zinc-200 text-zinc-400 shadow-xs">
+            <svg id="verifySpinner" class="hidden animate-spin w-4 h-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+            <span id="verifyBtnText">Select a File to Verify Authenticity</span>
+          </button>
+
+          <!-- VALID & UNTAMPERED BADGE -->
+          <div id="verifySuccessBadge" class="hidden relative rounded-2xl p-4 bg-zinc-100 border-2 border-zinc-950 text-zinc-900 space-y-2 shadow-sm">
+            <button onclick="dismissVerificationResults()" title="Dismiss / Close Badge" class="absolute top-3 right-3 w-7 h-7 rounded-lg bg-zinc-200 hover:bg-zinc-300 text-zinc-900 flex items-center justify-center font-black transition cursor-pointer text-sm">
+              ✕
+            </button>
+            <div class="flex items-center space-x-3 pr-8">
+              <div class="w-8 h-8 rounded-lg bg-zinc-950 text-white flex items-center justify-center font-black text-sm flex-shrink-0">✓</div>
+              <div>
+                <span class="px-2 py-0.5 rounded bg-zinc-950 text-white text-[10px] font-black uppercase">VALID & UNTAMPERED</span>
+                <h3 class="text-xs font-bold text-zinc-900 mt-0.5">Authenticity Confirmed &bull; Clock Reset</h3>
+              </div>
+            </div>
+            <div class="font-mono text-[11px] bg-white p-3 rounded-xl border border-zinc-300 text-zinc-700 space-y-1">
+              <div>Anchor Block: <span id="verBadgeBlockIndex" class="font-bold text-zinc-950"></span></div>
+              <div>Inactivity Extended To: <span id="verBadgeExpires" class="text-zinc-900 font-semibold"></span></div>
+            </div>
+          </div>
+
+          <!-- RED BADGE: WARNING TAMPERED -->
+          <div id="verifyFailBadge" class="hidden relative rounded-2xl p-4 bg-rose-50 border-2 border-rose-500 text-rose-900 space-y-2.5 shadow-sm">
+            <button onclick="dismissVerificationResults()" title="Dismiss / Close Warning" class="absolute top-3 right-3 w-7 h-7 rounded-lg bg-rose-200 hover:bg-rose-300 text-rose-900 flex items-center justify-center font-black transition cursor-pointer text-sm">
+              ✕
+            </button>
+            <div class="flex items-center space-x-3 pr-8">
+              <div class="w-8 h-8 rounded-lg bg-rose-600 text-white flex items-center justify-center font-black text-sm flex-shrink-0">✕</div>
+              <div>
+                <span class="px-2 py-0.5 rounded bg-rose-600 text-white text-[10px] font-black uppercase">WARNING: INVALID OR ALTERED FILE</span>
+                <h3 class="text-xs font-bold text-rose-900 mt-0.5">Cryptographic Mismatch Detected</h3>
+              </div>
+            </div>
+            <p class="text-xs text-rose-700">The file hash does not match the blockchain ledger.</p>
+            <div id="tamperEmailAlertNotice" class="hidden text-[11px] bg-white p-3 rounded-xl border border-rose-200 font-mono text-slate-700">
+              🚨 Security alert was dispatched to: <strong id="tamperAlertEmailSentTo" class="text-rose-700"></strong>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Slide Footer Nav -->
+        <div class="flex items-center justify-between pt-4 border-t border-zinc-200 text-xs">
+          <button onclick="goToSlide(1)" class="px-4 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-display font-semibold transition cursor-pointer">
+            &larr; Back to Slide 01
+          </button>
+          <button onclick="goToSlide(3)" class="px-5 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-display font-bold transition flex items-center space-x-2 cursor-pointer shadow-xs">
+            <span>Next: Slide 03 (30s Tamper Lab) &rarr;</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ====================================================== -->
+      <!-- SLIDE 3: 30-SECOND PRE-EDIT TAMPER LAB                 -->
+      <!-- ====================================================== -->
+      <div id="slideContent3" class="workbench-slide block space-y-6 pt-2 animate-in fade-in duration-200">
+        
+        <div class="space-y-4 pb-4 border-b border-zinc-200">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center space-x-3">
+              <div class="w-9 h-9 rounded-xl bg-amber-600 text-white flex items-center justify-center font-display font-black text-sm shadow-sm">
+                03
+              </div>
+              <div>
+                <span class="text-[10px] font-mono font-bold tracking-wider uppercase text-amber-700">SLIDE 03 &bull; ACTIVE FIM DEFENSE</span>
+                <h3 class="text-xl sm:text-2xl font-display font-extrabold text-zinc-950">
+                  Sentinel Tamper Lab & 30s Pre-Edit Quarantine
+                </h3>
+              </div>
+            </div>
+            <span id="tamperEditorStatusBadge" class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300 flex items-center space-x-1">
+              <span>🔒</span>
+              <span>Protected & Locked (Read-Only)</span>
+            </span>
+          </div>
+
+          <!-- Integrated Safeguard & How-to-Use Guide -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs bg-amber-50/50 p-4 rounded-2xl border border-amber-200">
+            <div class="space-y-1">
+              <div class="flex items-center space-x-1.5 font-display font-bold text-amber-950">
+                <span>🛡️</span><span>How this Safeguards:</span>
+              </div>
+              <p class="text-amber-900/80 font-sans leading-relaxed">
+                Prevents unannounced alterations! Attempting to edit locks the editor, dispatches an emergency email to the file owner, and enforces a mandatory <strong>30-second delay BEFORE editing unlocks</strong>.
+              </p>
+            </div>
+            <div class="space-y-1">
+              <div class="flex items-center space-x-1.5 font-display font-bold text-amber-950">
+                <span>📖</span><span>How to Use:</span>
+              </div>
+              <p class="text-amber-900/80 font-sans leading-relaxed">
+                Click <strong>"✏️ Edit File"</strong> below to initiate the 30s security window and email dispatch. Wait 30 seconds for edit mode to unlock, then alter text and click <strong>"Save Alterations"</strong> to see the Sentinel detect the tamper!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Tool for Stage 03 -->
+        <div id="tamper-lab" class="space-y-4">
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center space-x-2">
+              <label class="text-xs font-semibold text-zinc-700">Select File to Test:</label>
+              <select id="tamperFileSelect" onchange="loadSelectedTamperFile()" class="text-xs font-mono bg-white px-3 py-1.5 rounded-xl border border-zinc-300 text-zinc-800 focus:outline-none focus:border-amber-500">
+                <option value="Sample_Agreement.txt">Sample_Agreement.txt (Block #3)</option>
+                <option value="Confidential_Agreement.pdf">Confidential_Agreement.pdf (Block #2)</option>
+                <option value="Sample_Document.pdf">Sample_Document.pdf (Block #1)</option>
+              </select>
+            </div>
+
+            <div class="flex items-center space-x-2 text-xs text-zinc-500">
+              <span>Owner to Alert:</span>
+              <input type="email" id="tamperAlertEmailInput" value="owner@verichain.local" placeholder="owner@example.com" class="font-mono text-xs bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-zinc-800 focus:outline-none focus:border-amber-500 w-52" />
+            </div>
+          </div>
+
+          <!-- Locked Editor Notice -->
+          <div id="lockedEditorNotice" class="text-xs bg-amber-50/80 border border-amber-200 text-amber-900 px-3.5 py-2.5 rounded-xl flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="text-base">🔒</span>
+              <span id="lockedNoticeText">Editing is strictly locked. Click <strong>"Edit File"</strong> below to initiate the 30-second security waiting window and email dispatch.</span>
+            </div>
+            <span id="lockedNoticeBadge" class="text-[10px] font-bold text-amber-700 uppercase tracking-wider font-mono">Guarded Mode</span>
+          </div>
+
+          <!-- Editor Textarea -->
+          <div class="relative">
+            <textarea id="tamperFileEditor" readonly rows="4" class="w-full font-mono text-xs p-3.5 bg-zinc-100/80 border border-zinc-300 rounded-xl text-zinc-700 cursor-not-allowed select-none transition-all duration-300">AGREEMENT OF RECORD
+Version: 1.0
+Amount: $5,000
+Status: APPROVED
+Signer: Principal Engineer</textarea>
+          </div>
+
+          <!-- Action Toolbar -->
+          <div class="flex flex-wrap items-center justify-end gap-3 pt-1">
+            <!-- 1. Start Edit Button (initiates 30s wait) -->
+            <button id="btnStartEditFile" onclick="requestFileEdit()" class="px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs transition flex items-center space-x-1.5 cursor-pointer shadow-sm">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+              <span>✏️ Edit File (Wait 30s Before Editing)</span>
+            </button>
+
+            <!-- 2. Save Tampered File Button -->
+            <button id="btnSaveTamperedFile" onclick="saveTamperedFileAndAudit()" class="hidden px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition flex items-center space-x-1.5 cursor-pointer shadow-sm">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+              <span>💾 Save Alterations & Audit Blockchain Tampering</span>
+            </button>
+
+            <!-- Reset Button -->
+            <button id="btnResetTamperContent" onclick="resetTamperFileToOriginal()" class="px-3.5 py-2.5 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-700 text-xs font-semibold transition cursor-pointer">
+              ↺ Reset Original
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Slide Footer Nav -->
+        <div class="flex items-center justify-between pt-4 border-t border-zinc-200 text-xs">
+          <button onclick="goToSlide(2)" class="px-4 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-display font-semibold transition cursor-pointer">
+            &larr; Back to Slide 02
+          </button>
+          <button onclick="goToSlide(4)" class="px-5 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-display font-bold transition flex items-center space-x-2 cursor-pointer shadow-xs">
+            <span>Next: Slide 04 (Ledger Explorer) &rarr;</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ====================================================== -->
+      <!-- SLIDE 4: IMMUTABLE LEDGER & CHAIN HIERARCHY AUDIT       -->
+      <!-- ====================================================== -->
+      <div id="slideContent4" class="workbench-slide block space-y-6 pt-2 animate-in fade-in duration-200">
+        
+        <div class="space-y-4 pb-4 border-b border-zinc-200">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center space-x-3">
+              <div class="w-9 h-9 rounded-xl bg-zinc-950 text-white flex items-center justify-center font-display font-black text-sm shadow-sm">
+                04
+              </div>
+              <div>
+                <span class="text-[10px] font-mono font-bold tracking-wider uppercase text-zinc-400">SLIDE 04 &bull; IMMUTABLE CONSENSUS</span>
+                <h3 class="text-xl sm:text-2xl font-display font-extrabold text-zinc-950">
+                  Blockchain Ledger Explorer & Chain Audit
+                </h3>
+              </div>
+            </div>
+            <button onclick="auditLedger()" class="px-3.5 py-1.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-xs font-bold transition flex items-center space-x-1.5 cursor-pointer shadow-xs">
+              <svg class="w-3.5 h-3.5 text-zinc-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              <span>Run Full Audit</span>
+            </button>
+          </div>
+
+          <!-- Integrated Safeguard & How-to-Use Guide -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs bg-zinc-50 p-4 rounded-2xl border border-zinc-200">
+            <div class="space-y-1">
+              <div class="flex items-center space-x-1.5 font-display font-bold text-zinc-900">
+                <span>🛡️</span><span>How this Safeguards:</span>
+              </div>
+              <p class="text-zinc-500 font-sans leading-relaxed">
+                Cryptographic previous-hash chaining makes historical tampering mathematically prohibitive. Unaccessed files past their expiration date are safely purged to enforce data hygiene.
+              </p>
+            </div>
+            <div class="space-y-1">
+              <div class="flex items-center space-x-1.5 font-display font-bold text-zinc-900">
+                <span>📖</span><span>How to Use:</span>
+              </div>
+              <p class="text-zinc-500 font-sans leading-relaxed">
+                Search blocks by filename or hash, inspect nonces and timestamps, and verify that the blockchain height and root hashes remain in strict consensus.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Tool for Stage 04 -->
+        <div id="ledger" class="space-y-4">
+          
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="relative flex-1 max-w-md">
+              <input type="text" id="ledgerSearchInput" oninput="renderLedger()" placeholder="Search hash, block #, filename..." class="w-full bg-zinc-50 text-xs px-3.5 py-2 pl-9 rounded-xl border border-zinc-300 focus:outline-none focus:border-zinc-900 font-mono" />
+              <svg class="w-4 h-4 text-zinc-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+
+            <div class="flex items-center space-x-2 text-xs">
+              <span class="text-zinc-500">Mined Blocks in Ledger:</span>
+              <span class="px-2.5 py-1 rounded-lg bg-zinc-950 text-white font-mono font-bold" id="totalBlocksCountDisplay">1</span>
+            </div>
+          </div>
+
+          <!-- Mined Blocks Stream Container -->
+          <div id="ledgerContainer" class="space-y-3">
+
+    <div class="relative bg-white rounded-2xl border border-zinc-300 bg-zinc-50/50 p-5 shadow-xs transition space-y-3">
+      <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-zinc-100">
+        <div class="flex items-center space-x-2.5">
+          <span class="px-2.5 py-1 rounded-md text-xs font-bold font-mono bg-zinc-800 text-white">
+            BLOCK #0
+          </span>
+          <span class="text-sm font-bold text-zinc-950 truncate max-w-xs sm:max-w-md">Genesis Anchor Root</span>
+          <span class="px-2 py-0.5 rounded bg-zinc-200 text-zinc-900 text-[10px] font-bold">Genesis Root</span>
+          <span class="text-[10px] text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-300 font-mono">Alerts: system.root@verichain.local</span>
+        </div>
+        <div class="text-xs text-zinc-500 font-mono">
+          <span>Nonce: <strong class="text-zinc-900">0</strong></span> &bull; 
+          <span>26/10/2024, 9:56:40 pm</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono">
+        <div class="bg-zinc-50 p-2.5 rounded-xl border border-zinc-200 space-y-0.5">
+          <span class="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">Block Hash (SHA-256)</span>
+          <div class="text-zinc-950 text-[11px] break-all font-semibold font-mono">0000a1b2c3d4e5f67890123456789abcdef0123456789abcdef0123456789abc</div>
+        </div>
+        <div class="bg-zinc-50 p-2.5 rounded-xl border border-zinc-200 space-y-0.5">
+          <span class="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">File Content Hash</span>
+          <div class="text-zinc-950 text-[11px] break-all font-semibold font-mono">e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855</div>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-zinc-400 pt-1">
+        <div>Previous Hash: <span class="text-zinc-600">0...</span></div>
+        <div>PoW Target: <span class="text-zinc-900 font-bold">3 Leading Zeroes</span></div>
+      </div>
+    </div>
+  
+</div>
+
+        </div>
+
+        <!-- Slide Footer Nav -->
+        <div class="flex items-center justify-between pt-4 border-t border-zinc-200 text-xs">
+          <button onclick="goToSlide(3)" class="px-4 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-display font-semibold transition cursor-pointer">
+            &larr; Back to Slide 03
+          </button>
+          <button onclick="goToSlide(1)" class="px-5 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-display font-bold transition flex items-center space-x-2 cursor-pointer shadow-xs">
+            <span>↺ Loop to Slide 01 (Mine & Anchor)</span>
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+  </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- VIEW 3: ADMIN AUTHORITY & EMAIL REGISTRATION CONSOLE     -->
+  <!-- ======================================================== -->
+  <main id="tabContentAdmin" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full space-y-8 relative z-10 animate-in fade-in duration-300">
+    
+    <!-- Admin Header -->
+    <div class="text-center max-w-3xl mx-auto space-y-2">
+      <div class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-zinc-100 border border-zinc-300 text-zinc-900 text-xs font-display font-bold">
+        <svg class="w-3.5 h-3.5 text-zinc-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path></svg>
+        <span>Admin Authority & Registration Console</span>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-display font-black text-slate-900 tracking-tight">
+        Admin Authority & <span class="font-serif-italic font-normal text-zinc-900">Email Registration</span>
+      </h1>
+      <p class="text-xs sm:text-sm text-slate-500 font-sans max-w-xl mx-auto">
+        Specify owner email addresses for file registration, configure real-time alert dispatch routing, and unlock the full administrative vault via secure 6-digit OTP.
+      </p>
+    </div>
+
+    <!-- 1. ADMIN PAGE: ENTER EMAIL FOR REGISTERING FILE -->
+    <section class="aesthetic-card p-6 sm:p-8 border-l-4 border-l-zinc-950 space-y-6 bg-white">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
+        <div class="space-y-0.5">
+          <div class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-md bg-zinc-100 text-zinc-900 text-[10px] font-mono font-bold">
+            AUTHORITY ACTION: ENTER EMAIL & REGISTER
+          </div>
+          <h2 class="font-display font-extrabold text-lg text-slate-900">
+            Register File with <span class="font-serif-italic font-normal text-zinc-900">Authorized Owner Email</span>
+          </h2>
+          <p class="text-xs text-slate-500 font-sans">
+            Enter the authorized email address below to anchor and mine a file with designated owner alarm routing.
+          </p>
+        </div>
+        <span class="text-[10px] font-mono px-2 py-1 rounded bg-white border border-slate-200 text-slate-500">
+          POST /api/upload
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Left: Enter Email & Select Inactivity Period -->
+        <div class="space-y-4">
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
+            <label class="block text-xs font-display font-bold text-slate-900 flex items-center justify-between">
+              <span class="flex items-center space-x-1.5">
+                <span>📧</span>
+                <span>Authorized Owner Email for This File:</span>
+              </span>
+              <span class="text-[10px] text-zinc-900 font-mono font-bold">Required</span>
+            </label>
+            <input type="email" id="adminRegEmailInput" value="admin.security@verichain.local" placeholder="owner@company.com" class="w-full bg-white text-xs font-mono text-slate-900 px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-zinc-900 shadow-2xs font-bold" />
+            <p class="text-[11px] text-slate-400 font-sans">
+              * The Sentinel binds this address to the file. All 30s pre-edit alerts and tamper alarms are sent here.
+            </p>
+          </div>
+
+          <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 space-y-2">
+            <label class="block text-xs font-display font-bold text-slate-900">
+              Retention & State Pruning Limit:
+            </label>
+            <select id="adminRegRetentionSelect" class="w-full bg-white text-xs text-slate-800 px-3 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-zinc-900 font-medium font-sans">
+              <option value="6">6 Months Retention (Recommended)</option>
+              <option value="1">1 Month Retention</option>
+              <option value="3">3 Months Retention</option>
+              <option value="12">1 Year Retention (12 Months)</option>
+              <option value="never">Permanent (Never Expire / Never Prune)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Right: File Selection & Mine Action -->
+        <div class="space-y-4">
+          <label class="block text-xs font-display font-bold text-slate-900">
+            Select Document to Anchor Under This Email:
+          </label>
+
+          <div id="adminFileDropzone" class="border-2 border-dashed border-slate-300 hover:border-zinc-800 rounded-2xl p-5 text-center cursor-pointer transition bg-slate-50/50 hover:bg-zinc-100/20 group">
+            <input type="file" id="adminFileInput" class="hidden" />
+            <div class="flex flex-col items-center justify-center space-y-1.5">
+              <div class="w-9 h-9 rounded-xl bg-white text-slate-400 group-hover:text-zinc-900 flex items-center justify-center shadow-2xs border border-slate-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+              </div>
+              <p class="text-xs font-medium text-slate-700 font-sans" id="adminDropzonePrompt">
+                Drop document here, or <span class="text-zinc-900 font-bold underline">browse file</span>
+              </p>
+              <span id="adminSelectedFileNameBadge" class="hidden text-[11px] font-mono font-bold text-zinc-900 bg-zinc-200 px-2 py-0.5 rounded">file</span>
+            </div>
+          </div>
+
+          <button id="btnAdminRegisterFile" onclick="submitAdminRegisterFile()" class="w-full py-3 px-4 rounded-xl font-display font-bold text-xs sm:text-sm transition flex items-center justify-center space-x-2 cursor-pointer bg-zinc-950 hover:bg-zinc-800 text-white shadow-md shadow-zinc-950/20">
+            <svg id="adminMineSpinner" class="hidden animate-spin w-4 h-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
+            <span id="adminMineBtnText">🛡️ Mine & Register File Under This Email</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Live Success Notice -->
+      <div id="adminRegSuccessAlert" class="hidden rounded-2xl p-4 bg-zinc-100 border border-zinc-300 text-zinc-900 text-xs space-y-2 font-mono">
+        <div class="flex items-center space-x-2 font-display font-bold text-zinc-900 text-sm">
+          <span class="w-5 h-5 rounded-full bg-zinc-950 text-white flex items-center justify-center text-xs">✓</span>
+          <span>File Successfully Anchored Under Admin Email!</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 bg-white p-3 rounded-xl border border-zinc-300 text-[11px]">
+          <div>Mined Block: <strong id="adminRegResultBlock" class="text-slate-900">Block #</strong></div>
+          <div class="sm:col-span-2">Registered Owner: <strong id="adminRegResultEmail" class="text-zinc-900"></strong></div>
+          <div class="sm:col-span-3 text-slate-500 break-all">Hash: <span id="adminRegResultHash" class="text-zinc-900 font-semibold"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. REGISTERED FILE EMAIL DIRECTORY & LIVE REASSIGNMENT -->
+    <section class="aesthetic-card p-6 space-y-4">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-slate-100 gap-2">
+        <div>
+          <h3 class="font-display font-bold text-slate-900 text-sm">Active Ledger File Email Registry</h3>
+          <p class="text-xs text-slate-500 font-sans">View and reassign owner alert emails across all existing blockchain blocks</p>
+        </div>
+        <button onclick="renderAdminEmailDirectory()" class="text-xs font-display font-semibold text-zinc-900 hover:text-zinc-900 underline">
+          Refresh Directory
+        </button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs">
+          <thead class="text-slate-500 border-b border-slate-200 uppercase font-mono text-[10px] bg-slate-50/70">
+            <tr>
+              <th class="py-2.5 px-3">Block #</th>
+              <th class="py-2.5 px-3">File Name</th>
+              <th class="py-2.5 px-3">Current Registered Alert Email</th>
+              <th class="py-2.5 px-3">Reassign Alert Email</th>
+              <th class="py-2.5 px-3 text-right">Action</th>
+            </tr>
+          </thead>
+          <tbody id="adminEmailDirectoryTableBody" class="divide-y divide-slate-100 font-mono">
+            <tr><td colspan="5" class="text-center py-6 text-slate-400 font-sans">Loading registered email directory...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- EMAIL DISPATCH SERVER SETTINGS (ZERO CODE ACCESS NEEDED) -->
+    <section class="aesthetic-card p-6 sm:p-8 border-l-4 border-l-zinc-900 space-y-6 bg-white">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-3 border-b border-zinc-100 gap-2">
+        <div class="space-y-0.5">
+          <div class="inline-flex items-center space-x-1.5 px-2.5 py-0.5 rounded-md bg-zinc-100 text-zinc-900 text-[10px] font-mono font-bold">
+            CONFIGURATION: IN-BROWSER EMAIL SERVER (SMTP)
+          </div>
+          <h2 class="font-display font-extrabold text-lg text-zinc-950">
+            Outbound Email <span class="font-serif-italic font-normal text-zinc-800">Dispatch Server Settings</span>
+          </h2>
+          <p class="text-xs text-zinc-500 font-sans">
+            Configure real background email dispatch directly in your browser without editing files, environment variables, or touching code.
+          </p>
+        </div>
+        <div id="smtpStatusBadge" class="text-xs font-mono px-3 py-1 rounded-full bg-zinc-100 border border-zinc-200 text-zinc-700 flex items-center space-x-1.5">
+          <span class="w-2 h-2 rounded-full bg-zinc-400" id="smtpStatusIndicator"></span>
+          <span id="smtpStatusText">Checking SMTP Status...</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+        <div>
+          <label class="block font-semibold text-zinc-700 mb-1">SMTP Host</label>
+          <input type="text" id="smtpHostInput" placeholder="smtp.gmail.com" class="w-full bg-zinc-50 px-3 py-2 rounded-xl border border-zinc-300 text-zinc-900 font-mono text-xs focus:outline-none focus:border-zinc-950" />
+        </div>
+        <div>
+          <label class="block font-semibold text-zinc-700 mb-1">SMTP Port</label>
+          <input type="number" id="smtpPortInput" value="587" placeholder="587" class="w-full bg-zinc-50 px-3 py-2 rounded-xl border border-zinc-300 text-zinc-900 font-mono text-xs focus:outline-none focus:border-zinc-950" />
+        </div>
+        <div>
+          <label class="block font-semibold text-zinc-700 mb-1">Sender Email Account</label>
+          <input type="email" id="smtpUserInput" placeholder="your-email@gmail.com" class="w-full bg-zinc-50 px-3 py-2 rounded-xl border border-zinc-300 text-zinc-900 font-mono text-xs focus:outline-none focus:border-zinc-950" />
+        </div>
+        <div>
+          <label class="block font-semibold text-zinc-700 mb-1">Password or App Password</label>
+          <input type="password" id="smtpPassInput" placeholder="16-letter App Password" class="w-full bg-zinc-50 px-3 py-2 rounded-xl border border-zinc-300 text-zinc-900 font-mono text-xs focus:outline-none focus:border-zinc-950" />
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+        <p class="text-[11px] text-zinc-500 max-w-xl">
+          <strong>Note for Gmail:</strong> Use a 16-character Google App Password from <a href="https://myaccount.google.com/apppasswords" target="_blank" class="underline text-zinc-800">myaccount.google.com/apppasswords</a>. Credentials are saved securely to the active server.
+        </p>
+        <div class="flex items-center space-x-2 w-full sm:w-auto">
+          <button type="button" onclick="saveSmtpSettings()" id="btnSaveSmtp" class="flex-1 sm:flex-none py-2 px-4 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-bold text-xs shadow-sm transition cursor-pointer">
+            Save Email Server
+          </button>
+          <button type="button" onclick="sendTestEmail()" id="btnSendTestEmail" class="flex-1 sm:flex-none py-2 px-3.5 rounded-xl bg-white border border-zinc-300 hover:bg-zinc-100 text-zinc-800 font-semibold text-xs shadow-2xs transition cursor-pointer">
+            Send Test Email
+          </button>
+        </div>
+      </div>
+      
+      <div id="smtpFeedbackBanner" class="hidden text-xs p-3 rounded-xl"></div>
+    </section>
+
+    <!-- 3. Cross-Device Wi-Fi & Public Link Pill -->
+    <div class="aesthetic-card p-5 border-l-4 border-l-zinc-950 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center space-x-3.5">
+        <div class="w-10 h-10 rounded-xl bg-zinc-100 text-zinc-900 flex items-center justify-center font-bold flex-shrink-0">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path></svg>
+        </div>
+        <div class="space-y-0.5">
+          <div class="text-xs text-slate-500 font-medium">Public Worldwide HTTPS Host Link (Open on Any Phone/Device Anywhere):</div>
+          <a id="publicInternetUrl" href="https://9f96577cddcefb.lhr.life" target="_blank" class="text-sm sm:text-base font-mono font-bold text-zinc-900 hover:underline">
+            https://9f96577cddcefb.lhr.life
+          </a>
+          <div class="text-[11px] text-slate-400">
+            Local Wi-Fi Network Link: <span class="font-mono text-slate-600">http://192.168.29.174:3000</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button onclick="copyToClipboard('https://9f96577cddcefb.lhr.life')" class="px-4 py-2 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-bold text-xs transition cursor-pointer shadow-sm">
+          Copy Public Link
+        </button>
+      </div>
+    </div>
+
+    <!-- Admin Login Box -->
+    <div id="adminAuthSection" class="max-w-md mx-auto aesthetic-card p-6 sm:p-8 space-y-5">
+      <div class="text-center space-y-1">
+        <h2 class="text-base font-bold text-slate-900">Email OTP Authorization</h2>
+        <p class="text-xs text-slate-500">Enter your email to receive a 6-digit access OTP.</p>
+      </div>
+
+      <div id="otpStep1" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Admin Email Address</label>
+          <input type="email" id="adminEmailInput" placeholder="admin@example.com" class="w-full bg-slate-50 text-sm text-slate-900 px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-zinc-900" />
+        </div>
+        <button onclick="requestAdminOTP()" id="btnSendOtp" class="w-full py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-bold text-sm transition cursor-pointer shadow-sm">
+          Send 6-Digit Verification OTP
+        </button>
+      </div>
+
+      <div id="otpStep2" class="hidden space-y-4">
+        <div class="bg-zinc-100 p-3 rounded-xl border border-zinc-300 text-xs text-zinc-900">
+          ✓ Code dispatched to <strong id="sentEmailDisplay" class="text-slate-900"></strong>.
+          <div id="localOtpPreviewBanner" class="mt-2 text-[11px] bg-white p-2 rounded border border-zinc-300 text-zinc-800 font-mono select-all"></div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Enter 6-Digit OTP</label>
+          <input type="text" id="adminOtpInput" maxlength="6" placeholder="123456" class="w-full bg-slate-50 text-center tracking-widest text-lg font-mono text-slate-900 px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-zinc-900 font-bold" />
+        </div>
+        <button onclick="verifyAdminOTP()" id="btnVerifyOtp" class="w-full py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-bold text-sm transition cursor-pointer shadow-sm">
+          Verify & Unlock Admin Vault
+        </button>
+        <button onclick="resetOtpStep()" class="w-full text-xs text-slate-500 hover:text-slate-800 underline">Change Email Address</button>
+      </div>
+    </div>
+
+    <!-- Authenticated Vault Interface -->
+    <div id="adminVaultDashboard" class="hidden space-y-6">
+      <div class="aesthetic-card p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center space-x-3">
+          <div class="w-9 h-9 rounded-xl bg-zinc-200 text-zinc-900 flex items-center justify-center font-bold">✓</div>
+          <div>
+            <div class="text-xs text-slate-400">Authenticated Admin:</div>
+            <div id="authenticatedEmail" class="text-sm font-bold text-slate-900">admin@example.com</div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-3">
+          <button onclick="triggerManualPrune()" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-300 transition cursor-pointer">
+            Run Auto-Prune Check Now
+          </button>
+          <button onclick="adminLogout()" class="px-3.5 py-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold border border-rose-200 transition cursor-pointer">
+            Sign Out
+          </button>
+        </div>
+      </div>
+
+      <div class="aesthetic-card p-6 space-y-4">
+        <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+          <div>
+            <h3 class="text-sm font-bold text-slate-900">Individual File Vault & Sentinel Settings</h3>
+            <p class="text-xs text-slate-500">Edit individual time limits and view registered owner alert emails</p>
+          </div>
+          <button onclick="loadVaultFiles()" class="text-xs text-zinc-900 hover:text-zinc-900 font-semibold underline">Refresh Vault</button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="text-slate-500 border-b border-slate-200 uppercase font-mono text-[10px] bg-slate-50/60">
+              <tr>
+                <th class="py-2.5 px-3">Block #</th>
+                <th class="py-2.5 px-3">File Name</th>
+                <th class="py-2.5 px-3">Owner Alert Email</th>
+                <th class="py-2.5 px-3">Inactivity Status</th>
+                <th class="py-2.5 px-3">Edit Time Limit</th>
+                <th class="py-2.5 px-3 text-right">Access File</th>
+              </tr>
+            </thead>
+            <tbody id="vaultFilesTableBody" class="divide-y divide-slate-100 font-mono">
+              <tr><td colspan="6" class="text-center py-8 text-slate-400 font-sans">Loading vault files...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ======================================================== -->
+  <!-- COMPREHENSIVE WEBSITE FOOTER                             -->
+  <!-- ======================================================== -->
+  <footer class="border-t border-slate-200/80 bg-white/90 backdrop-blur-md pt-12 pb-8 text-xs text-slate-500 mt-20 relative z-10 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <!-- Brand Info -->
+        <div class="space-y-3">
+          <div class="flex items-center space-x-2">
+            <div class="w-7 h-7 rounded-lg bg-zinc-950 text-white flex items-center justify-center font-bold text-xs">C</div>
+            <span class="text-base font-black tracking-tight text-zinc-950">CORAL<span class="text-zinc-500">OCE</span></span>
+          </div>
+          <p class="text-[11px] text-slate-500 leading-relaxed">
+            Fortifying the World’s Critical Assets with Enterprise Cryptographic File Integrity & Real-Time Tamper Sentinel Platform. Powered by native Node.js crypto SHA-256 Proof-of-Work blockchain architecture.
+          </p>
+          <div class="flex items-center space-x-1.5 text-[11px] text-zinc-900 font-semibold">
+            <span class="w-2 h-2 rounded-full bg-zinc-800 animate-pulse"></span>
+            <span>All Sentinel Systems Fully Operational</span>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="space-y-2">
+          <div class="font-bold text-slate-900 uppercase text-[10px] tracking-wider font-mono">Platform Navigation</div>
+          <ul class="space-y-1.5 text-[11px]">
+            <li><a href="#features" class="hover:text-zinc-950 transition">Core Capabilities</a></li>
+            <li><a href="#tamper-lab" class="hover:text-amber-600 transition">30s Pre-Edit Tamper Lab</a></li>
+            <li><a href="#workbench" class="hover:text-zinc-950 transition">File Registration Studio</a></li>
+            <li><a href="#ledger" class="hover:text-zinc-950 transition">Blockchain Ledger Explorer</a></li>
+          </ul>
+        </div>
+
+        <!-- Architecture & Specs -->
+        <div class="space-y-2">
+          <div class="font-bold text-slate-900 uppercase text-[10px] tracking-wider font-mono">Cryptographic Specifications</div>
+          <ul class="space-y-1.5 text-[11px] text-slate-500">
+            <li>Algorithm: <span class="font-mono text-slate-700">SHA-256 Digest</span></li>
+            <li>Consensus: <span class="font-mono text-slate-700">Proof-of-Work (Target: 3)</span></li>
+            <li>State Engine: <span class="font-mono text-slate-700">Inactivity Pruning (Auto)</span></li>
+            <li>FIM Daemon: <span class="font-mono text-slate-700">Real-Time fs.watch</span></li>
+          </ul>
+        </div>
+
+        <!-- Network & Multi-Device -->
+        <div class="space-y-2">
+          <div class="font-bold text-slate-900 uppercase text-[10px] tracking-wider font-mono">Deployment & Host Links</div>
+          <ul class="space-y-1.5 text-[11px]">
+            <li>Local Host: <a href="http://localhost:3000" class="font-mono text-slate-700 hover:text-zinc-950">localhost:3000</a></li>
+            <li>Wi-Fi LAN: <span class="font-mono text-slate-700">192.168.29.174:3000</span></li>
+            <li>Public Link: <a href="https://9f96577cddcefb.lhr.life" target="_blank" class="font-mono text-zinc-900 font-bold hover:underline">9f96577cddcefb.lhr.life</a></li>
+            <li><button onclick="switchTab('admin')" class="text-zinc-900 hover:underline font-bold mt-1">Open Admin Vault (OTP)</button></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="border-t border-slate-100 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400">
+        <div>
+          &copy; 2026 Coraloce File Integrity Ledger. Built with zero cloud dependencies.
+        </div>
+        <div class="flex items-center space-x-4">
+          <a href="#architecture" class="hover:text-slate-600 transition">Architecture</a>
+          <span>&bull;</span>
+          <a href="#api-docs" class="hover:text-slate-600 transition">REST API</a>
+          <span>&bull;</span>
+          <a href="#" onclick="auditLedger()" class="hover:text-zinc-950 transition">Run Audit</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- APPLICATION SCRIPTS -->
+  <script>
+    let chainData = [];
+    let isLedgerValid = true;
+    let selectedRegisterFile = null;
+    let selectedVerifyFile = null;
+    let adminToken = localStorage.getItem('verichain_admin_token') || null;
+    let adminEmail = localStorage.getItem('verichain_admin_email') || null;
+    let countdownInterval = null;
+
+    // DOM Elements - Tabs
+    const tabContentWelcome = document.getElementById('tabContentWelcome');
+    const tabContentDashboard = document.getElementById('tabContentDashboard') || document.getElementById('workbench-slide-container');
+    const tabContentAdmin = document.getElementById('tabContentAdmin');
+    const navTabWelcome = document.getElementById('navTabWelcome');
+    const navTabDashboard = document.getElementById('navTabDashboard');
+    const navTabAdmin = document.getElementById('navTabAdmin');
+    const adminAuthBadge = document.getElementById('adminAuthBadge');
+
+    // DOM Elements - Admin Registration Console
+    const adminRegEmailInput = document.getElementById('adminRegEmailInput');
+    const adminRegRetentionSelect = document.getElementById('adminRegRetentionSelect');
+    const adminFileDropzone = document.getElementById('adminFileDropzone');
+    const adminFileInput = document.getElementById('adminFileInput');
+    const adminDropzonePrompt = document.getElementById('adminDropzonePrompt');
+    const adminSelectedFileNameBadge = document.getElementById('adminSelectedFileNameBadge');
+    const btnAdminRegisterFile = document.getElementById('btnAdminRegisterFile');
+    const adminMineSpinner = document.getElementById('adminMineSpinner');
+    const adminMineBtnText = document.getElementById('adminMineBtnText');
+    const adminRegSuccessAlert = document.getElementById('adminRegSuccessAlert');
+    const adminRegResultEmail = document.getElementById('adminRegResultEmail');
+    const adminRegResultBlock = document.getElementById('adminRegResultBlock');
+    const adminRegResultHash = document.getElementById('adminRegResultHash');
+    const adminEmailDirectoryTableBody = document.getElementById('adminEmailDirectoryTableBody');
+    let selectedAdminFile = null;
+
+    // DOM Elements - Registration
+    const registerDropzone = document.getElementById('registerDropzone');
+    const registerFileInput = document.getElementById('registerFileInput');
+    const registerSelectedFileInfo = document.getElementById('registerSelectedFileInfo');
+    const regSelectedFileName = document.getElementById('regSelectedFileName');
+    const regSelectedFileSize = document.getElementById('regSelectedFileSize');
+    const regComputedHash = document.getElementById('regComputedHash');
+    const btnMineBlock = document.getElementById('btnMineBlock');
+    const mineSpinner = document.getElementById('mineSpinner');
+    const mineBtnText = document.getElementById('mineBtnText');
+    const registerSuccessAlert = document.getElementById('registerSuccessAlert');
+    const regResultHash = document.getElementById('regResultHash');
+    const regResultExpiry = document.getElementById('regResultExpiry');
+    const regResultEmail = document.getElementById('regResultEmail');
+    const regAlertBlockIndex = document.getElementById('regAlertBlockIndex');
+    const selectedInactivityMonths = document.getElementById('selectedInactivityMonths');
+    const individualTimeLimitHint = document.getElementById('individualTimeLimitHint');
+    const ownerEmailInput = document.getElementById('ownerEmailInput');
+
+    // DOM Elements - Verification
+    const verifyDropzone = document.getElementById('verifyDropzone');
+    const verifyFileInput = document.getElementById('verifyFileInput');
+    const verifySelectedFileInfo = document.getElementById('verifySelectedFileInfo');
+    const verSelectedFileName = document.getElementById('verSelectedFileName');
+    const verSelectedFileSize = document.getElementById('verSelectedFileSize');
+    const verComputedHash = document.getElementById('verComputedHash');
+    const btnVerifyFile = document.getElementById('btnVerifyFile');
+    const verifySpinner = document.getElementById('verifySpinner');
+    const verifyBtnText = document.getElementById('verifyBtnText');
+    const verifySuccessBadge = document.getElementById('verifySuccessBadge');
+    const verifyFailBadge = document.getElementById('verifyFailBadge');
+    const verifyExpiredBadge = document.getElementById('verifyExpiredBadge') || { classList: { add: ()=>{}, remove: ()=>{} } };
+    const verBadgeBlockIndex = document.getElementById('verBadgeBlockIndex');
+    const verBadgeExpires = document.getElementById('verBadgeExpires');
+    const tamperEmailAlertNotice = document.getElementById('tamperEmailAlertNotice');
+    const tamperAlertEmailSentTo = document.getElementById('tamperAlertEmailSentTo');
+
+    // DOM Elements - Quarantine Modal
+    const quarantineModal = document.getElementById('quarantineModal');
+    const quarantineTitle = document.getElementById('quarantineTitle');
+    const quarantineSubtext = document.getElementById('quarantineSubtext');
+    const quarantineModalCard = document.getElementById('quarantineModalCard');
+    const quarantineIconContainer = document.getElementById('quarantineIconContainer');
+    const quarantineIcon = document.getElementById('quarantineIcon');
+    const quarantineEmailBanner = document.getElementById('quarantineEmailBanner');
+    const quarantineEmailLabel = document.getElementById('quarantineEmailLabel');
+    const quarantineEmailDisplay = document.getElementById('quarantineEmailDisplay');
+    const quarantineEmailNote = document.getElementById('quarantineEmailNote');
+    const countdownProtocolLabel = document.getElementById('countdownProtocolLabel');
+    const countdownTimer = document.getElementById('countdownTimer');
+    const countdownProgressBar = document.getElementById('countdownProgressBar');
+    const countdownExplanation = document.getElementById('countdownExplanation');
+    const btnDismissQuarantine = document.getElementById('btnDismissQuarantine');
+    const alertEmailPreviewBox = document.getElementById('alertEmailPreviewBox');
+    const previewEmailSubject = document.getElementById('previewEmailSubject');
+    const previewEmailTo = document.getElementById('previewEmailTo');
+    const previewEmailBody = document.getElementById('previewEmailBody');
+
+    // DOM Elements - Tampering Section & Pre-Edit Security
+    const tamperFileSelect = document.getElementById('tamperFileSelect');
+    const tamperEditorStatusBadge = document.getElementById('tamperEditorStatusBadge');
+    const lockedEditorNotice = document.getElementById('lockedEditorNotice');
+    const lockedNoticeText = document.getElementById('lockedNoticeText');
+    const lockedNoticeBadge = document.getElementById('lockedNoticeBadge');
+    const tamperFileEditor = document.getElementById('tamperFileEditor');
+    const tamperAlertEmailInput = document.getElementById('tamperAlertEmailInput');
+    const btnStartEditFile = document.getElementById('btnStartEditFile');
+    const btnSaveTamperedFile = document.getElementById('btnSaveTamperedFile');
+    const btnResetTamperContent = document.getElementById('btnResetTamperContent');
+
+    let currentQuarantineMode = 'PRE_EDIT';
+    const originalFileContents = {
+      'Sample_Agreement.txt': `AGREEMENT OF RECORD\nVersion: 1.0\nAmount: $5,000\nStatus: APPROVED\nSigner: Principal Engineer`,
+      'Confidential_Agreement.pdf': `%PDF-1.4\n1 0 obj << /Title (Confidential Agreement) /Amount ($50,000) >> endobj`,
+      'Sample_Document.pdf': `%PDF-1.4\n1 0 obj << /Title (Sample Document) /Status (Verified) >> endobj`
+    };
+
+    const blockchainContainer = document.getElementById('ledgerContainer') || document.getElementById('blockchainContainer');
+    const totalBlocksCount = document.getElementById('totalBlocksCount');
+    const chainStatusBadge = document.getElementById('chainStatusBadge') || { textContent: '', className: '' };
+    const chainStatusText = document.getElementById('chainStatusText') || { textContent: '' };
+    const ledgerSearchInput = document.getElementById('ledgerSearchInput');
+
+    // DOM Elements - Admin
+    const adminAuthSection = document.getElementById('adminAuthSection');
+    const adminVaultDashboard = document.getElementById('adminVaultDashboard');
+    const otpStep1 = document.getElementById('otpStep1');
+    const otpStep2 = document.getElementById('otpStep2');
+    const adminEmailInput = document.getElementById('adminEmailInput');
+    const adminOtpInput = document.getElementById('adminOtpInput');
+    const sentEmailDisplay = document.getElementById('sentEmailDisplay');
+    const localOtpPreviewBanner = document.getElementById('localOtpPreviewBanner');
+    const authenticatedEmail = document.getElementById('authenticatedEmail');
+    const vaultFilesTableBody = document.getElementById('vaultFilesTableBody');
+
+    window.addEventListener('DOMContentLoaded', () => {
+      setupDropzone(registerDropzone, registerFileInput, handleRegisterFileSelected);
+      setupDropzone(verifyDropzone, verifyFileInput, handleVerifyFileSelected);
+      setupDropzone(adminFileDropzone, adminFileInput, handleAdminFileSelected);
+      fetchBlockchain();
+      connectSentinelSSE();
+      loadSelectedTamperFile();
+      updateNotificationPermissionUI();
+      loadSmtpSettings();
+
+      if (adminToken && adminEmail) {
+        showAuthenticatedAdminUI();
+      }
+
+      // Default landing is the Welcome Page
+      switchTab('welcome');
+
+      // If user clicks on locked textarea, gently notify them to click "Edit File"
+      tamperFileEditor.addEventListener('click', () => {
+        if (tamperFileEditor.readOnly) {
+          lockedEditorNotice.classList.add('ring-2', 'ring-amber-500');
+          setTimeout(() => lockedEditorNotice.classList.remove('ring-2', 'ring-amber-500'), 1200);
+        }
+      });
+    });
+
+    /* ==========================================================
+       CONNECT TO SERVER-SENT EVENTS (SSE) STREAM
+       Receives live alerts the exact millisecond an event occurs!
+       ========================================================== */
+    function connectSentinelSSE() {
+      try {
+        const eventSource = new EventSource('/api/sentinel/stream');
+
+        eventSource.addEventListener('PRE_EDIT_ALERT', (e) => {
+          const data = JSON.parse(e.data);
+          console.warn('[SSE PRE-EDIT LOCKDOWN RECEIVED]:', data);
+          // If modal is not already open, display pre-edit countdown
+          if (quarantineModal.classList.contains('hidden')) {
+            trigger30SecondQuarantine(data, 'PRE_EDIT');
+          }
+        });
+
+        eventSource.addEventListener('LIVE_TAMPER', (e) => {
+          const data = JSON.parse(e.data);
+          console.warn('[SENTINEL SSE EVENT RECEIVED]:', data);
+          trigger30SecondQuarantine(data, 'LIVE_DISK');
+        });
+
+        eventSource.onerror = () => {
+          // auto-reconnects
+        };
+      } catch (err) {
+        console.error('SSE Error:', err);
+      }
+    }
+
+    /* Page Navigation Controller (Welcome vs Workbench vs Admin) */
+    function switchTab(tab) {
+      const elMain = document.getElementById('tabContentWelcome');
+      const elAdmin = document.getElementById('tabContentAdmin');
+
+      if (tab === 'welcome') {
+        if (elMain) elMain.classList.remove('hidden');
+        if (elAdmin) elAdmin.classList.add('hidden');
+        if (navTabWelcome) navTabWelcome.className = 'px-3.5 py-1.5 rounded-lg text-xs font-display font-bold transition bg-zinc-950 text-white shadow-sm flex items-center space-x-1.5 cursor-pointer';
+        if (navTabDashboard) navTabDashboard.className = 'px-3.5 py-1.5 rounded-lg text-xs font-display font-semibold transition text-zinc-600 hover:text-zinc-950 flex items-center space-x-1.5 cursor-pointer';
+        if (navTabAdmin) navTabAdmin.className = 'px-3.5 py-1.5 rounded-lg text-xs font-display font-semibold transition text-zinc-600 hover:text-zinc-950 flex items-center space-x-1.5 cursor-pointer';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else if (tab === 'dashboard') {
+        if (elMain) elMain.classList.remove('hidden');
+        if (elAdmin) elAdmin.classList.add('hidden');
+        if (navTabWelcome) navTabWelcome.className = 'px-3.5 py-1.5 rounded-lg text-xs font-display font-semibold transition text-zinc-600 hover:text-zinc-950 flex items-center space-x-1.5 cursor-pointer';
+        if (navTabDashboard) navTabDashboard.className = 'px-3.5 py-1.5 rounded-lg text-xs font-display font-bold transition bg-zinc-950 text-white shadow-sm flex items-center space-x-1.5 cursor-pointer';
+        if (navTabAdmin) navTabAdmin.className = 'px-3.5 py-1.5 rounded-lg text-xs font-display font-semibold transition text-zinc-600 hover:text-zinc-950 flex items-center space-x-1.5 cursor-pointer';
+        const target = document.getElementById('workbench-slide-container') || document.getElementById('workbench-platform') || document.getElementById('flow-step-1');
+        if (target) target.scrollIntoView({ behavior: 'smooth' });
+      } else if (tab === 'admin') {
+        if (elMain) elMain.classList.add('hidden');
+        if (elAdmin) elAdmin.classList.remove('hidden');
+        if (navTabWelcome) navTabWelcome.className = 'px-3.5 py-1.5 rounded-lg text-xs font-display font-semibold transition text-zinc-600 hover:text-zinc-950 flex items-center space-x-1.5 cursor-pointer';
+        if (navTabDashboard) navTabDashboard.className = 'px-3.5 py-1.5 rounded-lg text-xs font-display font-semibold transition text-zinc-600 hover:text-zinc-950 flex items-center space-x-1.5 cursor-pointer';
+        if (navTabAdmin) navTabAdmin.className = 'px-3.5 py-1.5 rounded-lg text-xs font-display font-bold transition bg-zinc-950 text-white shadow-sm flex items-center space-x-1.5 cursor-pointer';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        renderAdminEmailDirectory();
+        if (adminToken) loadVaultFiles();
+      }
+    }
+
+    /* ==========================================================
+       ADMIN PAGE: REGISTER FILE WITH AUTHORIZED EMAIL
+       ========================================================== */
+    function handleAdminFileSelected(file) {
+      selectedAdminFile = file;
+      adminDropzonePrompt.innerHTML = `Selected: <strong class="text-zinc-900 font-bold">${file.name}</strong> (${formatBytes(file.size)})`;
+      adminSelectedFileNameBadge.textContent = file.name;
+      adminSelectedFileNameBadge.classList.remove('hidden');
+    }
+
+    async function submitAdminRegisterFile() {
+      const email = adminRegEmailInput.value.trim();
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        alert('Please enter a valid authorized owner email address.');
+        return;
+      }
+
+      if (!selectedAdminFile) {
+        alert('Please choose or drop a file to register under this email.');
+        return;
+      }
+
+      btnAdminRegisterFile.disabled = true;
+      adminMineSpinner.classList.remove('hidden');
+      adminMineBtnText.textContent = 'Mining Block with Proof-of-Work...';
+      adminRegSuccessAlert.classList.add('hidden');
+
+      const formData = new FormData();
+      formData.append('file', selectedAdminFile);
+      formData.append('inactivityMonths', adminRegRetentionSelect.value);
+      formData.append('ownerEmail', email);
+
+      try {
+        const response = await fetch('/api/upload', { method: 'POST', body: formData });
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          adminRegResultBlock.textContent = `Block #${data.block.index}`;
+          adminRegResultEmail.textContent = data.ownerEmail;
+          adminRegResultHash.textContent = data.fileHash;
+          adminRegSuccessAlert.classList.remove('hidden');
+
+          await fetchBlockchain();
+          renderAdminEmailDirectory();
+        } else {
+          alert(`Registration failed: ${data.error || 'Server error'}`);
+        }
+      } catch (err) {
+        alert('Error: ' + err.message);
+      } finally {
+        btnAdminRegisterFile.disabled = false;
+        adminMineSpinner.classList.add('hidden');
+        adminMineBtnText.textContent = '🛡️ Mine & Register File Under This Email';
+      }
+    }
+
+    function renderAdminEmailDirectory() {
+      if (!adminEmailDirectoryTableBody) return;
+      if (!chainData || chainData.length <= 1) {
+        adminEmailDirectoryTableBody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-slate-400 font-sans">No files registered yet. Use the console above to anchor your first file.</td></tr>`;
+        return;
+      }
+
+      let html = '';
+      chainData.forEach(block => {
+        if (block.index === 0) return; // skip Genesis
+        const fileName = block.metadata?.originalName || block.metadata?.fileName || 'unnamed-file';
+        const currentEmail = block.metadata?.ownerEmail || 'None (Unassigned)';
+        const inputId = `emailInput_block_${block.index}`;
+
+        html += `
+          <tr class="hover:bg-slate-50/80 transition">
+            <td class="py-3 px-3 font-bold text-slate-900 font-mono">#${block.index}</td>
+            <td class="py-3 px-3 font-sans font-bold text-slate-800">${fileName}</td>
+            <td class="py-3 px-3">
+              <span class="px-2 py-0.5 rounded-md font-mono text-[11px] font-bold ${block.metadata?.ownerEmail ? 'bg-zinc-100 text-zinc-900 border border-zinc-300' : 'bg-slate-100 text-slate-500'}">
+                ${currentEmail}
+              </span>
+            </td>
+            <td class="py-3 px-3">
+              <input type="email" id="${inputId}" placeholder="new-owner@example.com" value="${block.metadata?.ownerEmail || ''}" class="bg-white text-xs px-2.5 py-1 rounded-lg border border-slate-300 font-mono text-slate-800 w-52 focus:outline-none focus:border-zinc-900" />
+            </td>
+            <td class="py-3 px-3 text-right">
+              <button onclick="updateBlockOwnerEmail('${block.fileHash}', '${inputId}')" class="px-3 py-1 rounded-lg bg-zinc-950 hover:bg-zinc-800 text-white font-display font-bold text-[11px] transition cursor-pointer shadow-2xs">
+                Update Email
+              </button>
+            </td>
+          </tr>
+        `;
+      });
+
+      adminEmailDirectoryTableBody.innerHTML = html;
+    }
+
+    async function updateBlockOwnerEmail(fileHash, inputId) {
+      const inputEl = document.getElementById(inputId);
+      const newEmail = inputEl ? inputEl.value.trim() : '';
+
+      if (!newEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newEmail)) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      try {
+        const res = await fetch('/api/admin/update-owner-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fileHash, newEmail })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          alert(data.message);
+          await fetchBlockchain();
+          renderAdminEmailDirectory();
+        } else {
+          alert('Update failed: ' + (data.error || 'Server error'));
+        }
+      } catch (err) {
+        alert('Error: ' + err.message);
+      }
+    }
+
+    function setTimeLimit(val, label) {
+      selectedInactivityMonths.value = val;
+      individualTimeLimitHint.textContent = label;
+
+      document.querySelectorAll('.time-btn').forEach(btn => {
+        btn.className = 'time-btn py-1.5 px-2 rounded-lg border border-slate-200 bg-white text-slate-700 hover:border-zinc-800 text-center font-medium';
+      });
+      if (event && event.target) {
+        event.target.className = 'time-btn active-time py-1.5 px-2 rounded-lg border-2 border-zinc-950 bg-zinc-950 text-white text-center font-bold';
+      }
+    }
+
+    function dismissVerificationResults() {
+      verifySuccessBadge.classList.add('hidden');
+      verifyFailBadge.classList.add('hidden');
+      verifyExpiredBadge.classList.add('hidden');
+      verifySelectedFileInfo.classList.add('hidden');
+      selectedVerifyFile = null;
+      verifyFileInput.value = '';
+      btnVerifyFile.disabled = true;
+      btnVerifyFile.className = 'w-full py-3 px-4 rounded-xl font-bold text-sm transition flex items-center justify-center space-x-2 cursor-not-allowed bg-slate-200 text-slate-400';
+      verifyBtnText.textContent = 'Select a File to Verify';
+    }
+
+    /* ==========================================================
+       FILE TAMPERING & 30-SECOND PRE-EDIT SECURITY ACTIONS
+       ========================================================== */
+
+    async function loadSelectedTamperFile() {
+      const fileName = tamperFileSelect.value;
+      const registeredBlock = chainData.find(b => b.metadata && (b.metadata.originalName === fileName || b.metadata.fileName === fileName));
+      if (registeredBlock && registeredBlock.metadata && registeredBlock.metadata.ownerEmail) {
+        tamperAlertEmailInput.value = registeredBlock.metadata.ownerEmail;
+      }
+
+      // Try loading actual disk content from API
+      try {
+        const res = await fetch(`/api/sentinel/file-content/${encodeURIComponent(fileName)}`);
+        const data = await res.json();
+        if (data.success && data.content) {
+          tamperFileEditor.value = data.content;
+          originalFileContents[fileName] = data.content;
+        } else if (originalFileContents[fileName]) {
+          tamperFileEditor.value = originalFileContents[fileName];
+        }
+      } catch (e) {
+        if (originalFileContents[fileName]) {
+          tamperFileEditor.value = originalFileContents[fileName];
+        }
+      }
+
+      // Lock editor whenever a file is selected
+      lockFileEditor();
+    }
+
+    function lockFileEditor() {
+      tamperFileEditor.readOnly = true;
+      tamperFileEditor.className = 'w-full font-mono text-xs p-3.5 bg-slate-100/80 border border-slate-300 rounded-xl text-slate-700 cursor-not-allowed select-none transition-all duration-300';
+      tamperEditorStatusBadge.innerHTML = '<span>🔒</span><span>Protected & Locked (Read-Only)</span>';
+      tamperEditorStatusBadge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300 flex items-center space-x-1';
+      lockedNoticeText.innerHTML = 'Editing is strictly locked. Click <strong>"Edit File"</strong> below to initiate the 30-second security waiting window and email dispatch.';
+      lockedNoticeBadge.textContent = 'Guarded Mode';
+      lockedNoticeBadge.className = 'text-[10px] font-bold text-amber-700 uppercase tracking-wider font-mono';
+      lockedEditorNotice.className = 'text-xs bg-amber-50/80 border border-amber-200 text-amber-900 px-3.5 py-2.5 rounded-xl flex items-center justify-between';
+      btnStartEditFile.classList.remove('hidden');
+      btnSaveTamperedFile.classList.add('hidden');
+    }
+
+    function unlockFileEditor() {
+      tamperFileEditor.readOnly = false;
+      tamperFileEditor.className = 'w-full font-mono text-xs p-3.5 bg-white border-2 border-zinc-900 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 cursor-text shadow-sm transition-all duration-300';
+      tamperEditorStatusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-zinc-900 animate-ping mr-1"></span><span>🔓 Unlocked (Edit Mode Active - Free Editing)</span>';
+      tamperEditorStatusBadge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-zinc-900 text-white border border-zinc-900 flex items-center space-x-1';
+      lockedNoticeText.innerHTML = '🔓 <strong>30-Second Security Window Complete!</strong> Editor is UNLOCKED. You can now edit/alter the file freely. No interruptions will occur while you type.';
+      lockedNoticeBadge.textContent = 'Edit Mode Ready';
+      lockedNoticeBadge.className = 'text-[10px] font-bold text-zinc-900 uppercase tracking-wider font-mono';
+      lockedEditorNotice.className = 'text-xs bg-zinc-100 border border-zinc-300 text-zinc-900 px-3.5 py-2.5 rounded-xl flex items-center justify-between';
+      btnStartEditFile.classList.add('hidden');
+      btnSaveTamperedFile.classList.remove('hidden');
+      tamperFileEditor.focus();
+    }
+
+    /* Step 1: User clicks "Edit File" -> dispatches email alert and asks user to wait 30 seconds before editing! */
+    async function requestFileEdit() {
+      const fileName = tamperFileSelect.value;
+      const ownerEmail = tamperAlertEmailInput.value.trim() || 'registered-owner@example.com';
+
+      btnStartEditFile.disabled = true;
+      btnStartEditFile.innerHTML = `<span>⏳ Initiating 30s Security Protocol...</span>`;
+
+      try {
+        const res = await fetch('/api/sentinel/request-edit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fileName, ownerEmail })
+        });
+        const data = await res.json();
+        if (data.success) {
+          trigger30SecondQuarantine(data, 'PRE_EDIT');
+        }
+      } catch (err) {
+        console.error('Pre-edit request error:', err);
+        trigger30SecondQuarantine({ fileName, ownerEmail, blockIndex: 3, originalHash: 'a903de6d83df9dc594e8bda2f8144f019f2b673e21e60e9824a9436c43b43a9e' }, 'PRE_EDIT');
+      } finally {
+        btnStartEditFile.disabled = false;
+        btnStartEditFile.innerHTML = `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg><span>✏️ Edit File (Wait 30s Before Editing)</span>`;
+      }
+    }
+
+    /* Step 2: Once editing is done, user clicks "Save Alterations & Audit Blockchain Tampering" */
+    async function saveTamperedFileAndAudit() {
+      const fileName = tamperFileSelect.value;
+      const alteredContent = tamperFileEditor.value;
+      const ownerEmail = tamperAlertEmailInput.value.trim() || 'registered-owner@example.com';
+
+      btnSaveTamperedFile.disabled = true;
+      btnSaveTamperedFile.innerHTML = `<span>Saving & Auditing Hash...</span>`;
+
+      try {
+        const res = await fetch('/api/sentinel/save-tamper', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fileName, alteredContent, ownerEmail })
+        });
+        const data = await res.json();
+
+        if (data.success && data.isTampered) {
+          dismissVerificationResults();
+          verifyFailBadge.classList.remove('hidden');
+          tamperAlertEmailSentTo.textContent = data.ownerEmail;
+          tamperEmailAlertNotice.classList.remove('hidden');
+          trigger30SecondQuarantine(data, 'AUDIT_TAMPER');
+        }
+      } catch (err) {
+        alert('Error saving tampered file: ' + err.message);
+      } finally {
+        btnSaveTamperedFile.disabled = false;
+        btnSaveTamperedFile.innerHTML = `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg><span>💾 Save Alterations & Audit Blockchain Tampering</span>`;
+      }
+    }
+
+    function resetTamperFileToOriginal() {
+      const fileName = tamperFileSelect.value;
+      if (originalFileContents[fileName]) {
+        tamperFileEditor.value = originalFileContents[fileName];
+      }
+      lockFileEditor();
+      dismissVerificationResults();
+    }
+
+    function closeQuarantineModal() {
+      // If closing prematurely while pre-edit protocol is still counting down, re-lock editor
+      if (currentQuarantineMode === 'PRE_EDIT') {
+        lockFileEditor();
+      }
+      quarantineModal.classList.add('hidden');
+      if (countdownInterval) clearInterval(countdownInterval);
+    }
+
+    function finishQuarantineModalAction() {
+      quarantineModal.classList.add('hidden');
+      if (countdownInterval) clearInterval(countdownInterval);
+
+      if (currentQuarantineMode === 'PRE_EDIT') {
+        unlockFileEditor();
+      } else {
+        verifyFailBadge.classList.remove('hidden');
+      }
+    }
+
+    /* ==========================================================
+       USER-PERMITTED ALERT DISPATCH & BROWSER NOTIFICATIONS
+       Allows any user to dispatch alerts via their own app
+       with zero passwords or server access needed!
+       ========================================================== */
+    let currentTamperAlertData = null;
+
+    function getAlertReportText() {
+      if (!currentTamperAlertData || !currentTamperAlertData.tamperData) return '';
+      const { tamperData, mode } = currentTamperAlertData;
+      const isPreEdit = (mode === 'PRE_EDIT');
+      return 'VERICHAIN FILE INTEGRITY SENTINEL - SECURITY ALERT\n' +
+        '=====================================================\n' +
+        'Event: ' + (isPreEdit ? 'PRE-EDIT SECURITY PROTOCOL (30s Lockdown)' : 'UNAUTHORIZED FILE TAMPERING DETECTED') + '\n' +
+        'Target File: ' + (tamperData.fileName || 'Unknown') + '\n' +
+        'Anchor Block: #' + (tamperData.blockIndex || 3) + '\n' +
+        'Original Hash: ' + (tamperData.originalHash || 'N/A') + '\n' +
+        (tamperData.tamperedHash ? 'Tampered Hash: ' + tamperData.tamperedHash + '\n' : '') +
+        'Registered Owner: ' + (tamperData.ownerEmail || 'registered-owner@example.com') + '\n' +
+        'Timestamp: ' + new Date().toISOString() + '\n' +
+        'Status: 30-Second Security Quarantine Protocol Engaged\n' +
+        '=====================================================\n' +
+        'Integrity verified by VeriChain Cryptographic Ledger.';
+    }
+
+    function dispatchViaGmailWeb() {
+      if (!currentTamperAlertData || !currentTamperAlertData.tamperData) return;
+      const { tamperData, mode } = currentTamperAlertData;
+      const isPreEdit = (mode === 'PRE_EDIT');
+      const recipient = tamperData.ownerEmail || 'owner@example.com';
+      const subject = isPreEdit 
+        ? `🚨 PRE-EDIT ALERT: Edit Mode Initiated for "${tamperData.fileName || 'file'}"`
+        : `🚨 CRITICAL ALERT: Tampering Detected for "${tamperData.fileName || 'file'}"`;
+      const body = getAlertReportText();
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(gmailUrl, '_blank');
+    }
+
+    function dispatchViaMailto() {
+      if (!currentTamperAlertData || !currentTamperAlertData.tamperData) return;
+      const { tamperData, mode } = currentTamperAlertData;
+      const isPreEdit = (mode === 'PRE_EDIT');
+      const recipient = tamperData.ownerEmail || 'owner@example.com';
+      const subject = isPreEdit 
+        ? `🚨 PRE-EDIT ALERT: Edit Mode Initiated for "${tamperData.fileName || 'file'}"`
+        : `🚨 CRITICAL ALERT: Tampering Detected for "${tamperData.fileName || 'file'}"`;
+      const body = getAlertReportText();
+      window.location.href = `mailto:${encodeURIComponent(recipient)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+
+    function copyAlertReportToClipboard() {
+      const text = getAlertReportText();
+      if (!navigator.clipboard) return;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('btnCopyAlertReport');
+        if (btn) {
+          const orig = btn.innerHTML;
+          btn.innerHTML = '<span>✓ Copied!</span>';
+          setTimeout(() => btn.innerHTML = orig, 2000);
+        }
+      });
+    }
+
+    function requestBrowserNotifications() {
+      if (!('Notification' in window)) {
+        alert('This browser does not support desktop notifications.');
+        return;
+      }
+      Notification.requestPermission().then(() => {
+        updateNotificationPermissionUI();
+        if (Notification.permission === 'granted') {
+          try {
+            new Notification('🔔 Sentinel Armed', {
+              body: 'VeriChain real-time desktop breach notifications are now active.',
+              icon: '/favicon.ico'
+            });
+          } catch (e) {}
+        }
+      });
+    }
+
+    function updateNotificationPermissionUI() {
+      const btn = document.getElementById('btnNotificationPermission');
+      if (!btn) return;
+      if (!('Notification' in window)) {
+        btn.classList.add('hidden');
+        return;
+      }
+      if (Notification.permission === 'granted') {
+        btn.innerHTML = '<span>🔔 Alerts: Allowed</span>';
+        btn.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-900 text-white flex items-center space-x-1.5 border border-zinc-700 cursor-default';
+      } else if (Notification.permission === 'denied') {
+        btn.innerHTML = '<span>🔕 Alerts: Blocked</span>';
+        btn.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-zinc-100 text-zinc-500 flex items-center space-x-1.5 border border-zinc-200 cursor-default';
+      } else {
+        btn.innerHTML = '<span>🔔 Allow Device Alerts</span>';
+        btn.className = 'px-3 py-1.5 rounded-xl text-xs font-semibold bg-white text-zinc-800 hover:bg-zinc-100 flex items-center space-x-1.5 border border-zinc-300 shadow-xs cursor-pointer transition';
+      }
+    }
+
+    async function loadSmtpSettings() {
+      try {
+        const res = await fetch('/api/admin/smtp-settings');
+        const data = await res.json();
+        const indicator = document.getElementById('smtpStatusIndicator');
+        const text = document.getElementById('smtpStatusText');
+        const hostInput = document.getElementById('smtpHostInput');
+        const portInput = document.getElementById('smtpPortInput');
+        const userInput = document.getElementById('smtpUserInput');
+        const passInput = document.getElementById('smtpPassInput');
+
+        if (data.success && data.isConfigured) {
+          if (indicator) indicator.className = 'w-2 h-2 rounded-full bg-zinc-950 animate-ping';
+          if (text) text.innerHTML = `Real Email Active &bull; ${data.user}`;
+          if (hostInput) hostInput.value = data.host || '';
+          if (portInput) portInput.value = data.port || '587';
+          if (userInput) userInput.value = data.user || '';
+          if (passInput) passInput.placeholder = '•••••••• (Configured)';
+        } else {
+          if (indicator) indicator.className = 'w-2 h-2 rounded-full bg-zinc-400';
+          if (text) text.textContent = 'Simulated Delivery (Local)';
+          if (hostInput && !hostInput.value) hostInput.value = 'smtp.gmail.com';
+        }
+      } catch (err) {
+        console.error('Failed to load SMTP settings:', err);
+      }
+    }
+
+    async function saveSmtpSettings() {
+      const host = (document.getElementById('smtpHostInput')?.value || '').trim();
+      const port = (document.getElementById('smtpPortInput')?.value || '587').trim();
+      const user = (document.getElementById('smtpUserInput')?.value || '').trim();
+      const pass = (document.getElementById('smtpPassInput')?.value || '').trim();
+      const banner = document.getElementById('smtpFeedbackBanner');
+      const btn = document.getElementById('btnSaveSmtp');
+
+      if (!host || !user) {
+        alert('Please provide SMTP Host and Sender Email Account.');
+        return;
+      }
+
+      if (btn) { btn.disabled = true; btn.textContent = 'Saving...'; }
+
+      try {
+        const res = await fetch('/api/admin/smtp-settings', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ host, port, user, pass })
+        });
+        const data = await res.json();
+        if (banner) {
+          banner.classList.remove('hidden');
+          if (res.ok && data.success) {
+            banner.className = 'text-xs p-3 rounded-xl bg-zinc-100 border border-zinc-300 text-zinc-900 font-medium';
+            banner.textContent = '✓ ' + data.message;
+            loadSmtpSettings();
+          } else {
+            banner.className = 'text-xs p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 font-medium';
+            banner.textContent = '✗ ' + (data.error || 'Failed to save settings.');
+          }
+        }
+      } catch (err) {
+        alert(err.message);
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = 'Save Email Server'; }
+      }
+    }
+
+    async function sendTestEmail() {
+      const user = (document.getElementById('smtpUserInput')?.value || '').trim();
+      const recipient = prompt('Enter the email address you want to send the test alert to:', user || '');
+      if (!recipient) return;
+
+      const btn = document.getElementById('btnSendTestEmail');
+      const banner = document.getElementById('smtpFeedbackBanner');
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending Test...'; }
+
+      try {
+        const res = await fetch('/api/admin/test-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ recipient })
+        });
+        const data = await res.json();
+        if (banner) {
+          banner.classList.remove('hidden');
+          if (res.ok && data.success) {
+            banner.className = 'text-xs p-3 rounded-xl bg-zinc-950 text-white font-medium';
+            banner.textContent = '✓ ' + data.message;
+          } else {
+            banner.className = 'text-xs p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-800 font-medium';
+            banner.textContent = '✗ ' + (data.error || 'Failed to send test email.');
+          }
+        }
+      } catch (err) {
+        alert(err.message);
+      } finally {
+        if (btn) { btn.disabled = false; btn.textContent = 'Send Test Email'; }
+      }
+    }
+
+    function setupDropzone(dropzoneEl, inputEl, onFileSelected) {
+      dropzoneEl.addEventListener('click', () => {
+        inputEl.value = '';
+        inputEl.click();
+      });
+      inputEl.addEventListener('change', (e) => {
+        if (e.target.files && e.target.files[0]) onFileSelected(e.target.files[0]);
+      });
+      ['dragenter', 'dragover'].forEach(eventName => {
+        dropzoneEl.addEventListener(eventName, (e) => {
+          e.preventDefault(); e.stopPropagation();
+          dropzoneEl.classList.add('border-zinc-900', 'bg-zinc-100/50');
+        }, false);
+      });
+      ['dragleave', 'drop'].forEach(eventName => {
+        dropzoneEl.addEventListener(eventName, (e) => {
+          e.preventDefault(); e.stopPropagation();
+          dropzoneEl.classList.remove('border-zinc-900', 'bg-zinc-100/50');
+        }, false);
+      });
+      dropzoneEl.addEventListener('drop', (e) => {
+        if (e.dataTransfer.files && e.dataTransfer.files[0]) onFileSelected(e.dataTransfer.files[0]);
+      });
+    }
+
+    async function handleRegisterFileSelected(file) {
+      selectedRegisterFile = file;
+      regSelectedFileName.textContent = file.name;
+      regSelectedFileSize.textContent = formatBytes(file.size);
+      registerSelectedFileInfo.classList.remove('hidden');
+      regComputedHash.textContent = 'Calculating local SHA-256...';
+
+      btnMineBlock.disabled = false;
+      btnMineBlock.className = 'w-full py-3 px-4 rounded-xl font-bold text-sm transition flex items-center justify-center space-x-2 cursor-pointer bg-zinc-900 hover:bg-zinc-800 text-white shadow-md shadow-zinc-900/20';
+      mineBtnText.textContent = `Mine Block for "${file.name}"`;
+      registerSuccessAlert.classList.add('hidden');
+
+      try {
+        const hash = await calculateClientSHA256(file);
+        regComputedHash.textContent = hash;
+      } catch (err) {
+        regComputedHash.textContent = 'Hash preview ready on submission.';
+      }
+    }
+
+    async function handleVerifyFileSelected(file) {
+      selectedVerifyFile = file;
+      verSelectedFileName.textContent = file.name;
+      verSelectedFileSize.textContent = formatBytes(file.size);
+      verifySelectedFileInfo.classList.remove('hidden');
+      verComputedHash.textContent = 'Calculating local SHA-256...';
+
+      btnVerifyFile.disabled = false;
+      btnVerifyFile.className = 'w-full py-3 px-4 rounded-xl font-bold text-sm transition flex items-center justify-center space-x-2 cursor-pointer bg-zinc-950 hover:bg-zinc-800 text-white shadow-md shadow-zinc-950/20';
+      verifyBtnText.textContent = `Audit Integrity for "${file.name}"`;
+
+      dismissVerificationResults();
+      selectedVerifyFile = file;
+      verifySelectedFileInfo.classList.remove('hidden');
+      btnVerifyFile.disabled = false;
+
+      try {
+        const hash = await calculateClientSHA256(file);
+        verComputedHash.textContent = hash;
+      } catch (err) {
+        verComputedHash.textContent = 'Hash preview ready on submission.';
+      }
+    }
+
+    async function calculateClientSHA256(file) {
+      const buffer = await file.arrayBuffer();
+      const hashBuffer = await crypto.subtle.digest('SHA-256', buffer);
+      return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    /* Submit File Registration */
+    async function submitRegisterFile() {
+      if (!selectedRegisterFile) return;
+
+      btnMineBlock.disabled = true;
+      mineSpinner.classList.remove('hidden');
+      mineBtnText.textContent = 'Executing Proof-of-Work Mining...';
+      registerSuccessAlert.classList.add('hidden');
+
+      const formData = new FormData();
+      formData.append('file', selectedRegisterFile);
+      formData.append('inactivityMonths', selectedInactivityMonths.value);
+      formData.append('ownerEmail', ownerEmailInput.value.trim());
+
+      try {
+        const response = await fetch('/api/upload', { method: 'POST', body: formData });
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          regAlertBlockIndex.textContent = `Block #${data.block.index}`;
+          regResultHash.textContent = data.fileHash;
+          regResultEmail.textContent = data.ownerEmail ? data.ownerEmail : 'None (Sentinel Inactive)';
+          regResultExpiry.textContent = data.expiresAt 
+            ? `Expires if unopened by ${new Date(data.expiresAt).toLocaleDateString()} (${data.inactivityMonths} months limit)` 
+            : 'Permanent (Never Expires)';
+
+          registerSuccessAlert.classList.remove('hidden');
+          await fetchBlockchain();
+        } else {
+          alert(`Registration failed: ${data.error || 'Server error'}`);
+        }
+      } catch (err) {
+        alert(`Error: ${err.message}`);
+      } finally {
+        btnMineBlock.disabled = false;
+        mineSpinner.classList.add('hidden');
+        mineBtnText.textContent = `Mine Block for "${selectedRegisterFile.name}"`;
+      }
+    }
+
+    /* Submit Verify File with 30-Second Security Quarantine */
+    async function submitVerifyFile() {
+      if (!selectedVerifyFile) return;
+
+      btnVerifyFile.disabled = true;
+      verifySpinner.classList.remove('hidden');
+      verifyBtnText.textContent = 'Scanning Blockchain & Sentinel...';
+      verifySuccessBadge.classList.add('hidden');
+      verifyFailBadge.classList.add('hidden');
+      verifyExpiredBadge.classList.add('hidden');
+
+      const formData = new FormData();
+      formData.append('file', selectedVerifyFile);
+
+      try {
+        const response = await fetch('/api/verify', { method: 'POST', body: formData });
+        const data = await response.json();
+
+        if (response.ok && data.isVerified) {
+          verBadgeBlockIndex.textContent = `Block #${data.blockIndex}`;
+          verBadgeExpires.textContent = data.expiresAt ? new Date(data.expiresAt).toLocaleString() : 'Permanent';
+          verifySuccessBadge.classList.remove('hidden');
+          await fetchBlockchain();
+        } else if (data.status === 'TAMPER_DETECTED' || data.isTampered) {
+          trigger30SecondQuarantine(data, false);
+        } else if (data.status === 'EXPIRED_PRUNED' || data.isExpired) {
+          verifyExpiredBadge.classList.remove('hidden');
+        } else {
+          verifyFailBadge.classList.remove('hidden');
+        }
+      } catch (err) {
+        alert(`Error during verification: ${err.message}`);
+      } finally {
+        btnVerifyFile.disabled = false;
+        verifySpinner.classList.add('hidden');
+        verifyBtnText.textContent = `Audit Integrity for "${selectedVerifyFile.name}"`;
+      }
+    }
+
+    /* ==========================================================
+       30-SECOND SECURITY QUARANTINE PROTOCOL
+       ========================================================== */
+    function trigger30SecondQuarantine(tamperData, mode = 'PRE_EDIT') {
+      currentQuarantineMode = mode;
+      currentTamperAlertData = { tamperData, mode };
+      const isPreEdit = (mode === 'PRE_EDIT');
+
+      if ('Notification' in window && Notification.permission === 'granted') {
+        try {
+          new Notification(isPreEdit ? '⏳ Coraloce: 30s Pre-Edit Lockdown' : '🚨 Coraloce: File Tamper Intercepted!', {
+            body: isPreEdit 
+              ? `Edit requested on "${tamperData.fileName}". 30s delay active.`
+              : `Unauthorized modification on "${tamperData.fileName}"! Quarantine active.`,
+            icon: '/favicon.ico'
+          });
+        } catch (e) {}
+      }
+
+      if (isPreEdit) {
+        quarantineModalCard.className = 'max-w-lg w-full bg-white rounded-3xl border-2 border-amber-500 shadow-2xl p-6 sm:p-8 space-y-6 text-center relative overflow-hidden animate-in fade-in zoom-in duration-300';
+        quarantineIconContainer.className = 'w-16 h-16 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-3xl font-black border border-amber-200';
+        quarantineIcon.textContent = '⏳';
+        quarantineTitle.textContent = 'PLEASE WAIT 30 SECONDS BEFORE EDITING';
+        quarantineSubtext.textContent = 'Pre-edit security protocol engaged. An alert was dispatched to your email before editing unlocks!';
+        quarantineEmailBanner.className = 'bg-amber-50 border border-amber-200 rounded-2xl p-4 text-left space-y-2 text-xs';
+        quarantineEmailLabel.textContent = '📧 Real-Time Alert Dispatched BEFORE Editing To:';
+        quarantineEmailNote.textContent = 'The Sentinel dispatched an emergency alert to the file owner before allowing editing.';
+        countdownProtocolLabel.textContent = '30-Second Pre-Edit Security Protocol Active';
+        countdownTimer.className = 'font-mono text-5xl font-black text-amber-600';
+        countdownProgressBar.className = 'bg-amber-600 h-full w-full transition-all duration-1000 ease-linear';
+        countdownExplanation.innerHTML = 'Please wait <strong>30 seconds</strong> before editing. This delay gives the registered owner time to see the alert on their phone/email and intervene before editing unlocks.';
+        previewEmailSubject.textContent = `Subject: 🚨 PRE-EDIT ALERT: File Edit Mode Requested for "${tamperData.fileName}"`;
+      } else {
+        quarantineModalCard.className = 'max-w-lg w-full bg-white rounded-3xl border-2 border-rose-500 shadow-2xl p-6 sm:p-8 space-y-6 text-center relative overflow-hidden animate-in fade-in zoom-in duration-300';
+        quarantineIconContainer.className = 'w-16 h-16 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-3xl font-black border border-rose-200';
+        quarantineIcon.textContent = '🚨';
+        quarantineTitle.textContent = mode === 'LIVE_DISK' ? 'LIVE DISK TAMPERING INTERCEPTED!' : 'SECURITY ALERT: TAMPERING DETECTED!';
+        quarantineSubtext.textContent = 'Cryptographic signature mismatch on registered file.';
+        quarantineEmailBanner.className = 'bg-rose-50 border border-rose-200 rounded-2xl p-4 text-left space-y-2 text-xs';
+        quarantineEmailLabel.textContent = '📧 Real-Time Alert Dispatched To:';
+        quarantineEmailNote.textContent = 'The Sentinel caught the file modification and pushed an emergency alert to the owner.';
+        countdownProtocolLabel.textContent = '30-Second Security Quarantine Protocol Active';
+        countdownTimer.className = 'font-mono text-5xl font-black text-rose-600';
+        countdownProgressBar.className = 'bg-rose-600 h-full w-full transition-all duration-1000 ease-linear';
+        countdownExplanation.innerHTML = 'Please wait <strong>30 seconds</strong>. This delay gives the registered owner time to see the alert on their phone/email and intervene before inspection proceeds.';
+        previewEmailSubject.textContent = `Subject: 🚨 CRITICAL ALERT: File Tampering Intercepted for "${tamperData.fileName}"`;
+      }
+
+      const ownerEmail = tamperData.ownerEmail || 'registered-owner@example.com';
+      quarantineEmailDisplay.textContent = ownerEmail;
+      previewEmailTo.textContent = ownerEmail;
+      previewEmailBody.innerHTML = `
+        Target File: <strong>"${tamperData.fileName}"</strong><br/>
+        Anchor Block: #${tamperData.blockIndex || 3}<br/>
+        Original Hash: ${tamperData.originalHash || 'a903de6d83df9dc594e8bda2f8144f019f2b673e21e60e9824a9436c43b43a9e'}<br/>
+        ${isPreEdit ? 'Action: Pre-Edit Lockdown (30s delay enforced before editor unlocks)' : `Tampered Hash: ${tamperData.tamperedHash || 'Altered Content'}`}<br/>
+        Status: 30-Second Security Window Enforced
+      `;
+
+      quarantineModal.classList.remove('hidden');
+
+      let secondsLeft = 30;
+      countdownTimer.textContent = secondsLeft;
+      countdownProgressBar.style.width = '100%';
+      btnDismissQuarantine.disabled = true;
+      btnDismissQuarantine.className = 'w-full py-3 rounded-xl bg-slate-200 text-slate-400 font-bold text-xs transition cursor-not-allowed';
+      btnDismissQuarantine.textContent = isPreEdit 
+        ? `Please wait 30 seconds before editing (${secondsLeft}s)` 
+        : `Security window active: giving owner time to review email (${secondsLeft}s)`;
+
+      if (countdownInterval) clearInterval(countdownInterval);
+
+      countdownInterval = setInterval(() => {
+        secondsLeft--;
+        countdownTimer.textContent = secondsLeft;
+        const percent = (secondsLeft / 30) * 100;
+        countdownProgressBar.style.width = `${percent}%`;
+        btnDismissQuarantine.textContent = isPreEdit 
+          ? `Please wait 30 seconds before editing (${secondsLeft}s)` 
+          : `Security window active: giving owner time to review email (${secondsLeft}s)`;
+
+        if (secondsLeft <= 0) {
+          clearInterval(countdownInterval);
+          btnDismissQuarantine.disabled = false;
+          if (isPreEdit) {
+            btnDismissQuarantine.className = 'w-full py-3 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-bold text-xs transition cursor-pointer shadow-md';
+            btnDismissQuarantine.textContent = '✓ 30s Window Complete — Unlock File Editor Now';
+          } else {
+            btnDismissQuarantine.className = 'w-full py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs transition cursor-pointer shadow-md';
+            btnDismissQuarantine.textContent = '30s Window Complete — Acknowledge & View Details';
+          }
+        }
+      }, 1000);
+
+      tamperAlertEmailSentTo.textContent = ownerEmail;
+      tamperEmailAlertNotice.classList.remove('hidden');
+    }
+
+    function finishQuarantine() {
+      quarantineModal.classList.add('hidden');
+      if (countdownInterval) clearInterval(countdownInterval);
+      verifyFailBadge.classList.remove('hidden');
+    }
+
+    function toggleAlertPreview() {
+      alertEmailPreviewBox.classList.toggle('hidden');
+    }
+
+    async function fetchBlockchain() {
+      try {
+        const response = await fetch('/api/chain');
+        const data = await response.json();
+        if (response.ok && data.success) {
+          chainData = data.chain || [];
+          isLedgerValid = data.isValid;
+          totalBlocksCount.textContent = data.length || chainData.length;
+          const heroHeightEl = document.getElementById('heroHeightCount');
+          if (heroHeightEl) heroHeightEl.textContent = totalBlocksCount.textContent;
+          renderLedger();
+          renderAdminEmailDirectory();
+        }
+      } catch (err) {
+        console.error('Failed to fetch chain:', err);
+      }
+    }
+
+    function renderLedger() {
+      const container = document.getElementById('ledgerContainer') || document.getElementById('blockchainContainer');
+      if (!container) return;
+
+      if (!chainData || chainData.length === 0) {
+        container.innerHTML = '<div class="py-8 text-center text-zinc-400 text-xs">No blocks found in ledger.</div>';
+        return;
+      }
+
+      const query = (ledgerSearchInput ? ledgerSearchInput.value || '' : '').trim().toLowerCase();
+      const filtered = chainData.filter(b => {
+        if (!query) return true;
+        const name = (b.metadata?.originalName || b.metadata?.fileName || '').toLowerCase();
+        return String(b.index).includes(query) || (b.hash || '').toLowerCase().includes(query) || name.includes(query);
+      });
+
+      let blockHtml = '';
+      filtered.forEach((block, idx) => {
+        const isGenesis = block.index === 0;
+        const fileName = block.metadata?.originalName || block.metadata?.fileName || 'Genesis Anchor';
+        const formattedDate = new Date(block.timestamp).toLocaleString();
+        const isExpired = block.status === 'EXPIRED_PRUNED';
+        const ownerEmail = block.metadata?.ownerEmail;
+
+        let retentionBadge = '';
+        if (isGenesis) {
+          retentionBadge = '<span class="px-2 py-0.5 rounded bg-zinc-200 text-zinc-900 text-[10px] font-bold">Genesis Root</span>';
+        } else if (isExpired) {
+          retentionBadge = '<span class="px-2 py-0.5 rounded bg-rose-100 text-rose-800 font-bold text-[10px] border border-rose-300">EXPIRED & PRUNED</span>';
+        } else if (block.expiresAt) {
+          retentionBadge = '<span class="px-2 py-0.5 rounded bg-zinc-100 text-zinc-900 text-[10px] border border-zinc-300 font-semibold">Expires: ' + new Date(block.expiresAt).toLocaleDateString() + '</span>';
+        } else {
+          retentionBadge = '<span class="px-2 py-0.5 rounded bg-zinc-100 text-zinc-600 text-[10px]">Permanent (No Expiry)</span>';
+        }
+
+        blockHtml += `
+          <div class="relative bg-white rounded-2xl border ${isExpired ? 'border-rose-300 bg-rose-50/20' : isGenesis ? 'border-zinc-300 bg-zinc-50/50' : 'border-zinc-200 hover:border-zinc-400'} p-5 shadow-xs transition space-y-3">
+            <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-zinc-100">
+              <div class="flex items-center space-x-2.5">
+                <span class="px-2.5 py-1 rounded-md text-xs font-bold font-mono ${isGenesis ? 'bg-zinc-800 text-white' : isExpired ? 'bg-rose-600 text-white' : 'bg-zinc-950 text-white'}">
+                  BLOCK #${block.index}
+                </span>
+                <span class="text-sm font-bold text-zinc-950 truncate max-w-xs sm:max-w-md">${fileName}</span>
+                ${retentionBadge}
+                ${ownerEmail ? `<span class="text-[10px] text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-300 font-mono">Alerts: ${ownerEmail}</span>` : ''}
+              </div>
+              <div class="text-xs text-zinc-500 font-mono">
+                <span>Nonce: <strong class="text-zinc-900">${block.nonce.toLocaleString()}</strong></span> &bull; 
+                <span>${formattedDate}</span>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs font-mono">
+              <div class="bg-zinc-50 p-2.5 rounded-xl border border-zinc-200 space-y-0.5">
+                <span class="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">Block Hash</span>
+                <div class="text-zinc-950 text-[11px] break-all font-semibold font-mono">${block.hash}</div>
+              </div>
+              <div class="bg-zinc-50 p-2.5 rounded-xl border border-zinc-200 space-y-0.5">
+                <span class="text-[10px] text-zinc-400 font-bold uppercase tracking-wider">File Content Hash (SHA-256)</span>
+                <div class="text-zinc-950 text-[11px] break-all font-semibold font-mono">${block.fileHash}</div>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] font-mono text-zinc-400 pt-1">
+              <div>Previous Hash: <span class="text-zinc-600">${block.previousHash ? block.previousHash.substring(0, 24) + '...' : '00000000000000000000000000000000'}</span></div>
+              <div>Difficulty: <span class="text-zinc-900 font-bold">3 Leading Zeroes</span></div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = blockHtml;
+      
+      const totalDisplay = document.getElementById('totalBlocksCountDisplay');
+      if (totalDisplay) totalDisplay.textContent = chainData.length;
+      if (totalBlocksCount) totalBlocksCount.textContent = chainData.length;
+      const heroHeightEl = document.getElementById('heroHeightCount');
+      if (heroHeightEl) heroHeightEl.textContent = chainData.length;
+    }
+
+      async function requestAdminOTP() {
+      const email = adminEmailInput.value.trim();
+      if (!email) { alert('Please enter your email.'); return; }
+      const btn = document.getElementById('btnSendOtp');
+      btn.disabled = true; btn.textContent = 'Sending Code...';
+
+      try {
+        const res = await fetch('/api/admin/request-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          sentEmailDisplay.textContent = email;
+          otpStep1.classList.add('hidden');
+          otpStep2.classList.remove('hidden');
+          if (data.debugOtp) {
+            localOtpPreviewBanner.innerHTML = `<span>Simulated OTP: <strong>${data.debugOtp}</strong></span> <button onclick="document.getElementById('adminOtpInput').value='${data.debugOtp}'" class="text-zinc-900 font-bold underline ml-2">Auto-fill</button>`;
+          }
+        } else {
+          alert(`Failed: ${data.error}`);
+        }
+      } catch (err) {
+        alert(err.message);
+      } finally {
+        btn.disabled = false; btn.textContent = 'Send 6-Digit Verification OTP';
+      }
+    }
+
+    async function verifyAdminOTP() {
+      const email = adminEmailInput.value.trim();
+      const otp = adminOtpInput.value.trim();
+      if (!otp) { alert('Enter 6-digit OTP'); return; }
+
+      const btn = document.getElementById('btnVerifyOtp');
+      btn.disabled = true; btn.textContent = 'Validating...';
+
+      try {
+        const res = await fetch('/api/admin/verify-otp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, otp })
+        });
+        const data = await res.json();
+        if (res.ok && data.success) {
+          adminToken = data.token;
+          adminEmail = data.email;
+          localStorage.setItem('verichain_admin_token', adminToken);
+          localStorage.setItem('verichain_admin_email', adminEmail);
+          showAuthenticatedAdminUI();
+          loadVaultFiles();
+        } else {
+          alert(`Validation Failed: ${data.error}`);
+        }
+      } catch (err) {
+        alert(err.message);
+      } finally {
+        btn.disabled = false; btn.textContent = 'Verify & Unlock Admin Vault';
+      }
+    }
+
+    function showAuthenticatedAdminUI() {
+      adminAuthSection.classList.add('hidden');
+      adminVaultDashboard.classList.remove('hidden');
+      adminAuthBadge.classList.remove('hidden');
+      authenticatedEmail.textContent = adminEmail;
+    }
+
+    function resetOtpStep() {
+      otpStep2.classList.add('hidden');
+      otpStep1.classList.remove('hidden');
+      adminOtpInput.value = '';
+    }
+
+    function adminLogout() {
+      adminToken = null; adminEmail = null;
+      localStorage.removeItem('verichain_admin_token');
+      localStorage.removeItem('verichain_admin_email');
+      adminAuthSection.classList.remove('hidden');
+      adminVaultDashboard.classList.add('hidden');
+      adminAuthBadge.classList.add('hidden');
+      resetOtpStep();
+    }
+
+    async function loadVaultFiles() {
+      if (!adminToken) return;
+      vaultFilesTableBody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-slate-400 font-sans">Scanning vault...</td></tr>`;
+
+      try {
+        const res = await fetch('/api/admin/vault-files', {
+          headers: { 'Authorization': `Bearer ${adminToken}` }
+        });
+        const data = await res.json();
+
+        if (res.ok && data.success) {
+          if (data.files.length === 0) {
+            vaultFilesTableBody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-slate-400 font-sans">No files vaulted yet.</td></tr>`;
+            return;
+          }
+
+          let rows = '';
+          data.files.forEach(f => {
+            const isExpired = f.status === 'EXPIRED_PRUNED';
+            rows += `
+              <tr class="hover:bg-slate-50 transition">
+                <td class="py-3 px-3 text-zinc-900 font-bold">#${f.blockIndex}</td>
+                <td class="py-3 px-3 font-sans text-slate-900 font-medium truncate max-w-[150px]">${f.fileName}</td>
+                <td class="py-3 px-3 text-zinc-900 font-mono text-[11px] truncate max-w-[150px]">${f.ownerEmail || 'None'}</td>
+                <td class="py-3 px-3">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold ${isExpired ? 'bg-rose-100 text-rose-800' : 'bg-zinc-950 text-white'}">
+                    ${f.remainingText}
+                  </span>
+                </td>
+                <td class="py-3 px-3">
+                  <button onclick="promptEditIndividualTimeLimit('${f.fileHash}', '${f.inactivityMonths || 6}')" class="px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-sans text-[11px] font-medium border border-slate-300 transition cursor-pointer">
+                    Edit Limit
+                  </button>
+                </td>
+                <td class="py-3 px-3 text-right">
+                  ${isExpired ? '<span class="text-rose-500 font-sans text-[11px]">Purged</span>' : `
+                    <a href="${f.downloadUrl}?token=${adminToken}" target="_blank" class="px-3 py-1 rounded bg-zinc-950 hover:bg-zinc-800 text-white font-bold font-sans text-[11px] transition inline-block">
+                      Download
+                    </a>
+                  `}
+                </td>
+              </tr>
+            `;
+          });
+          vaultFilesTableBody.innerHTML = rows;
+        } else if (res.status === 401) {
+          adminLogout();
+        }
+      } catch (err) {
+        vaultFilesTableBody.innerHTML = `<tr><td colspan="6" class="text-center py-6 text-rose-500 font-sans">${err.message}</td></tr>`;
+      }
+    }
+
+    async function promptEditIndividualTimeLimit(fileHash, currentMonths) {
+      const newMonths = prompt(`Set new Inactivity Limit for this file in months (or type 'never' for permanent):`, currentMonths);
+      if (newMonths === null) return;
+
+      try {
+        const res = await fetch('/api/admin/update-expiry', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${adminToken}`
+          },
+          body: JSON.stringify({ fileHash, inactivityMonths: newMonths })
+        });
+        const data = await res.json();
+        if (data.success) {
+          alert(data.message);
+          loadVaultFiles();
+          fetchBlockchain();
+        } else {
+          alert(data.error);
+        }
+      } catch (e) {
+        alert(e.message);
+      }
+    }
+
+    async function triggerManualPrune() {
+      if (!adminToken) return;
+      try {
+        const res = await fetch('/api/admin/prune-now', {
+          method: 'POST',
+          headers: { 'Authorization': `Bearer ${adminToken}` }
+        });
+        const data = await res.json();
+        alert(data.message);
+        loadVaultFiles();
+        fetchBlockchain();
+      } catch (e) {
+        alert(e.message);
+      }
+    }
+
+    async function auditLedger() {
+      try {
+        const res = await fetch('/api/audit', { method: 'POST' });
+        const data = await res.json();
+        alert(data.isValid ? `✓ Ledger 100% Mathematically Valid.\nAll ${data.blocksChecked} blocks checked.` : `Tamper Alert: ${data.reason}`);
+        fetchBlockchain();
+      } catch (e) {
+        alert(e.message);
+      }
+    }
+
+    function formatBytes(bytes) {
+      if (!bytes || bytes === 0) return '0 Bytes';
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return (bytes / Math.pow(k, i)).toFixed(1) + ' ' + sizes[i];
+    }
+
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text);
+      alert('Copied to clipboard: ' + text);
+    }
+  
+
+    /* ==========================================================
+       WORKBENCH PLATFORM SLIDE DECK CONTROLLER (SLIDES 1 TO 4)
+       ========================================================== */
+    let currentSlide = 1;
+    let workbenchMode = 'slide'; // 'slide' or 'flow'
+
+    function goToSlide(n) {
+      if (n < 1) n = 1;
+      if (n > 4) n = 4;
+      currentSlide = n;
+
+      if (workbenchMode === 'slide') {
+        for (let i = 1; i <= 4; i++) {
+          const el = document.getElementById('slideContent' + i);
+          const tab = document.getElementById('tabSlide' + i);
+          if (el) {
+            if (i === n) {
+              el.classList.remove('hidden');
+              el.classList.add('block');
+            } else {
+              el.classList.add('hidden');
+              el.classList.remove('block');
+            }
+          }
+          if (tab) {
+            if (i === n) {
+              tab.className = 'slide-tab-btn p-3 rounded-2xl border-2 border-zinc-950 bg-zinc-950 text-white text-left transition flex items-center space-x-2.5 cursor-pointer shadow-sm';
+              const numSpan = tab.querySelector('span');
+              if (numSpan) numSpan.className = 'w-6 h-6 rounded-lg bg-white/20 text-white flex items-center justify-center font-bold text-xs';
+            } else {
+              tab.className = 'slide-tab-btn p-3 rounded-2xl border border-zinc-200 bg-zinc-50 text-zinc-700 hover:border-zinc-400 text-left transition flex items-center space-x-2.5 cursor-pointer';
+              const numSpan = tab.querySelector('span');
+              if (numSpan) numSpan.className = 'w-6 h-6 rounded-lg bg-zinc-200 text-zinc-900 flex items-center justify-center font-bold text-xs';
+            }
+          }
+        }
+
+        const badge = document.getElementById('currentSlideNumber');
+        if (badge) badge.textContent = n;
+
+        const progressBar = document.getElementById('slideProgressBar');
+        if (progressBar) progressBar.style.width = (n * 25) + '%';
+      }
+
+      // Smooth scroll slide container into view if user jumped
+      const container = document.getElementById('workbench-slide-container');
+      if (container) {
+        container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < 4) goToSlide(currentSlide + 1);
+      else goToSlide(1);
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) goToSlide(currentSlide - 1);
+      else goToSlide(4);
+    }
+
+    function setWorkbenchMode(mode) {
+      workbenchMode = mode;
+      const btnSlide = document.getElementById('btnModeSlide');
+      const btnFlow = document.getElementById('btnModeFlow');
+      const slideControls = document.getElementById('slideControlsToolbar');
+
+      if (mode === 'flow') {
+        // Show all slides simultaneously as continuous flow
+        for (let i = 1; i <= 4; i++) {
+          const el = document.getElementById('slideContent' + i);
+          if (el) {
+            el.classList.remove('hidden');
+            el.classList.add('block');
+          }
+        }
+        if (btnSlide) btnSlide.className = 'px-3 py-1.5 rounded-lg font-semibold text-zinc-600 hover:text-zinc-950 transition cursor-pointer';
+        if (btnFlow) btnFlow.className = 'px-3 py-1.5 rounded-lg font-bold bg-zinc-950 text-white shadow-xs transition cursor-pointer';
+        if (slideControls) slideControls.classList.add('hidden');
+      } else {
+        // Slide mode: single slide visible at a time
+        if (btnSlide) btnSlide.className = 'px-3 py-1.5 rounded-lg font-bold bg-zinc-950 text-white shadow-xs transition cursor-pointer';
+        if (btnFlow) btnFlow.className = 'px-3 py-1.5 rounded-lg font-semibold text-zinc-600 hover:text-zinc-950 transition cursor-pointer';
+        if (slideControls) slideControls.classList.remove('hidden');
+        goToSlide(currentSlide);
+      }
+    }
+
+    // Keyboard navigation (ArrowLeft & ArrowRight) for slides
+    document.addEventListener('keydown', (e) => {
+      const activeTag = document.activeElement ? document.activeElement.tagName.toLowerCase() : '';
+      if (activeTag === 'input' || activeTag === 'textarea') return;
+      if (workbenchMode !== 'slide') return;
+
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+</script>
+</body>
+</html>

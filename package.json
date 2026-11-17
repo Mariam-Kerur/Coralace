@@ -1,0 +1,30 @@
+{
+  "name": "coraloce-file-integrity-ledger",
+  "version": "1.0.0",
+  "description": "Coraloce - Production-ready File Integrity Verification System using custom lightweight Proof-of-Work blockchain architecture. Fortifying the World's Critical Assets.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "tunnel": "ssh -R 80:127.0.0.1:3000 -o ServerAliveInterval=30 nokey@localhost.run",
+    "test": "node test-blockchain.js"
+  },
+  "keywords": [
+    "blockchain",
+    "file-integrity",
+    "sha256",
+    "proof-of-work",
+    "express",
+    "cryptography"
+  ],
+  "author": "Coraloce Technologies",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^8.7.2",
+    "helmet": "^8.3.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^10.3.1"
+  }
+}

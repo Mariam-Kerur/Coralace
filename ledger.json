@@ -1,0 +1,25 @@
+[
+  {
+    "index": 0,
+    "timestamp": "2026-01-01T00:00:00.000Z",
+    "fileHash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "previousHash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "nonce": 123,
+    "metadata": {
+      "fileName": "GENESIS_ANCHOR.system",
+      "fileSize": 0,
+      "mimeType": "application/x-genesis",
+      "author": "VeriChain Engine",
+      "description": "Cryptographic Root Anchor for File Integrity Ledger",
+      "inactivityMonths": null,
+      "status": "ACTIVE"
+    },
+    "miningTimeMs": 0,
+    "inactivityMonths": null,
+    "lastAccessedAt": "2026-01-01T00:00:00.000Z",
+    "expiresAt": null,
+    "status": "ACTIVE",
+    "vaultFileName": null,
+    "hash": "000b8bd77eafeadcb04fb0ebd93c9bd7cf250657faf8accdbc981758414f11fd"
+  }
+]

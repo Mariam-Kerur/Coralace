@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: verichain-enterprise
+    runtime: node
+    plan: standard
+    buildCommand: npm install
+    startCommand: node server.js
+    disk:
+      name: verichain-data
+      mountPath: /usr/src/app/vault_storage
+      sizeGB: 10
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: NODE_ENV
+        value: production
+      - key: SMTP_HOST
+        sync: false
+      - key: SMTP_PORT
+        sync: false
+      - key: SMTP_USER
+        sync: false
+      - key: SMTP_PASS
+        sync: false
+      - key: SMTP_FROM
+        sync: false
