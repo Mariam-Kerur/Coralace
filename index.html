@@ -122,6 +122,7 @@
           <div class="flex items-center space-x-2">
             <span class="text-xl font-display font-black tracking-tight text-zinc-950">CORAL<span class="text-zinc-500">OCE</span></span>
             <span class="text-[10px] font-display font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-zinc-100 text-zinc-800 border border-zinc-300">Sentinel Active</span>
+            <button onclick="event.stopPropagation(); openPatentModal()" class="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-zinc-950 text-white hover:bg-zinc-800 transition border border-zinc-900 cursor-pointer shadow-xs">⚖️ Patent Pending (India & US)</button>
           </div>
           <p class="text-[11px] font-sans text-zinc-500 font-medium">Fortifying the World’s Critical Assets</p>
         </div>
@@ -181,7 +182,7 @@
   <!-- 30-SECOND SECURITY QUARANTINE & TAMPER ALERT MODAL       -->
   <!-- ======================================================== -->
   <div id="quarantineModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
-    <div id="quarantineModalCard" class="max-w-lg w-full bg-white rounded-3xl border-2 border-amber-500 shadow-2xl p-6 sm:p-8 space-y-6 text-center relative overflow-hidden animate-in fade-in zoom-in duration-300">
+    <div id="quarantineModalCard" class="max-w-lg w-full bg-white rounded-3xl border-2 border-zinc-950 shadow-2xl p-6 sm:p-8 space-y-6 text-center relative overflow-hidden animate-in fade-in zoom-in duration-300">
       
       <!-- Close button on modal -->
       <button onclick="closeQuarantineModal()" title="Close Window" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-sm cursor-pointer transition">
@@ -190,23 +191,23 @@
 
       <!-- Warning Header -->
       <div class="flex flex-col items-center space-y-2">
-        <div id="quarantineIconContainer" class="w-16 h-16 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-3xl font-black border border-amber-200">
+        <div id="quarantineIconContainer" class="w-16 h-16 rounded-2xl bg-zinc-950 text-white flex items-center justify-center text-3xl font-black border border-zinc-800">
           <span id="quarantineIcon" class="animate-bounce">⏳</span>
         </div>
         <h2 class="text-xl font-extrabold text-slate-900 tracking-tight" id="quarantineTitle">
           PLEASE WAIT 30 SECONDS BEFORE EDITING
         </h2>
-        <p class="text-xs text-amber-700 font-semibold" id="quarantineSubtext">
+        <p class="text-xs text-zinc-500 font-semibold" id="quarantineSubtext">
           Pre-edit security protocol engaged. An alert was dispatched to your email before editing unlocks!
         </p>
       </div>
 
       <!-- Email Notification Dispatch Banner -->
-      <div id="quarantineEmailBanner" class="bg-amber-50 border border-amber-200 rounded-2xl p-4 text-left space-y-2 text-xs">
-        <div class="flex items-center space-x-2 text-amber-900 font-bold">
+      <div id="quarantineEmailBanner" class="bg-zinc-50 border border-zinc-200 rounded-2xl p-4 text-left space-y-2 text-xs">
+        <div class="flex items-center space-x-2 text-zinc-900 font-bold">
           <span id="quarantineEmailLabel">📧 Real-Time Alert Dispatched BEFORE Editing To:</span>
         </div>
-        <div id="quarantineEmailDisplay" class="font-mono text-sm font-bold text-amber-900 bg-white p-2 rounded-lg border border-amber-200 truncate">
+        <div id="quarantineEmailDisplay" class="font-mono text-sm font-bold text-zinc-900 bg-white p-2 rounded-lg border border-zinc-200 truncate">
           owner@example.com
         </div>
         <p class="text-[11px] text-slate-500" id="quarantineEmailNote">
@@ -221,12 +222,12 @@
         </div>
         
         <div class="flex items-center justify-center space-x-2">
-          <span id="countdownTimer" class="font-mono text-5xl font-black text-amber-600">30</span>
+          <span id="countdownTimer" class="font-mono text-5xl font-black text-zinc-950">30</span>
           <span class="text-sm font-bold text-slate-400">seconds</span>
         </div>
 
         <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-          <div id="countdownProgressBar" class="bg-amber-600 h-full w-full transition-all duration-1000 ease-linear"></div>
+          <div id="countdownProgressBar" class="bg-zinc-950 h-full w-full transition-all duration-1000 ease-linear"></div>
         </div>
 
         <p class="text-[11px] text-slate-500 leading-relaxed" id="countdownExplanation">
@@ -236,12 +237,12 @@
 
       <!-- View Email Content Button -->
       <div>
-        <button onclick="toggleAlertPreview()" class="text-xs font-semibold text-amber-800 hover:text-amber-950 underline">
+        <button onclick="toggleAlertPreview()" class="text-xs font-semibold text-zinc-600 hover:text-zinc-950 underline">
           View Dispatched Alert Email Content
         </button>
 
         <div id="alertEmailPreviewBox" class="hidden mt-3 text-left font-mono text-[11px] bg-slate-900 text-slate-200 p-3 rounded-xl max-h-40 overflow-y-auto space-y-1">
-          <div class="text-amber-400 font-bold" id="previewEmailSubject">Subject: 🚨 PRE-EDIT ALERT: File Edit Mode Requested</div>
+          <div class="text-zinc-400 font-bold" id="previewEmailSubject">Subject: 🚨 PRE-EDIT ALERT: File Edit Mode Requested</div>
           <div class="text-slate-400">To: <span id="previewEmailTo"></span></div>
           <div class="text-slate-300 pt-2 border-t border-slate-800" id="previewEmailBody"></div>
         </div>
@@ -277,6 +278,117 @@
   </div>
 
   <!-- ======================================================== -->
+  <!-- INTELLECTUAL PROPERTY & PATENT SPECIFICATION MODAL       -->
+  <!-- ======================================================== -->
+  <div id="patentModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+    <div class="max-w-2xl w-full bg-white rounded-3xl border border-zinc-300 shadow-2xl p-6 sm:p-8 space-y-6 relative overflow-hidden animate-in fade-in zoom-in duration-300 max-h-[90vh] overflow-y-auto">
+      
+      <!-- Close button on modal -->
+      <button onclick="closePatentModal()" title="Close Window" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-zinc-100 hover:bg-zinc-200 text-zinc-700 flex items-center justify-center font-bold text-sm cursor-pointer transition">
+        ✕
+      </button>
+
+      <div class="space-y-2">
+        <div class="flex flex-wrap items-center gap-1.5 text-[10px] font-mono font-bold uppercase tracking-wider">
+          <span class="px-2.5 py-1 rounded-full bg-zinc-950 text-white">⚖️ PATENT PENDING</span>
+          <span class="px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-800 border border-zinc-300">🇮🇳 INDIA IPO: CLC-2026-FIM01-IN</span>
+          <span class="px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-800 border border-zinc-300">🇺🇸 USPTO: CLC-2026-FIM01-US</span>
+          <span class="px-2.5 py-1 rounded-full bg-zinc-100 text-zinc-800 border border-zinc-300">🌐 WIPO PCT</span>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-display font-black text-zinc-950 tracking-tight">
+          Coraloce Intellectual Property & Patent Specification
+        </h2>
+        <p class="text-xs text-zinc-500 font-sans">
+          Filed under <strong>The Patents Act, 1970</strong> (Section 10, Rule 13 — Form 2 Complete Specification, India) and <strong>35 U.S.C. § 111(b)</strong> (USPTO / PCT Route).
+        </p>
+      </div>
+
+      <!-- Indian Patent Act Section 3(k) Technical Effect Compliance Banner -->
+      <div class="p-3 bg-zinc-100 rounded-xl border border-zinc-200 text-[11px] text-zinc-700 space-y-1">
+        <div class="font-bold text-zinc-900 font-mono text-[10px] uppercase tracking-wider flex items-center space-x-1.5">
+          <span>🇮🇳</span>
+          <span>INDIAN PATENT OFFICE (IPO) CRI COMPLIANCE & TECHNICAL EFFECT</span>
+        </div>
+        <p class="leading-relaxed">
+          In compliance with the <strong>CGPDTM Guidelines for Computer-Related Inventions (CRIs), 2017</strong> and Delhi High Court precedent (<em>Ferid Allani</em> & <em>Microsoft</em>), the invention produces a concrete <strong>Technical Effect</strong> by directly gatekeeping operating system file buffer access, enforcing physical disk storage state defenses, and executing CPU-accelerated SHA-256 Proof-of-Work consensus.
+        </p>
+      </div>
+
+      <!-- Core Invention Abstract -->
+      <div class="bg-zinc-50 p-4 rounded-2xl border border-zinc-200 space-y-2 text-xs">
+        <div class="font-display font-bold text-zinc-900 flex items-center space-x-1.5">
+          <span>🛡️</span>
+          <span>Invention Title & Abstract:</span>
+        </div>
+        <p class="text-[11px] font-mono text-zinc-800 font-semibold leading-snug">
+          "SYSTEM, METHOD, AND NON-TRANSITORY COMPUTER-READABLE MEDIUM FOR PROACTIVE FILE INTEGRITY MONITORING WITH PRE-EDIT EMERGENCY QUARANTINE DELAY AND INTEGRATED LOCAL PROOF-OF-WORK LEDGER CONSENSUS"
+        </p>
+        <p class="text-zinc-600 font-sans leading-relaxed text-[11px]">
+          In contrast to retrospective intrusion detection systems that identify tampering only after records are compromised, the disclosed architecture introduces an active pre-edit gatekeeper. Attempted alterations immediately lock editor buffers, dispatch out-of-band alerts to the registered owner, and enforce a mandatory 30-second delay before editing unlocks.
+        </p>
+      </div>
+
+      <!-- 4 Core Novel Claims -->
+      <div class="space-y-3">
+        <div class="text-xs font-bold font-mono uppercase tracking-wider text-zinc-400">Core Inventive Claims (Protected IP)</div>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div class="p-3.5 rounded-xl border border-zinc-200 bg-white space-y-1">
+            <div class="font-bold text-zinc-900 flex items-center space-x-1">
+              <span>01.</span>
+              <span>Pre-Edit Emergency Quarantine</span>
+            </div>
+            <p class="text-[11px] text-zinc-500 leading-relaxed font-sans">
+              Interception of write requests prior to buffer acquisition with mandatory 30-second temporal delay and simultaneous out-of-band notification.
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-zinc-200 bg-white space-y-1">
+            <div class="font-bold text-zinc-900 flex items-center space-x-1">
+              <span>02.</span>
+              <span>Zero-Dependency PoW Consensus</span>
+            </div>
+            <p class="text-[11px] text-zinc-500 leading-relaxed font-sans">
+              Native host CPU nonce discovery (3 leading zeroes target) chaining file hashes and metadata without third-party blockchain gas fees.
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-zinc-200 bg-white space-y-1">
+            <div class="font-bold text-zinc-900 flex items-center space-x-1">
+              <span>03.</span>
+              <span>Dual-Lifecycle Retention Engine</span>
+            </div>
+            <p class="text-[11px] text-zinc-500 leading-relaxed font-sans">
+              Cryptographic byte parity audits reset and extend document lifespans; stale, unverified files are autonomously purged via garbage collection.
+            </p>
+          </div>
+
+          <div class="p-3.5 rounded-xl border border-zinc-200 bg-white space-y-1">
+            <div class="font-bold text-zinc-900 flex items-center space-x-1">
+              <span>04.</span>
+              <span>AES-256-GCM Vault & IP Quarantine</span>
+            </div>
+            <p class="text-[11px] text-zinc-500 leading-relaxed font-sans">
+              Authenticated Galois/Counter Mode encryption at rest with two-factor email OTP and automatic 15-minute IP quarantine upon 3 failed attempts.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Legal Notice & Action -->
+      <div class="pt-2 border-t border-zinc-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div class="text-[11px] text-zinc-500">
+          Assignee: <strong class="text-zinc-900">Coraloce Technologies</strong> &bull; All Rights Reserved.
+        </div>
+        <button onclick="closePatentModal()" class="px-5 py-2 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-bold text-xs transition cursor-pointer">
+          Acknowledge & Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ======================================================== -->
   <!-- ======================================================== -->
   <!-- VIEW 1: WELCOME PAGE (EXPANSIVE AESTHETIC HERO & INTRO)  -->
   <!-- ======================================================== -->
@@ -304,7 +416,7 @@
         </div>
 
         <p class="text-sm sm:text-base text-zinc-600 leading-relaxed font-sans max-w-3xl">
-          Say goodbye to silent tampering and unmonitored alterations. Coraloce combines a custom <strong>Node.js Proof-of-Work blockchain</strong> with an active real-time background Sentinel. When anyone attempts to alter a registered record, the system immediately dispatches an emergency alert to the file owner and enforces a <em class="font-serif-italic text-amber-700 font-bold text-base">mandatory 30-second delay BEFORE editing unlocks</em>.
+          Say goodbye to silent tampering and unmonitored alterations. Coraloce combines a custom <strong>Node.js Proof-of-Work blockchain</strong> with an active real-time background Sentinel. When anyone attempts to alter a registered record, the system immediately dispatches an emergency alert to the file owner and enforces a <em class="font-serif-italic text-zinc-900 font-bold text-base">mandatory 30-second delay BEFORE editing unlocks</em>.
         </p>
 
         <!-- Generously Spaced Action Buttons -->
@@ -319,7 +431,7 @@
             <span>Admin Authority: Register Email</span>
           </button>
 
-          <button onclick="goToSlide(3)" class="px-6 py-4 rounded-2xl bg-amber-50 hover:bg-amber-100 text-amber-900 border border-amber-300 font-display font-bold text-sm transition flex items-center space-x-2 cursor-pointer shadow-xs">
+          <button onclick="goToSlide(3)" class="px-6 py-4 rounded-2xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 border border-zinc-300 font-display font-bold text-sm transition flex items-center space-x-2 cursor-pointer shadow-xs">
             <span>⚡ 30s Pre-Edit Lab</span>
           </button>
         </div>
@@ -343,15 +455,15 @@
         </div>
       </div>
 
-      <div class="aesthetic-card p-8 sm:p-10 space-y-4 border-t-4 border-t-amber-500 hover:shadow-xl transition">
-        <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 flex items-center justify-center font-display font-black text-lg shadow-md border border-amber-200">
+      <div class="aesthetic-card p-8 sm:p-10 space-y-4 border-t-4 border-t-zinc-950 hover:shadow-xl transition">
+        <div class="w-12 h-12 rounded-2xl bg-zinc-950 text-white flex items-center justify-center font-display font-black text-lg shadow-md border border-zinc-800">
           02
         </div>
         <h3 class="font-display font-bold text-zinc-950 text-lg">Active 30s Pre-Edit Sentinel</h3>
         <p class="text-xs sm:text-sm text-zinc-500 leading-relaxed font-sans">
-          Before any user can alter or edit an anchored file, the Sentinel locks the editor, dispatches an emergency alert email to the registered owner, and enforces a <em class="font-serif-italic font-bold text-amber-800">mandatory 30-second delay</em>.
+          Before any user can alter or edit an anchored file, the Sentinel locks the editor, dispatches an emergency alert email to the registered owner, and enforces a <em class="font-serif-italic font-bold text-zinc-900">mandatory 30-second delay</em>.
         </p>
-        <div class="text-[11px] font-mono text-amber-900 bg-amber-50 p-3 rounded-xl border border-amber-200 font-medium">
+        <div class="text-[11px] font-mono text-zinc-900 bg-zinc-50 p-3 rounded-xl border border-zinc-200 font-medium">
           Real-Time Pre-Edit Quarantine Protocol
         </div>
       </div>
@@ -381,7 +493,7 @@
 
       <div class="aesthetic-card p-6 space-y-2 border border-zinc-200">
         <div class="text-[11px] font-mono font-bold uppercase tracking-wider text-zinc-400">Response Window</div>
-        <div class="text-xl font-display font-extrabold text-amber-700">30 Seconds</div>
+        <div class="text-xl font-display font-extrabold text-zinc-950">30 Seconds</div>
         <p class="text-xs text-zinc-500 font-sans">Guaranteed delay allowing document owners to intercept unapproved changes.</p>
       </div>
 
@@ -409,7 +521,7 @@
           Zero-Trust Cryptographic Ledger & Active Sentinel Framework
         </h3>
         <p class="text-xs sm:text-sm text-zinc-400 font-sans leading-relaxed max-w-3xl">
-          Designed for uncompromising data integrity. VeriChain combines deterministic SHA-256 Proof-of-Work blockchain consensus with an active background disk watcher, ensuring every file modification is intercepted before alterations occur.
+          Designed for uncompromising data integrity. Coraloce combines deterministic SHA-256 Proof-of-Work blockchain consensus with an active background disk watcher, ensuring every file modification is intercepted before alterations occur.
         </p>
       </div>
 
@@ -419,7 +531,7 @@
           <p class="text-zinc-400 text-[11px] leading-relaxed">Pure native Node.js crypto. Zero external 3rd-party blockchain or cloud dependencies.</p>
         </div>
         <div class="bg-zinc-900/80 p-4 rounded-2xl border border-zinc-800 space-y-1">
-          <div class="font-display font-bold text-amber-400 text-sm">30s Pre-Edit Protocol</div>
+          <div class="font-display font-bold text-zinc-300 text-sm">30s Pre-Edit Protocol</div>
           <p class="text-zinc-400 text-[11px] leading-relaxed">Locks editing and dispatches owner email alerts before file modifications unlock.</p>
         </div>
         <div class="bg-zinc-900/80 p-4 rounded-2xl border border-zinc-800 space-y-1">
@@ -430,7 +542,7 @@
 
       <div class="text-xs text-zinc-500 font-sans flex items-center space-x-2 pt-2 border-t border-zinc-900">
         <span>&mdash;</span>
-        <strong class="text-zinc-300 font-display">VeriChain Cryptographic Consensus Engine</strong>
+        <strong class="text-zinc-300 font-display">Coraloce Cryptographic Consensus Engine</strong>
         <span>&bull;</span>
         <span>Standardized Enterprise Cryptography</span>
       </div>
@@ -497,7 +609,7 @@
         </div>
         <div class="bg-zinc-50 p-3.5 rounded-2xl border border-zinc-200 shadow-2xs">
           <div class="text-[10px] text-zinc-400 font-mono uppercase tracking-wider font-bold">Sentinel Protocol</div>
-          <div class="text-xl font-black text-amber-700 font-mono mt-0.5">30s <span class="text-xs text-zinc-400 font-sans font-normal">Pre-Edit Wait</span></div>
+          <div class="text-xl font-black text-zinc-950 font-mono mt-0.5">30s <span class="text-xs text-zinc-400 font-sans font-normal">Pre-Edit Wait</span></div>
         </div>
         <div class="bg-zinc-50 p-3.5 rounded-2xl border border-zinc-200 shadow-2xs">
           <div class="text-[10px] text-zinc-400 font-mono uppercase tracking-wider font-bold">State Engine</div>
@@ -529,7 +641,7 @@
         </button>
 
         <button id="tabSlide3" onclick="goToSlide(3)" class="slide-tab-btn p-3 rounded-2xl border border-zinc-200 bg-zinc-50 text-zinc-700 hover:border-zinc-400 text-left transition flex items-center space-x-2.5 cursor-pointer">
-          <span class="w-6 h-6 rounded-lg bg-amber-100 text-amber-900 flex items-center justify-center font-bold text-xs">3</span>
+          <span class="w-6 h-6 rounded-lg bg-zinc-950 text-white flex items-center justify-center font-bold text-xs">3</span>
           <div>
             <div class="font-bold text-xs">30s Tamper Lab</div>
             <div class="text-[10px] text-zinc-400 font-normal">Stage 03 Slide</div>
@@ -623,7 +735,7 @@
                 <button type="button" onclick="setTimeLimit(3, '3 Months')" class="time-btn py-1.5 px-2 rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400 text-center font-medium">3 Months</button>
                 <button type="button" onclick="setTimeLimit(6, '6 Months (Recommended)')" class="time-btn active-time py-1.5 px-2 rounded-lg border-2 border-zinc-950 bg-zinc-950 text-white text-center font-bold">6 Months</button>
                 <button type="button" onclick="setTimeLimit(12, '12 Months (1 Year)')" class="time-btn py-1.5 px-2 rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400 text-center font-medium">1 Year</button>
-                <button type="button" onclick="setTimeLimit(0.00023, '10 Minutes (Live Demo Test)')" class="time-btn py-1.5 px-2 rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400 text-center font-medium text-amber-700">10 Min (Demo)</button>
+                <button type="button" onclick="setTimeLimit(0.00023, '10 Minutes (Live Demo Test)')" class="time-btn py-1.5 px-2 rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400 text-center font-medium">10 Min (Demo)</button>
                 <button type="button" onclick="setTimeLimit('never', 'Permanent (Never Expire)')" class="time-btn py-1.5 px-2 rounded-lg border border-zinc-200 bg-white text-zinc-700 hover:border-zinc-400 text-center font-medium">Permanent</button>
               </div>
               <input type="hidden" id="selectedInactivityMonths" value="6" />
@@ -822,37 +934,37 @@
         <div class="space-y-4 pb-4 border-b border-zinc-200">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center space-x-3">
-              <div class="w-9 h-9 rounded-xl bg-amber-600 text-white flex items-center justify-center font-display font-black text-sm shadow-sm">
+              <div class="w-9 h-9 rounded-xl bg-zinc-950 text-white flex items-center justify-center font-display font-black text-sm shadow-sm">
                 03
               </div>
               <div>
-                <span class="text-[10px] font-mono font-bold tracking-wider uppercase text-amber-700">SLIDE 03 &bull; ACTIVE FIM DEFENSE</span>
+                <span class="text-[10px] font-mono font-bold tracking-wider uppercase text-zinc-400">SLIDE 03 &bull; ACTIVE FIM DEFENSE</span>
                 <h3 class="text-xl sm:text-2xl font-display font-extrabold text-zinc-950">
                   Sentinel Tamper Lab & 30s Pre-Edit Quarantine
                 </h3>
               </div>
             </div>
-            <span id="tamperEditorStatusBadge" class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300 flex items-center space-x-1">
+            <span id="tamperEditorStatusBadge" class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-zinc-900 text-zinc-100 border border-zinc-800 flex items-center space-x-1">
               <span>🔒</span>
               <span>Protected & Locked (Read-Only)</span>
             </span>
           </div>
 
           <!-- Integrated Safeguard & How-to-Use Guide -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs bg-amber-50/50 p-4 rounded-2xl border border-amber-200">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs bg-zinc-50 p-4 rounded-2xl border border-zinc-200">
             <div class="space-y-1">
-              <div class="flex items-center space-x-1.5 font-display font-bold text-amber-950">
+              <div class="flex items-center space-x-1.5 font-display font-bold text-zinc-900">
                 <span>🛡️</span><span>How this Safeguards:</span>
               </div>
-              <p class="text-amber-900/80 font-sans leading-relaxed">
+              <p class="text-zinc-500 font-sans leading-relaxed">
                 Prevents unannounced alterations! Attempting to edit locks the editor, dispatches an emergency email to the file owner, and enforces a mandatory <strong>30-second delay BEFORE editing unlocks</strong>.
               </p>
             </div>
             <div class="space-y-1">
-              <div class="flex items-center space-x-1.5 font-display font-bold text-amber-950">
+              <div class="flex items-center space-x-1.5 font-display font-bold text-zinc-900">
                 <span>📖</span><span>How to Use:</span>
               </div>
-              <p class="text-amber-900/80 font-sans leading-relaxed">
+              <p class="text-zinc-500 font-sans leading-relaxed">
                 Click <strong>"✏️ Edit File"</strong> below to initiate the 30s security window and email dispatch. Wait 30 seconds for edit mode to unlock, then alter text and click <strong>"Save Alterations"</strong> to see the Sentinel detect the tamper!
               </p>
             </div>
@@ -865,7 +977,7 @@
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="flex items-center space-x-2">
               <label class="text-xs font-semibold text-zinc-700">Select File to Test:</label>
-              <select id="tamperFileSelect" onchange="loadSelectedTamperFile()" class="text-xs font-mono bg-white px-3 py-1.5 rounded-xl border border-zinc-300 text-zinc-800 focus:outline-none focus:border-amber-500">
+              <select id="tamperFileSelect" onchange="loadSelectedTamperFile()" class="text-xs font-mono bg-white px-3 py-1.5 rounded-xl border border-zinc-300 text-zinc-800 focus:outline-none focus:border-zinc-900">
                 <option value="Sample_Agreement.txt">Sample_Agreement.txt (Block #3)</option>
                 <option value="Confidential_Agreement.pdf">Confidential_Agreement.pdf (Block #2)</option>
                 <option value="Sample_Document.pdf">Sample_Document.pdf (Block #1)</option>
@@ -874,17 +986,17 @@
 
             <div class="flex items-center space-x-2 text-xs text-zinc-500">
               <span>Owner to Alert:</span>
-              <input type="email" id="tamperAlertEmailInput" value="owner@verichain.local" placeholder="owner@example.com" class="font-mono text-xs bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-zinc-800 focus:outline-none focus:border-amber-500 w-52" />
+              <input type="email" id="tamperAlertEmailInput" value="owner@verichain.local" placeholder="owner@example.com" class="font-mono text-xs bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-zinc-800 focus:outline-none focus:border-zinc-900 w-52" />
             </div>
           </div>
 
           <!-- Locked Editor Notice -->
-          <div id="lockedEditorNotice" class="text-xs bg-amber-50/80 border border-amber-200 text-amber-900 px-3.5 py-2.5 rounded-xl flex items-center justify-between">
+          <div id="lockedEditorNotice" class="text-xs bg-zinc-100 border border-zinc-300 text-zinc-800 px-3.5 py-2.5 rounded-xl flex items-center justify-between">
             <div class="flex items-center space-x-2">
               <span class="text-base">🔒</span>
               <span id="lockedNoticeText">Editing is strictly locked. Click <strong>"Edit File"</strong> below to initiate the 30-second security waiting window and email dispatch.</span>
             </div>
-            <span id="lockedNoticeBadge" class="text-[10px] font-bold text-amber-700 uppercase tracking-wider font-mono">Guarded Mode</span>
+            <span id="lockedNoticeBadge" class="text-[10px] font-bold text-zinc-700 uppercase tracking-wider font-mono">Guarded Mode</span>
           </div>
 
           <!-- Editor Textarea -->
@@ -899,7 +1011,7 @@ Signer: Principal Engineer</textarea>
           <!-- Action Toolbar -->
           <div class="flex flex-wrap items-center justify-end gap-3 pt-1">
             <!-- 1. Start Edit Button (initiates 30s wait) -->
-            <button id="btnStartEditFile" onclick="requestFileEdit()" class="px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs transition flex items-center space-x-1.5 cursor-pointer shadow-sm">
+            <button id="btnStartEditFile" onclick="requestFileEdit()" class="px-5 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-bold text-xs transition flex items-center space-x-1.5 cursor-pointer shadow-sm">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
               <span>✏️ Edit File (Wait 30s Before Editing)</span>
             </button>
@@ -1378,7 +1490,7 @@ Signer: Principal Engineer</textarea>
           <div class="font-bold text-slate-900 uppercase text-[10px] tracking-wider font-mono">Platform Navigation</div>
           <ul class="space-y-1.5 text-[11px]">
             <li><a href="#features" class="hover:text-zinc-950 transition">Core Capabilities</a></li>
-            <li><a href="#tamper-lab" class="hover:text-amber-600 transition">30s Pre-Edit Tamper Lab</a></li>
+            <li><a href="#tamper-lab" class="hover:text-zinc-950 transition">30s Pre-Edit Tamper Lab</a></li>
             <li><a href="#workbench" class="hover:text-zinc-950 transition">File Registration Studio</a></li>
             <li><a href="#ledger" class="hover:text-zinc-950 transition">Blockchain Ledger Explorer</a></li>
           </ul>
@@ -1408,8 +1520,10 @@ Signer: Principal Engineer</textarea>
       </div>
 
       <div class="border-t border-slate-100 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-400">
-        <div>
-          &copy; 2026 Coraloce File Integrity Ledger. Built with zero cloud dependencies.
+        <div class="flex items-center flex-wrap gap-2">
+          <span>&copy; 2026 Coraloce Technologies. All Rights Reserved.</span>
+          <span>&bull;</span>
+          <button onclick="openPatentModal()" class="text-zinc-900 font-mono font-bold hover:underline cursor-pointer">⚖️ Patent Pending (India: CLC-2026-FIM01-IN &bull; US: CLC-2026-FIM01-US)</button>
         </div>
         <div class="flex items-center space-x-4">
           <a href="#architecture" class="hover:text-slate-600 transition">Architecture</a>
@@ -1574,8 +1688,8 @@ Signer: Principal Engineer</textarea>
       // If user clicks on locked textarea, gently notify them to click "Edit File"
       tamperFileEditor.addEventListener('click', () => {
         if (tamperFileEditor.readOnly) {
-          lockedEditorNotice.classList.add('ring-2', 'ring-amber-500');
-          setTimeout(() => lockedEditorNotice.classList.remove('ring-2', 'ring-amber-500'), 1200);
+          lockedEditorNotice.classList.add('ring-2', 'ring-zinc-950');
+          setTimeout(() => lockedEditorNotice.classList.remove('ring-2', 'ring-zinc-950'), 1200);
         }
       });
     });
@@ -1825,11 +1939,11 @@ Signer: Principal Engineer</textarea>
       tamperFileEditor.readOnly = true;
       tamperFileEditor.className = 'w-full font-mono text-xs p-3.5 bg-slate-100/80 border border-slate-300 rounded-xl text-slate-700 cursor-not-allowed select-none transition-all duration-300';
       tamperEditorStatusBadge.innerHTML = '<span>🔒</span><span>Protected & Locked (Read-Only)</span>';
-      tamperEditorStatusBadge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-300 flex items-center space-x-1';
+      tamperEditorStatusBadge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-zinc-900 text-zinc-100 border border-zinc-800 flex items-center space-x-1';
       lockedNoticeText.innerHTML = 'Editing is strictly locked. Click <strong>"Edit File"</strong> below to initiate the 30-second security waiting window and email dispatch.';
       lockedNoticeBadge.textContent = 'Guarded Mode';
-      lockedNoticeBadge.className = 'text-[10px] font-bold text-amber-700 uppercase tracking-wider font-mono';
-      lockedEditorNotice.className = 'text-xs bg-amber-50/80 border border-amber-200 text-amber-900 px-3.5 py-2.5 rounded-xl flex items-center justify-between';
+      lockedNoticeBadge.className = 'text-[10px] font-bold text-zinc-700 uppercase tracking-wider font-mono';
+      lockedEditorNotice.className = 'text-xs bg-zinc-100 border border-zinc-300 text-zinc-800 px-3.5 py-2.5 rounded-xl flex items-center justify-between';
       btnStartEditFile.classList.remove('hidden');
       btnSaveTamperedFile.classList.add('hidden');
     }
@@ -1923,6 +2037,14 @@ Signer: Principal Engineer</textarea>
       }
       quarantineModal.classList.add('hidden');
       if (countdownInterval) clearInterval(countdownInterval);
+    }
+
+    function openPatentModal() {
+      document.getElementById('patentModal').classList.remove('hidden');
+    }
+
+    function closePatentModal() {
+      document.getElementById('patentModal').classList.add('hidden');
     }
 
     function finishQuarantineModalAction() {
@@ -2311,17 +2433,17 @@ Signer: Principal Engineer</textarea>
       }
 
       if (isPreEdit) {
-        quarantineModalCard.className = 'max-w-lg w-full bg-white rounded-3xl border-2 border-amber-500 shadow-2xl p-6 sm:p-8 space-y-6 text-center relative overflow-hidden animate-in fade-in zoom-in duration-300';
-        quarantineIconContainer.className = 'w-16 h-16 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center text-3xl font-black border border-amber-200';
+        quarantineModalCard.className = 'max-w-lg w-full bg-white rounded-3xl border-2 border-zinc-950 shadow-2xl p-6 sm:p-8 space-y-6 text-center relative overflow-hidden animate-in fade-in zoom-in duration-300';
+        quarantineIconContainer.className = 'w-16 h-16 rounded-2xl bg-zinc-950 text-white flex items-center justify-center text-3xl font-black border border-zinc-800';
         quarantineIcon.textContent = '⏳';
         quarantineTitle.textContent = 'PLEASE WAIT 30 SECONDS BEFORE EDITING';
         quarantineSubtext.textContent = 'Pre-edit security protocol engaged. An alert was dispatched to your email before editing unlocks!';
-        quarantineEmailBanner.className = 'bg-amber-50 border border-amber-200 rounded-2xl p-4 text-left space-y-2 text-xs';
+        quarantineEmailBanner.className = 'bg-zinc-50 border border-zinc-200 rounded-2xl p-4 text-left space-y-2 text-xs';
         quarantineEmailLabel.textContent = '📧 Real-Time Alert Dispatched BEFORE Editing To:';
         quarantineEmailNote.textContent = 'The Sentinel dispatched an emergency alert to the file owner before allowing editing.';
         countdownProtocolLabel.textContent = '30-Second Pre-Edit Security Protocol Active';
-        countdownTimer.className = 'font-mono text-5xl font-black text-amber-600';
-        countdownProgressBar.className = 'bg-amber-600 h-full w-full transition-all duration-1000 ease-linear';
+        countdownTimer.className = 'font-mono text-5xl font-black text-zinc-950';
+        countdownProgressBar.className = 'bg-zinc-950 h-full w-full transition-all duration-1000 ease-linear';
         countdownExplanation.innerHTML = 'Please wait <strong>30 seconds</strong> before editing. This delay gives the registered owner time to see the alert on their phone/email and intervene before editing unlocks.';
         previewEmailSubject.textContent = `Subject: 🚨 PRE-EDIT ALERT: File Edit Mode Requested for "${tamperData.fileName}"`;
       } else {
