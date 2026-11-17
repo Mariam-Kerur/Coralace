@@ -167,18 +167,7 @@ const otpRequestLimiter = rateLimit({
 // Middleware
 app.use(
   helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "https://cdn.tailwindcss.com"],
-        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-        fontSrc: ["'self'", "https://fonts.gstatic.com", "data:"],
-        imgSrc: ["'self'", "data:", "blob:", "https:"],
-        connectSrc: ["'self'", "http:", "https:", "ws:", "wss:"],
-        objectSrc: ["'none'"],
-        upgradeInsecureRequests: null
-      }
-    },
+    contentSecurityPolicy: false,
     crossOriginEmbedderPolicy: false
   })
 );
@@ -310,7 +299,7 @@ async function sendTamperAlertEmail(ownerEmail, fileName, blockIndex, originalHa
   }
 
   let targetRecipient = (ownerEmail || '').trim();
-  if (!targetRecipient || targetRecipient.endsWith('.local') || targetRecipient.includes('example.com') || targetRecipient.includes('verichain.local')) {
+  if (!targetRecipient || targetRecipient.endsWith('.local') || targetRecipient.includes('example.com') || targetRecipient.includes('coraloce.local') || targetRecipient.includes('verichain.local')) {
     if (process.env.SMTP_USER) {
       targetRecipient = process.env.SMTP_USER;
     }
@@ -1018,7 +1007,7 @@ app.post('/api/admin/smtp-settings', (req, res) => {
     process.env.SMTP_PORT = String(port || 587);
     process.env.SMTP_USER = user.trim();
     process.env.SMTP_PASS = passwordToUse.trim();
-    process.env.SMTP_FROM = from ? from.trim() : `"VeriChain Sentinel" <${user.trim()}>`;
+    process.env.SMTP_FROM = from ? from.trim() : `"Coraloce Sentinel" <${user.trim()}>`;
     process.env.SMTP_SECURE = secure ? 'true' : 'false';
 
     mailTransporter = nodemailer.createTransport({
@@ -1072,12 +1061,12 @@ app.post('/api/admin/test-email', async (req, res) => {
     const testPayload = {
       from: getDefaultSenderEmail(),
       to: targetEmail,
-      subject: '✅ VeriChain Security: Live Email Verification Test',
-      text: 'Congratulations! Your VeriChain email alert dispatch system is connected and working perfectly.',
+      subject: '✅ Coraloce Security: Live Email Verification Test',
+      text: 'Congratulations! Your Coraloce email alert dispatch system is connected and working perfectly.',
       html: `
         <div style="font-family: Arial, sans-serif; background-color: #09090b; color: #ffffff; padding: 28px; border-radius: 16px; border: 1px solid #27272a;">
-          <h2 style="color: #ffffff; margin-top: 0;">✅ VeriChain Sentinel: Email Verified</h2>
-          <p style="color: #a1a1aa; font-size: 14px;">Your VeriChain email alert dispatch system has been verified and is ready.</p>
+          <h2 style="color: #ffffff; margin-top: 0;">✅ Coraloce Sentinel: Email Verified</h2>
+          <p style="color: #a1a1aa; font-size: 14px;">Your Coraloce email alert dispatch system has been verified and is ready.</p>
           <div style="background-color: #18181b; border: 1px solid #27272a; border-radius: 10px; padding: 16px; margin: 20px 0;">
             <p style="margin: 0; font-family: monospace; font-size: 13px; color: #e4e4e7;">Sender: ${process.env.SMTP_USER}</p>
             <p style="margin: 8px 0 0 0; font-family: monospace; font-size: 13px; color: #e4e4e7;">Recipient: ${targetEmail}</p>
