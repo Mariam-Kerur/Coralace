@@ -181,11 +181,11 @@
   <!-- ======================================================== -->
   <!-- 30-SECOND SECURITY QUARANTINE & TAMPER ALERT MODAL       -->
   <!-- ======================================================== -->
-  <div id="quarantineModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+  <div id="quarantineModal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md" onclick="if (event.target === this) closeQuarantineModal()">
     <div id="quarantineModalCard" class="max-w-lg w-full bg-white rounded-3xl border-2 border-zinc-950 shadow-2xl p-6 sm:p-8 space-y-6 text-center relative overflow-hidden animate-in fade-in zoom-in duration-300">
       
       <!-- Close button on modal -->
-      <button onclick="closeQuarantineModal()" title="Close Window" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-sm cursor-pointer transition">
+      <button id="btnCloseQuarantineModal" onclick="closeQuarantineModal()" title="Close Window" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center font-bold text-base cursor-pointer transition z-30 shadow-xs">
         ✕
       </button>
 
@@ -197,17 +197,17 @@
         <h2 class="text-xl font-extrabold text-slate-900 tracking-tight" id="quarantineTitle">
           PLEASE WAIT 30 SECONDS BEFORE EDITING
         </h2>
-        <p class="text-xs text-zinc-500 font-semibold" id="quarantineSubtext">
+        <p class="text-xs text-zinc-600 font-semibold" id="quarantineSubtext">
           Pre-edit security protocol engaged. An alert was dispatched to your email before editing unlocks!
         </p>
       </div>
 
       <!-- Email Notification Dispatch Banner -->
-      <div id="quarantineEmailBanner" class="bg-zinc-50 border border-zinc-200 rounded-2xl p-4 text-left space-y-2 text-xs">
-        <div class="flex items-center space-x-2 text-zinc-900 font-bold">
+      <div id="quarantineEmailBanner" class="bg-zinc-100 border border-zinc-200 rounded-2xl p-4 text-left space-y-2 text-xs">
+        <div class="flex items-center space-x-2 text-zinc-950 font-bold">
           <span id="quarantineEmailLabel">📧 Real-Time Alert Dispatched BEFORE Editing To:</span>
         </div>
-        <div id="quarantineEmailDisplay" class="font-mono text-sm font-bold text-zinc-900 bg-white p-2 rounded-lg border border-zinc-200 truncate">
+        <div id="quarantineEmailDisplay" class="font-mono text-sm font-bold text-zinc-950 bg-white p-2 rounded-lg border border-zinc-300 truncate">
           owner@example.com
         </div>
         <p class="text-[11px] text-slate-500" id="quarantineEmailNote">
@@ -416,7 +416,7 @@
         </div>
 
         <p class="text-sm sm:text-base text-zinc-600 leading-relaxed font-sans max-w-3xl">
-          Say goodbye to silent tampering and unmonitored alterations. Coraloce combines a custom <strong>Node.js Proof-of-Work blockchain</strong> with an active real-time background Sentinel. When anyone attempts to alter a registered record, the system immediately dispatches an emergency alert to the file owner and enforces a <em class="font-serif-italic text-zinc-900 font-bold text-base">mandatory 30-second delay BEFORE editing unlocks</em>.
+          Say goodbye to silent tampering and unmonitored alterations. Coraloce combines a custom <strong>Node.js Proof-of-Work blockchain</strong> with an active real-time background Sentinel. When anyone attempts to alter a registered record, the system immediately dispatches an emergency alert to the file owner and enforces a <em class="font-serif-italic text-zinc-950 font-bold text-base">mandatory 30-second delay BEFORE editing unlocks</em>.
         </p>
 
         <!-- Generously Spaced Action Buttons -->
@@ -431,7 +431,7 @@
             <span>Admin Authority: Register Email</span>
           </button>
 
-          <button onclick="goToSlide(3)" class="px-6 py-4 rounded-2xl bg-zinc-100 hover:bg-zinc-200 text-zinc-900 border border-zinc-300 font-display font-bold text-sm transition flex items-center space-x-2 cursor-pointer shadow-xs">
+          <button onclick="goToSlide(3)" class="px-6 py-4 rounded-2xl bg-zinc-100 hover:bg-zinc-200 text-zinc-950 border border-zinc-300 font-display font-bold text-sm transition flex items-center space-x-2 cursor-pointer shadow-xs">
             <span>⚡ 30s Pre-Edit Lab</span>
           </button>
         </div>
@@ -461,9 +461,9 @@
         </div>
         <h3 class="font-display font-bold text-zinc-950 text-lg">Active 30s Pre-Edit Sentinel</h3>
         <p class="text-xs sm:text-sm text-zinc-500 leading-relaxed font-sans">
-          Before any user can alter or edit an anchored file, the Sentinel locks the editor, dispatches an emergency alert email to the registered owner, and enforces a <em class="font-serif-italic font-bold text-zinc-900">mandatory 30-second delay</em>.
+          Before any user can alter or edit an anchored file, the Sentinel locks the editor, dispatches an emergency alert email to the registered owner, and enforces a <em class="font-serif-italic font-bold text-zinc-950">mandatory 30-second delay</em>.
         </p>
-        <div class="text-[11px] font-mono text-zinc-900 bg-zinc-50 p-3 rounded-xl border border-zinc-200 font-medium">
+        <div class="text-[11px] font-mono text-zinc-800 bg-zinc-100 p-3 rounded-xl border border-zinc-200 font-medium">
           Real-Time Pre-Edit Quarantine Protocol
         </div>
       </div>
@@ -531,7 +531,7 @@
           <p class="text-zinc-400 text-[11px] leading-relaxed">Pure native Node.js crypto. Zero external 3rd-party blockchain or cloud dependencies.</p>
         </div>
         <div class="bg-zinc-900/80 p-4 rounded-2xl border border-zinc-800 space-y-1">
-          <div class="font-display font-bold text-zinc-300 text-sm">30s Pre-Edit Protocol</div>
+          <div class="font-display font-bold text-zinc-200 text-sm">30s Pre-Edit Protocol</div>
           <p class="text-zinc-400 text-[11px] leading-relaxed">Locks editing and dispatches owner email alerts before file modifications unlock.</p>
         </div>
         <div class="bg-zinc-900/80 p-4 rounded-2xl border border-zinc-800 space-y-1">
@@ -641,7 +641,7 @@
         </button>
 
         <button id="tabSlide3" onclick="goToSlide(3)" class="slide-tab-btn p-3 rounded-2xl border border-zinc-200 bg-zinc-50 text-zinc-700 hover:border-zinc-400 text-left transition flex items-center space-x-2.5 cursor-pointer">
-          <span class="w-6 h-6 rounded-lg bg-zinc-950 text-white flex items-center justify-center font-bold text-xs">3</span>
+          <span class="w-6 h-6 rounded-lg bg-zinc-200 text-zinc-900 flex items-center justify-center font-bold text-xs">3</span>
           <div>
             <div class="font-bold text-xs">30s Tamper Lab</div>
             <div class="text-[10px] text-zinc-400 font-normal">Stage 03 Slide</div>
@@ -934,37 +934,37 @@
         <div class="space-y-4 pb-4 border-b border-zinc-200">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center space-x-3">
-              <div class="w-9 h-9 rounded-xl bg-zinc-950 text-white flex items-center justify-center font-display font-black text-sm shadow-sm">
+              <div class="w-9 h-9 rounded-xl bg-zinc-950 text-white flex items-center justify-center font-display font-black text-sm shadow-sm border border-zinc-800">
                 03
               </div>
               <div>
-                <span class="text-[10px] font-mono font-bold tracking-wider uppercase text-zinc-400">SLIDE 03 &bull; ACTIVE FIM DEFENSE</span>
+                <span class="text-[10px] font-mono font-bold tracking-wider uppercase text-zinc-500">SLIDE 03 &bull; ACTIVE FIM DEFENSE</span>
                 <h3 class="text-xl sm:text-2xl font-display font-extrabold text-zinc-950">
                   Sentinel Tamper Lab & 30s Pre-Edit Quarantine
                 </h3>
               </div>
             </div>
-            <span id="tamperEditorStatusBadge" class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-zinc-900 text-zinc-100 border border-zinc-800 flex items-center space-x-1">
+            <span id="tamperEditorStatusBadge" class="text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-900 border border-zinc-300 flex items-center space-x-1">
               <span>🔒</span>
               <span>Protected & Locked (Read-Only)</span>
             </span>
           </div>
 
           <!-- Integrated Safeguard & How-to-Use Guide -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs bg-zinc-50 p-4 rounded-2xl border border-zinc-200">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs bg-zinc-100/70 p-4 rounded-2xl border border-zinc-200">
             <div class="space-y-1">
-              <div class="flex items-center space-x-1.5 font-display font-bold text-zinc-900">
+              <div class="flex items-center space-x-1.5 font-display font-bold text-zinc-950">
                 <span>🛡️</span><span>How this Safeguards:</span>
               </div>
-              <p class="text-zinc-500 font-sans leading-relaxed">
+              <p class="text-zinc-600 font-sans leading-relaxed">
                 Prevents unannounced alterations! Attempting to edit locks the editor, dispatches an emergency email to the file owner, and enforces a mandatory <strong>30-second delay BEFORE editing unlocks</strong>.
               </p>
             </div>
             <div class="space-y-1">
-              <div class="flex items-center space-x-1.5 font-display font-bold text-zinc-900">
+              <div class="flex items-center space-x-1.5 font-display font-bold text-zinc-950">
                 <span>📖</span><span>How to Use:</span>
               </div>
-              <p class="text-zinc-500 font-sans leading-relaxed">
+              <p class="text-zinc-600 font-sans leading-relaxed">
                 Click <strong>"✏️ Edit File"</strong> below to initiate the 30s security window and email dispatch. Wait 30 seconds for edit mode to unlock, then alter text and click <strong>"Save Alterations"</strong> to see the Sentinel detect the tamper!
               </p>
             </div>
@@ -977,7 +977,7 @@
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div class="flex items-center space-x-2">
               <label class="text-xs font-semibold text-zinc-700">Select File to Test:</label>
-              <select id="tamperFileSelect" onchange="loadSelectedTamperFile()" class="text-xs font-mono bg-white px-3 py-1.5 rounded-xl border border-zinc-300 text-zinc-800 focus:outline-none focus:border-zinc-900">
+              <select id="tamperFileSelect" onchange="loadSelectedTamperFile()" class="text-xs font-mono bg-white px-3 py-1.5 rounded-xl border border-zinc-300 text-zinc-800 focus:outline-none focus:border-zinc-950">
                 <option value="Sample_Agreement.txt">Sample_Agreement.txt (Block #3)</option>
                 <option value="Confidential_Agreement.pdf">Confidential_Agreement.pdf (Block #2)</option>
                 <option value="Sample_Document.pdf">Sample_Document.pdf (Block #1)</option>
@@ -986,22 +986,22 @@
 
             <div class="flex items-center space-x-2 text-xs text-zinc-500">
               <span>Owner to Alert:</span>
-              <input type="email" id="tamperAlertEmailInput" value="owner@verichain.local" placeholder="owner@example.com" class="font-mono text-xs bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-zinc-800 focus:outline-none focus:border-zinc-900 w-52" />
+              <input type="email" id="tamperAlertEmailInput" value="owner@coraloce.local" placeholder="owner@example.com" class="font-mono text-xs bg-white px-2.5 py-1 rounded-lg border border-zinc-300 text-zinc-800 focus:outline-none focus:border-zinc-950 w-52" />
             </div>
           </div>
 
           <!-- Locked Editor Notice -->
-          <div id="lockedEditorNotice" class="text-xs bg-zinc-100 border border-zinc-300 text-zinc-800 px-3.5 py-2.5 rounded-xl flex items-center justify-between">
+          <div id="lockedEditorNotice" class="text-xs bg-zinc-100 border border-zinc-200 text-zinc-900 px-3.5 py-2.5 rounded-xl flex items-center justify-between">
             <div class="flex items-center space-x-2">
               <span class="text-base">🔒</span>
               <span id="lockedNoticeText">Editing is strictly locked. Click <strong>"Edit File"</strong> below to initiate the 30-second security waiting window and email dispatch.</span>
             </div>
-            <span id="lockedNoticeBadge" class="text-[10px] font-bold text-zinc-700 uppercase tracking-wider font-mono">Guarded Mode</span>
+            <span id="lockedNoticeBadge" class="text-[10px] font-bold text-zinc-600 uppercase tracking-wider font-mono">Guarded Mode</span>
           </div>
 
           <!-- Editor Textarea -->
           <div class="relative">
-            <textarea id="tamperFileEditor" readonly rows="4" class="w-full font-mono text-xs p-3.5 bg-zinc-100/80 border border-zinc-300 rounded-xl text-zinc-700 cursor-not-allowed select-none transition-all duration-300">AGREEMENT OF RECORD
+            <textarea id="tamperFileEditor" readonly rows="4" class="w-full font-mono text-xs p-3.5 bg-zinc-50 border border-zinc-200 rounded-xl text-zinc-700 cursor-not-allowed select-none transition-all duration-300">AGREEMENT OF RECORD
 Version: 1.0
 Amount: $5,000
 Status: APPROVED
@@ -1113,7 +1113,7 @@ Signer: Principal Engineer</textarea>
           </span>
           <span class="text-sm font-bold text-zinc-950 truncate max-w-xs sm:max-w-md">Genesis Anchor Root</span>
           <span class="px-2 py-0.5 rounded bg-zinc-200 text-zinc-900 text-[10px] font-bold">Genesis Root</span>
-          <span class="text-[10px] text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-300 font-mono">Alerts: system.root@verichain.local</span>
+          <span class="text-[10px] text-zinc-900 bg-zinc-100 px-2 py-0.5 rounded border border-zinc-300 font-mono">Alerts: system.root@coraloce.local</span>
         </div>
         <div class="text-xs text-zinc-500 font-mono">
           <span>Nonce: <strong class="text-zinc-900">0</strong></span> &bull; 
@@ -1147,7 +1147,7 @@ Signer: Principal Engineer</textarea>
           <button onclick="goToSlide(3)" class="px-4 py-2 rounded-xl bg-zinc-100 hover:bg-zinc-200 text-zinc-800 font-display font-semibold transition cursor-pointer">
             &larr; Back to Slide 03
           </button>
-          <button onclick="goToSlide(1)" class="px-5 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-display font-bold transition flex items-center space-x-2 cursor-pointer shadow-xs">
+          <button id="btnLoopToSlide1" onclick="goToSlide(1)" class="px-5 py-2.5 rounded-xl bg-zinc-950 hover:bg-zinc-800 text-white font-display font-bold transition flex items-center space-x-2 cursor-pointer shadow-xs">
             <span>↺ Loop to Slide 01 (Mine & Anchor)</span>
           </button>
         </div>
@@ -1209,7 +1209,7 @@ Signer: Principal Engineer</textarea>
               </span>
               <span class="text-[10px] text-zinc-900 font-mono font-bold">Required</span>
             </label>
-            <input type="email" id="adminRegEmailInput" value="admin.security@verichain.local" placeholder="owner@company.com" class="w-full bg-white text-xs font-mono text-slate-900 px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-zinc-900 shadow-2xs font-bold" />
+            <input type="email" id="adminRegEmailInput" value="admin.security@coraloce.local" placeholder="owner@company.com" class="w-full bg-white text-xs font-mono text-slate-900 px-3.5 py-2.5 rounded-xl border border-slate-300 focus:outline-none focus:border-zinc-900 shadow-2xs font-bold" />
             <p class="text-[11px] text-slate-400 font-sans">
               * The Sentinel binds this address to the file. All 30s pre-edit alerts and tamper alarms are sent here.
             </p>
@@ -1543,8 +1543,8 @@ Signer: Principal Engineer</textarea>
     let isLedgerValid = true;
     let selectedRegisterFile = null;
     let selectedVerifyFile = null;
-    let adminToken = localStorage.getItem('verichain_admin_token') || null;
-    let adminEmail = localStorage.getItem('verichain_admin_email') || null;
+    let adminToken = localStorage.getItem('coraloce_admin_token') || localStorage.getItem('verichain_admin_token') || null;
+    let adminEmail = localStorage.getItem('coraloce_admin_email') || localStorage.getItem('verichain_admin_email') || null;
     let countdownInterval = null;
 
     // DOM Elements - Tabs
@@ -1682,14 +1682,22 @@ Signer: Principal Engineer</textarea>
         showAuthenticatedAdminUI();
       }
 
-      // Default landing is the Welcome Page
+      // Default landing is the Welcome Page and Workbench Slide 1
       switchTab('welcome');
+      goToSlide(1);
+
+      // ESC key dismisses quarantine modal cleanly
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !quarantineModal.classList.contains('hidden')) {
+          closeQuarantineModal();
+        }
+      });
 
       // If user clicks on locked textarea, gently notify them to click "Edit File"
       tamperFileEditor.addEventListener('click', () => {
         if (tamperFileEditor.readOnly) {
-          lockedEditorNotice.classList.add('ring-2', 'ring-zinc-950');
-          setTimeout(() => lockedEditorNotice.classList.remove('ring-2', 'ring-zinc-950'), 1200);
+          lockedEditorNotice.classList.add('ring-2', 'ring-zinc-600');
+          setTimeout(() => lockedEditorNotice.classList.remove('ring-2', 'ring-zinc-600'), 1200);
         }
       });
     });
@@ -1939,24 +1947,24 @@ Signer: Principal Engineer</textarea>
       tamperFileEditor.readOnly = true;
       tamperFileEditor.className = 'w-full font-mono text-xs p-3.5 bg-slate-100/80 border border-slate-300 rounded-xl text-slate-700 cursor-not-allowed select-none transition-all duration-300';
       tamperEditorStatusBadge.innerHTML = '<span>🔒</span><span>Protected & Locked (Read-Only)</span>';
-      tamperEditorStatusBadge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-zinc-900 text-zinc-100 border border-zinc-800 flex items-center space-x-1';
+      tamperEditorStatusBadge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-900 border border-zinc-300 flex items-center space-x-1';
       lockedNoticeText.innerHTML = 'Editing is strictly locked. Click <strong>"Edit File"</strong> below to initiate the 30-second security waiting window and email dispatch.';
       lockedNoticeBadge.textContent = 'Guarded Mode';
-      lockedNoticeBadge.className = 'text-[10px] font-bold text-zinc-700 uppercase tracking-wider font-mono';
-      lockedEditorNotice.className = 'text-xs bg-zinc-100 border border-zinc-300 text-zinc-800 px-3.5 py-2.5 rounded-xl flex items-center justify-between';
+      lockedNoticeBadge.className = 'text-[10px] font-bold text-zinc-600 uppercase tracking-wider font-mono';
+      lockedEditorNotice.className = 'text-xs bg-zinc-100 border border-zinc-200 text-zinc-900 px-3.5 py-2.5 rounded-xl flex items-center justify-between';
       btnStartEditFile.classList.remove('hidden');
       btnSaveTamperedFile.classList.add('hidden');
     }
 
     function unlockFileEditor() {
       tamperFileEditor.readOnly = false;
-      tamperFileEditor.className = 'w-full font-mono text-xs p-3.5 bg-white border-2 border-zinc-900 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-zinc-900 cursor-text shadow-sm transition-all duration-300';
-      tamperEditorStatusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-zinc-900 animate-ping mr-1"></span><span>🔓 Unlocked (Edit Mode Active - Free Editing)</span>';
-      tamperEditorStatusBadge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-zinc-900 text-white border border-zinc-900 flex items-center space-x-1';
+      tamperFileEditor.className = 'w-full font-mono text-xs p-3.5 bg-white border-2 border-zinc-950 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-zinc-950 cursor-text shadow-sm transition-all duration-300';
+      tamperEditorStatusBadge.innerHTML = '<span class="w-2 h-2 rounded-full bg-zinc-950 animate-ping mr-1"></span><span>🔓 Unlocked (Edit Mode Active - Free Editing)</span>';
+      tamperEditorStatusBadge.className = 'text-[10px] font-bold px-2.5 py-0.5 rounded-full bg-zinc-950 text-white border border-zinc-950 flex items-center space-x-1';
       lockedNoticeText.innerHTML = '🔓 <strong>30-Second Security Window Complete!</strong> Editor is UNLOCKED. You can now edit/alter the file freely. No interruptions will occur while you type.';
       lockedNoticeBadge.textContent = 'Edit Mode Ready';
-      lockedNoticeBadge.className = 'text-[10px] font-bold text-zinc-900 uppercase tracking-wider font-mono';
-      lockedEditorNotice.className = 'text-xs bg-zinc-100 border border-zinc-300 text-zinc-900 px-3.5 py-2.5 rounded-xl flex items-center justify-between';
+      lockedNoticeBadge.className = 'text-[10px] font-bold text-zinc-950 uppercase tracking-wider font-mono';
+      lockedEditorNotice.className = 'text-xs bg-zinc-100 border border-zinc-200 text-zinc-900 px-3.5 py-2.5 rounded-xl flex items-center justify-between';
       btnStartEditFile.classList.add('hidden');
       btnSaveTamperedFile.classList.remove('hidden');
       tamperFileEditor.focus();
@@ -2036,6 +2044,7 @@ Signer: Principal Engineer</textarea>
         lockFileEditor();
       }
       quarantineModal.classList.add('hidden');
+      quarantineModal.style.display = 'none';
       if (countdownInterval) clearInterval(countdownInterval);
     }
 
@@ -2069,7 +2078,7 @@ Signer: Principal Engineer</textarea>
       if (!currentTamperAlertData || !currentTamperAlertData.tamperData) return '';
       const { tamperData, mode } = currentTamperAlertData;
       const isPreEdit = (mode === 'PRE_EDIT');
-      return 'VERICHAIN FILE INTEGRITY SENTINEL - SECURITY ALERT\n' +
+      return 'CORALOCE FILE INTEGRITY SENTINEL - SECURITY ALERT\n' +
         '=====================================================\n' +
         'Event: ' + (isPreEdit ? 'PRE-EDIT SECURITY PROTOCOL (30s Lockdown)' : 'UNAUTHORIZED FILE TAMPERING DETECTED') + '\n' +
         'Target File: ' + (tamperData.fileName || 'Unknown') + '\n' +
@@ -2080,7 +2089,7 @@ Signer: Principal Engineer</textarea>
         'Timestamp: ' + new Date().toISOString() + '\n' +
         'Status: 30-Second Security Quarantine Protocol Engaged\n' +
         '=====================================================\n' +
-        'Integrity verified by VeriChain Cryptographic Ledger.';
+        'Integrity verified by Coraloce Cryptographic Ledger.';
     }
 
     function dispatchViaGmailWeb() {
@@ -2131,7 +2140,7 @@ Signer: Principal Engineer</textarea>
         if (Notification.permission === 'granted') {
           try {
             new Notification('🔔 Sentinel Armed', {
-              body: 'VeriChain real-time desktop breach notifications are now active.',
+              body: 'Coraloce real-time desktop breach notifications are now active.',
               icon: '/favicon.ico'
             });
           } catch (e) {}
@@ -2438,7 +2447,7 @@ Signer: Principal Engineer</textarea>
         quarantineIcon.textContent = '⏳';
         quarantineTitle.textContent = 'PLEASE WAIT 30 SECONDS BEFORE EDITING';
         quarantineSubtext.textContent = 'Pre-edit security protocol engaged. An alert was dispatched to your email before editing unlocks!';
-        quarantineEmailBanner.className = 'bg-zinc-50 border border-zinc-200 rounded-2xl p-4 text-left space-y-2 text-xs';
+        quarantineEmailBanner.className = 'bg-zinc-100 border border-zinc-200 text-zinc-900 rounded-2xl p-4 text-left space-y-2 text-xs';
         quarantineEmailLabel.textContent = '📧 Real-Time Alert Dispatched BEFORE Editing To:';
         quarantineEmailNote.textContent = 'The Sentinel dispatched an emergency alert to the file owner before allowing editing.';
         countdownProtocolLabel.textContent = '30-Second Pre-Edit Security Protocol Active';
@@ -2473,6 +2482,7 @@ Signer: Principal Engineer</textarea>
         Status: 30-Second Security Window Enforced
       `;
 
+      quarantineModal.style.display = 'flex';
       quarantineModal.classList.remove('hidden');
 
       let secondsLeft = 30;
@@ -2514,6 +2524,7 @@ Signer: Principal Engineer</textarea>
 
     function finishQuarantine() {
       quarantineModal.classList.add('hidden');
+      quarantineModal.style.display = 'none';
       if (countdownInterval) clearInterval(countdownInterval);
       verifyFailBadge.classList.remove('hidden');
     }
@@ -2668,8 +2679,8 @@ Signer: Principal Engineer</textarea>
         if (res.ok && data.success) {
           adminToken = data.token;
           adminEmail = data.email;
-          localStorage.setItem('verichain_admin_token', adminToken);
-          localStorage.setItem('verichain_admin_email', adminEmail);
+          localStorage.setItem('coraloce_admin_token', adminToken);
+          localStorage.setItem('coraloce_admin_email', adminEmail);
           showAuthenticatedAdminUI();
           loadVaultFiles();
         } else {
@@ -2697,6 +2708,8 @@ Signer: Principal Engineer</textarea>
 
     function adminLogout() {
       adminToken = null; adminEmail = null;
+      localStorage.removeItem('coraloce_admin_token');
+      localStorage.removeItem('coraloce_admin_email');
       localStorage.removeItem('verichain_admin_token');
       localStorage.removeItem('verichain_admin_email');
       adminAuthSection.classList.remove('hidden');
@@ -2844,9 +2857,11 @@ Signer: Principal Engineer</textarea>
             if (i === n) {
               el.classList.remove('hidden');
               el.classList.add('block');
+              el.style.display = 'block';
             } else {
               el.classList.add('hidden');
               el.classList.remove('block');
+              el.style.display = 'none';
             }
           }
           if (tab) {
@@ -2869,10 +2884,15 @@ Signer: Principal Engineer</textarea>
         if (progressBar) progressBar.style.width = (n * 25) + '%';
       }
 
-      // Smooth scroll slide container into view if user jumped
-      const container = document.getElementById('workbench-slide-container');
-      if (container) {
-        container.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      // Smooth scroll target slide or container into view
+      const targetSlide = document.getElementById('slideContent' + n);
+      if (targetSlide) {
+        targetSlide.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } else {
+        const container = document.getElementById('workbench-slide-container');
+        if (container) {
+          container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
     }
 
@@ -2899,6 +2919,7 @@ Signer: Principal Engineer</textarea>
           if (el) {
             el.classList.remove('hidden');
             el.classList.add('block');
+            el.style.display = 'block';
           }
         }
         if (btnSlide) btnSlide.className = 'px-3 py-1.5 rounded-lg font-semibold text-zinc-600 hover:text-zinc-950 transition cursor-pointer';
@@ -2912,6 +2933,59 @@ Signer: Principal Engineer</textarea>
         goToSlide(currentSlide);
       }
     }
+
+    // Global Event Delegation in Capture Phase (Bypasses any browser or CSP inline restrictions)
+    document.addEventListener('click', function(e) {
+      const btn = e.target.closest('button, a, [onclick]');
+      if (!btn) return;
+
+      const onclickStr = btn.getAttribute('onclick') || '';
+      const text = (btn.textContent || '').trim();
+
+      if (btn.id === 'btnLoopToSlide1' || text.includes('Loop to Slide 01')) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        goToSlide(1);
+        return;
+      }
+
+      if (btn.id === 'btnCloseQuarantineModal' || text === '✕' || onclickStr.includes('closeQuarantineModal')) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        closeQuarantineModal();
+        return;
+      }
+
+      if (btn.id === 'btnNextSlide' || onclickStr.includes('nextSlide()')) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        nextSlide();
+        return;
+      }
+
+      if (btn.id === 'btnPrevSlide' || onclickStr.includes('prevSlide()')) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        prevSlide();
+        return;
+      }
+
+      const matchGoTo = onclickStr.match(/goToSlide\((\d+)\)/);
+      if (matchGoTo) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        goToSlide(parseInt(matchGoTo[1], 10));
+        return;
+      }
+
+      const matchSwitchTab = onclickStr.match(/switchTab\(['"]([^'"]+)['"]\)/);
+      if (matchSwitchTab) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        switchTab(matchSwitchTab[1]);
+        return;
+      }
+    }, true);
 
     // Keyboard navigation (ArrowLeft & ArrowRight) for slides
     document.addEventListener('keydown', (e) => {
